@@ -1,0 +1,127 @@
+syntax = "proto3";
+//package display.client;
+
+
+// add_unit(id,type,owner,loc[x,y],hp) : create unit of 'type' at 'loc' and register as 'id'
+// del_unid(id) : he's dead, jim
+// update(id, [owner], [loc], [hp], ...)
+message Iloc {
+    uint32	y = 1;
+    uint32	x = 2;
+}
+message Floc {
+    float	y = 1;
+    float	x = 2;
+}
+
+// delta loc .. is this robust/usable? 
+// Expect to send keyframe every 5 or so
+// interpolated with FDloc/IDloc updates
+// [or not: if keyframe includes a Dloc, and unit still on track]
+message IDloc {
+    uint32	dy = 1;
+    uint32	dx = 2;
+}
+// delta loc
+message FDloc {
+    float	dy = 1;
+    float	dx = 2;
+}
+// set a speed:
+message Dloc {
+    float	dy_dt = 1;
+    float	dx_dt = 2;
+}
+
+
+// All the kinds of messages:
+enum Code {
+    UPDATE = 0;	// update id, loc [, hp]
+    REVEAL = 1;	// reveal terrain of type, at loc, 
+    ADD = 2;	// id for new Unit (of type at loc)
+    DEL = 3;	// Unit[id] is dead
+    TURN = 7;	// SetTurn
+    TMAP = 10;	// setup terrain-map (tid->png); or just load: (N,W,H,URL-of-long-png)
+    ZMAP = 11;	// setup z-height map: int array[256]
+}
+
+// UNION Update message:
+message Union {
+    int32	id = 2;		// required for UPDATE (not for MAP)
+    Floc	loc = 3;
+    int32	level = 4;	// z value for MAP terrain, hp for Unit update
+    string	type = 5;	// unit type or terrain_type
+    int32	player = 6;	// new Unit associated with Player
+    string	display = 7;	// display name for new Unit/Player
+}
+
+// send a bunch of 'Code' messages [all the ADD], [all the UPDATE], [all the DEL], ...
+message CodeUpdate {
+    Code 	code = 1;
+    repeated Union updates = 2;
+}
+
+// ADD[(id=1, type="Player", display="Self", ...)
+//     (id=2, type="Player", display="Other", ...)
+//     (id=3, type="Player", display="Gaia", ...)
+//     (id=4, type="HQ", player=1, loc=[x0,y0], display="HQ")	 at site of primary lander
+//     (id=5, type="Scout", player=1, loc=[x1,y1], display="Scout-0")
+//    ]
+// MAP(loc=[x0,y0], type="GRASS", level=34)
+
+// field_data= {n,val}*
+// M-<UnionCode>{1:Code,[field_data]}
+// M-<CodeUpdate>{1:Code,2:updates<n>[field_data]}
+
+// next message type:
+message CodeMessage {
+    Code code = 1;
+}
+// M-<CodeMessage>{1:Code},M-<CodeSeq>{1:updates<n>[field_data]}
+
+// Update-Floc, Update-Iloc, update-Dloc, ...
+message Update {
+    int32	id = 2;		// required for UPDATE
+    Floc	loc = 3;
+    int32	hp = 4;		// hp for Unit update
+}
+
+message UpdateSeq {
+    repeated Update updates = 1;
+}
+
+// add Unit (or Player)
+message Add {
+    int32	id = 2;		// required for UPDATE
+    Floc	loc = 3;
+    int32	hp = 4;		// hp for Unit update
+    string	type = 5;	// unit type or terrain_type
+    int32	player = 6;	// new Unit associated with Player
+    string	display = 7;	// display name for new Unit/Player
+}
+message AddSeq {
+    repeated Add adds = 1;
+}
+message Del {
+    int32	id = 2;		// required
+}
+message DelSeq {
+    repeated Del dels = 1;
+}
+message TerRowX {
+    uint32	dx = 2;		// small positive number, relative to loc
+    uint32	tid = 3;	// index into terrain type map
+    uint32	z = 4;		// index into z-height map
+}
+message TerRasterY { 		// extends Iloc?
+    Iloc	loc = 1;
+    repeated TerRowX rowx = 2;
+}
+message TerRasterSeq {
+    repeated TerRasterY rasters = 1;
+}
+
+
+message Turn {
+    uint32	id = 2;		// new turn number; no Seq for this...
+}
