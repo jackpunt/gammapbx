@@ -6,8 +6,8 @@ syntax = "proto3";
 // del_unid(id) : he's dead, jim
 // update(id, [owner], [loc], [hp], ...)
 message Iloc {
-    uint32	y = 1;
-    uint32	x = 2;
+    int32	y = 1;
+    int32	x = 2;
 }
 message Floc {
     float	y = 1;
@@ -19,109 +19,184 @@ message Floc {
 // interpolated with FDloc/IDloc updates
 // [or not: if keyframe includes a Dloc, and unit still on track]
 message IDloc {
-    uint32	dy = 1;
-    uint32	dx = 2;
+    int32	dy = 1;
+    int32	dx = 2;
 }
 // delta loc
 message FDloc {
     float	dy = 1;
     float	dx = 2;
 }
-// set a speed:
+// set a speed: [dloc/dturn]
 message Dloc {
     float	dy_dt = 1;
     float	dx_dt = 2;
 }
 
+// create CodeMessage, obtain byte-count
+// for phase in CodeMessage.Code) {
+// m = new CodeMessage();
+// m.code = phase;
+// switch (phase) {
+// case reveal:
+// // m.code = m.Code.REVEAL;
+// // r = new RevealSeq();
+// // for (y in info_to_reveal()) {
+// //   ty = y.makeTerRasterY(info_for_xrow());
+// //   r.rastery.add(ty);
+// // }
+// // m.reveals = r;
+// // break;
+// }
+// bytes = m.serializeToByteArray();
+// c = new Count(); c.bytes=bytes;
+// BinaryIterator
+// BinaryReader, BinaryDecoder, BinaryWriter, BinaryEncoder
+// bwriter.writeSerializedMessage(c);
+// bwriter.writeSerializedBytes(bytes);
 
-// All the kinds of messages:
-enum Code {
-    UPDATE = 0;	// update id, loc [, hp]
-    REVEAL = 1;	// reveal terrain of type, at loc, 
-    ADD = 2;	// id for new Unit (of type at loc)
-    DEL = 3;	// Unit[id] is dead
-    TURN = 7;	// SetTurn
-    TMAP = 10;	// setup terrain-map (tid->png); or just load: (N,W,H,URL-of-long-png)
-    ZMAP = 11;	// setup z-height map: int array[256]
+message Turn {
+    uint32	id = 1;		// new turn number; no Seq for this...
 }
 
-// UNION Update message:
-message Union {
-    int32	id = 2;		// required for UPDATE (not for MAP)
-    Floc	loc = 3;
-    int32	level = 4;	// z value for MAP terrain, hp for Unit update
-    string	type = 5;	// unit type or terrain_type
-    int32	player = 6;	// new Unit associated with Player
-    string	display = 7;	// display name for new Unit/Player
-}
-
-// send a bunch of 'Code' messages [all the ADD], [all the UPDATE], [all the DEL], ...
-message CodeUpdate {
-    Code 	code = 1;
-    repeated Union updates = 2;
-}
-
-// ADD[(id=1, type="Player", display="Self", ...)
-//     (id=2, type="Player", display="Other", ...)
-//     (id=3, type="Player", display="Gaia", ...)
-//     (id=4, type="HQ", player=1, loc=[x0,y0], display="HQ")	 at site of primary lander
-//     (id=5, type="Scout", player=1, loc=[x1,y1], display="Scout-0")
-//    ]
-// MAP(loc=[x0,y0], type="GRASS", level=34)
-
-// field_data= {n,val}*
-// M-<UnionCode>{1:Code,[field_data]}
-// M-<CodeUpdate>{1:Code,2:updates<n>[field_data]}
-
-// next message type:
+// type of following message:
 message CodeMessage {
+    enum Code {
+	UPDATE = 0;	// update id, loc [, hp]
+	TURN = 1;	// SetTurn
+	REVEAL = 3;	// reveal terrain of type, at loc, 
+	ADD = 4;	// id for new Unit (of type at loc)
+	DEL = 5;	// Unit[id] is dead
+	TMAP = 21;	// setup terrain-map (tid->png); or just load: (N,W,H,URL-of-long-png)
+	ZMAP = 22;	// setup z-height map: int array[256]
+	ICONS = 23;	// unit-icons, unit-model, 
+    }
     Code code = 1;
+    UpdateSeq updates = 2;	// code 0
+    RevealSeq reveals = 3; // RevealSeq
+    AddSeq adds = 4;	// AddSeq
+    DelSeq dels = 5;	// DelSeq
+    TerImageSeq ter_images = 21;
+    ZHeightMap z_heigth_map = 22;
+    ModelSeq images = 23;	// ModelSeq
 }
-// M-<CodeMessage>{1:Code},M-<CodeSeq>{1:updates<n>[field_data]}
+// M-Code{1:Code},M-<Code>Seq{1:repeated<Code>}
 
-// Update-Floc, Update-Iloc, update-Dloc, ...
+// Code:ADD,
+// ADD[{id=1, type="Player", display="Self", ...}
+//     {id=2, type="Player", display="Other", ...}
+//     {id=3, type="Player", display="Gaia", ...}
+//     {id=4, type="HQ", player=1, loc=[x0,y0], display="HQ"}	 at site of primary lander
+//     {id=5, type="Scout", player=1, loc=[x1,y1], display="Scout-0"}
+//    ]
+// Code:REVEAL
+// TerMap[{loc=[x0,y0], type="GRASS", level=34}]
+
+
+// Unit position/health update:
+// Update-Floc, Update-Iloc, Update-Dloc, ...
 message Update {
-    int32	id = 2;		// required for UPDATE
-    Floc	loc = 3;
-    int32	hp = 4;		// hp for Unit update
+    uint32	id = 1;		// objectId (required)
+    int32	hp = 2;		// hp for Unit update
+    bool	isHp = 3;
+    // one of {floc, iloc}
+    Floc	floc = 4;
+    bool	is_floc = 5;
+    Iloc	iloc = 6;
+    bool	is_iloc = 7;
+    // set expected speed: (close enough for many purposes; on keyframe set Floc/Idoc)
+    Dloc	dloc = 8;
+    bool	is_dloc = 9;
 }
 
 message UpdateSeq {
     repeated Update updates = 1;
 }
 
+message ImageAry {
+    uint32 npixels = 1;	// each sub-image is npixels X npixels, in  row major order
+    uint32 nrows = 2;	// each of the nrows
+    uint32 ncols = 3;	// has ncols
+    string url = 4;	// url[r,c] -> tid(r*ncols+c); tid->(tid/ncols,tid%ncols)
+}
+
+// set mapping from m_idx and icon_ndx to image (in ImageAry mblk)
+// for each player, create a master with the livery color replaced
+message ImageId {
+    uint32	id = 1;
+    uint32	x0 = 2;
+    uint32	y0 = 3;
+    uint32	x_px = 4;
+    uint32	y_px = 5;
+    uint32	x_off = 6;
+    uint32	y_off = 7;
+    uint32	p_color = 8;	// replace pixels of this RGB with player's color
+    // or maybe it is constant: #888888, #F10102 ?
+    string	name = 9;	// image name (dubious)
+}
+
+message ModelSeq {
+    ImageAry	mblk = 1;
+    repeated ImageId images = 2;
+}
+
+// unit identity and presentation
+message Ident {
+    string	type = 1;	// engineer, building, scout, etc (determines menu)
+    string	model = 2;	// scaled image or shape or 3d-model
+    string	icon = 3;	// constant size icon
+    string	display = 4;	// display name for new Unit (hovertext: eng#5)
+    uint32	player_id = 5;	// new Unit associated with Player (player id)
+}
+
 // add Unit (or Player)
+// Add { type, player, display, Update }
 message Add {
-    int32	id = 2;		// required for UPDATE
-    Floc	loc = 3;
-    int32	hp = 4;		// hp for Unit update
-    string	type = 5;	// unit type or terrain_type
-    int32	player = 6;	// new Unit associated with Player
-    string	display = 7;	// display name for new Unit/Player
+    Ident	ident = 1;	// who/what
+    Update	update = 2;	// where (initial value)
 }
 message AddSeq {
     repeated Add adds = 1;
 }
+
 message Del {
-    int32	id = 2;		// required
+    uint32	id = 2;		// required
 }
 message DelSeq {
     repeated Del dels = 1;
 }
-message TerRowX {
-    uint32	dx = 2;		// small positive number, relative to loc
+
+// from iloc(x,y) do set (x..+dx,y) to (tid,z)
+message TerRunX {
+    int32	dx = 2;		// small positive number, relative to loc [default=1]
     uint32	tid = 3;	// index into terrain type map
-    uint32	z = 4;		// index into z-height map
+    uint32	zndx = 4;	// index into z-height map: z-height=zmap[zndx]
+    int32	zval = 5;	// actual z-height value
 }
 message TerRasterY { 		// extends Iloc?
-    Iloc	loc = 1;
-    repeated TerRowX rowx = 2;
+    Iloc	loc = 1;	// start at (y,x) [upper-left corner]
+    repeated TerRunX rowx = 2;	// for i=0...: (y+i: (x+dx0, tid0, z0), (x+dx1, tid1, z1))
 }
-message TerRasterSeq {
-    repeated TerRasterY rasters = 1;
+message RevealSeq {
+    repeated TerRasterY rastery = 1;
 }
 
+message Tmap {
+    uint32	tid = 1;
+    string	tname = 2;
+    string	url = 4;	// unless we have a Tblk
+}
+// 
+message TerImageSeq {
+    ImageAry	tblk = 1;
+    repeated Tmap tmaps = 2;
+}
 
-message Turn {
-    uint32	id = 2;		// new turn number; no Seq for this...
+// not sure we need this..
+// compress 300m 500m ... 4000m ... 6000m to small ints
+// (but it quantizes the z-heights)
+// stuff these heights into a map for future reference: zheight[zndx+I(repeat)]=zval
+message ZHeightMap {
+    uint32 zndx = 2;
+    repeated int32 zval = 3;
 }
