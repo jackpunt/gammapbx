@@ -58,19 +58,19 @@ message Dloc {
 message Turn {
     uint32	id = 1;		// new turn number; no Seq for this...
 }
+enum Code {
+    UPDATE = 0;	// update id, loc [, hp]
+    TURN = 1;	// SetTurn
+    REVEAL = 3;	// reveal terrain of type, at loc, 
+    ADD = 4;	// id for new Unit (of type at loc)
+    DEL = 5;	// Unit[id] is dead
+    TMAP = 21;	// setup terrain-map (tid->png); or just load: (N,W,H,URL-of-long-png)
+    ZMAP = 22;	// setup z-height map: int array[256]
+    ICONS = 23;	// unit-icons, unit-model, 
+}
 
 // type of following message:
 message CodeMessage {
-    enum Code {
-	UPDATE = 0;	// update id, loc [, hp]
-	TURN = 1;	// SetTurn
-	REVEAL = 3;	// reveal terrain of type, at loc, 
-	ADD = 4;	// id for new Unit (of type at loc)
-	DEL = 5;	// Unit[id] is dead
-	TMAP = 21;	// setup terrain-map (tid->png); or just load: (N,W,H,URL-of-long-png)
-	ZMAP = 22;	// setup z-height map: int array[256]
-	ICONS = 23;	// unit-icons, unit-model, 
-    }
     Code code = 1;
     UpdateSeq updates = 2;	// code 0
     RevealSeq reveals = 3; // RevealSeq
