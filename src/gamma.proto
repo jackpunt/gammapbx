@@ -33,13 +33,12 @@ message Dloc {
     float	dx_dt = 2;
 }
 
-// create CodeMessage, obtain byte-count
-// for phase in CodeMessage.Code) {
-// m = new CodeMessage();
+// create AMessage, obtain byte-count
+// for (phase in EventFields) {
+// m = new AMessage();
 // m.code = phase;
 // switch (phase) {
 // case reveal:
-// // m.code = m.Code.REVEAL;
 // // r = new RevealSeq();
 // // for (y in info_to_reveal()) {
 // //   ty = y.makeTerRasterY(info_for_xrow());
@@ -48,41 +47,39 @@ message Dloc {
 // // m.reveals = r;
 // // break;
 // }
-// bytes = m.serializeToByteArray();
-// c = new Count(); c.bytes=bytes;
-// BinaryIterator
-// BinaryReader, BinaryDecoder, BinaryWriter, BinaryEncoder
-// bwriter.writeSerializedMessage(c);
-// bwriter.writeSerializedBytes(bytes);
+// mbytes = m.serializeBinary();
+// nbytes = mbytes.length;
+// obytes = new ArrayBuffer(nbytes+4);
+// obytes[0..3] = nbytes;
 
 message Turn {
     uint32	id = 1;		// new turn number; no Seq for this...
 }
-enum Code {
-    UPDATE = 0;	// update id, loc [, hp]
-    TURN = 1;	// SetTurn
-    REVEAL = 3;	// reveal terrain of type, at loc, 
-    ADD = 4;	// id for new Unit (of type at loc)
-    DEL = 5;	// Unit[id] is dead
-    TMAP = 21;	// setup terrain-map (tid->png); or just load: (N,W,H,URL-of-long-png)
-    ZMAP = 22;	// setup z-height map: int array[256]
-    ICONS = 23;	// unit-icons, unit-model, 
-}
 
 // type of following message:
-message CodeMessage {
-    Code code = 1;
+message AMessage {
+    Turn      turn = 1;		// new turn number; no Seq for this...
     UpdateSeq updates = 2;	// code 0
-    RevealSeq reveals = 3; // RevealSeq
-    AddSeq adds = 4;	// AddSeq
-    DelSeq dels = 5;	// DelSeq
+    RevealSeq reveals = 3;	// RevealSeq
+    AddSeq adds = 4;		// AddSeq
+    DelSeq dels = 5;		// DelSeq
     TerImageSeq ter_images = 21;
     ZHeightMap z_heigth_map = 22;
     ModelSeq images = 23;	// ModelSeq
 }
-// M-Code{1:Code},M-<Code>Seq{1:repeated<Code>}
+enum Fields {
+    none = 0;
+    turn = 1;
+    update=2;
+    reveal=3;
+    add  = 4;
+    del  = 5;
+    tmap = 21;
+    zmap = 22;
+    imag = 23;
+}
 
-// Code:ADD,
+// add Player? add Unit?
 // ADD[{id=1, type="Player", display="Self", ...}
 //     {id=2, type="Player", display="Other", ...}
 //     {id=3, type="Player", display="Gaia", ...}
@@ -130,7 +127,7 @@ message ImageId {
     uint32	y_px = 5;
     uint32	x_off = 6;
     uint32	y_off = 7;
-    uint32	p_color = 8;	// replace pixels of this RGB with player's color
+    uint32	p_color = 8;	// replace pixels of this RGB with player's color [livery]
     // or maybe it is constant: #888888, #F10102 ?
     string	name = 9;	// image name (dubious)
 }
@@ -149,7 +146,7 @@ message Ident {
     uint32	player_id = 5;	// new Unit associated with Player (player id)
 }
 
-// add Unit (or Player)
+// add Unit (or Player/Team/Civ)
 // Add { type, player, display, Update }
 message Add {
     Ident	ident = 1;	// who/what

@@ -9,14 +9,14 @@ var jspb = require('google-protobuf');
 var goog = jspb;
 var global = Function('return this')();
 
+goog.exportSymbol('proto.AMessage', null, global);
 goog.exportSymbol('proto.Add', null, global);
 goog.exportSymbol('proto.AddSeq', null, global);
-goog.exportSymbol('proto.CodeMessage', null, global);
-goog.exportSymbol('proto.CodeMessage.Code', null, global);
 goog.exportSymbol('proto.Del', null, global);
 goog.exportSymbol('proto.DelSeq', null, global);
 goog.exportSymbol('proto.Dloc', null, global);
 goog.exportSymbol('proto.FDloc', null, global);
+goog.exportSymbol('proto.Fields', null, global);
 goog.exportSymbol('proto.Floc', null, global);
 goog.exportSymbol('proto.IDloc', null, global);
 goog.exportSymbol('proto.Ident', null, global);
@@ -1019,12 +1019,12 @@ proto.Turn.prototype.setId = function(value) {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.CodeMessage = function(opt_data) {
+proto.AMessage = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
-goog.inherits(proto.CodeMessage, jspb.Message);
+goog.inherits(proto.AMessage, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
-  proto.CodeMessage.displayName = 'proto.CodeMessage';
+  proto.AMessage.displayName = 'proto.AMessage';
 }
 
 
@@ -1039,8 +1039,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     for transitional soy proto support: http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.CodeMessage.prototype.toObject = function(opt_includeInstance) {
-  return proto.CodeMessage.toObject(opt_includeInstance, this);
+proto.AMessage.prototype.toObject = function(opt_includeInstance) {
+  return proto.AMessage.toObject(opt_includeInstance, this);
 };
 
 
@@ -1049,12 +1049,12 @@ proto.CodeMessage.prototype.toObject = function(opt_includeInstance) {
  * @param {boolean|undefined} includeInstance Whether to include the JSPB
  *     instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.CodeMessage} msg The msg instance to transform.
+ * @param {!proto.AMessage} msg The msg instance to transform.
  * @return {!Object}
  */
-proto.CodeMessage.toObject = function(includeInstance, msg) {
+proto.AMessage.toObject = function(includeInstance, msg) {
   var f, obj = {
-    code: jspb.Message.getFieldWithDefault(msg, 1, 0),
+    turn: (f = msg.getTurn()) && proto.Turn.toObject(includeInstance, f),
     updates: (f = msg.getUpdates()) && proto.UpdateSeq.toObject(includeInstance, f),
     reveals: (f = msg.getReveals()) && proto.RevealSeq.toObject(includeInstance, f),
     adds: (f = msg.getAdds()) && proto.AddSeq.toObject(includeInstance, f),
@@ -1075,23 +1075,23 @@ proto.CodeMessage.toObject = function(includeInstance, msg) {
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.CodeMessage}
+ * @return {!proto.AMessage}
  */
-proto.CodeMessage.deserializeBinary = function(bytes) {
+proto.AMessage.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.CodeMessage;
-  return proto.CodeMessage.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.AMessage;
+  return proto.AMessage.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.CodeMessage} msg The message object to deserialize into.
+ * @param {!proto.AMessage} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.CodeMessage}
+ * @return {!proto.AMessage}
  */
-proto.CodeMessage.deserializeBinaryFromReader = function(msg, reader) {
+proto.AMessage.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -1099,8 +1099,9 @@ proto.CodeMessage.deserializeBinaryFromReader = function(msg, reader) {
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {!proto.CodeMessage.Code} */ (reader.readEnum());
-      msg.setCode(value);
+      var value = new proto.Turn;
+      reader.readMessage(value,proto.Turn.deserializeBinaryFromReader);
+      msg.setTurn(value);
       break;
     case 2:
       var value = new proto.UpdateSeq;
@@ -1150,9 +1151,9 @@ proto.CodeMessage.deserializeBinaryFromReader = function(msg, reader) {
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.CodeMessage.prototype.serializeBinary = function() {
+proto.AMessage.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.CodeMessage.serializeBinaryToWriter(this, writer);
+  proto.AMessage.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -1160,16 +1161,17 @@ proto.CodeMessage.prototype.serializeBinary = function() {
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.CodeMessage} message
+ * @param {!proto.AMessage} message
  * @param {!jspb.BinaryWriter} writer
  */
-proto.CodeMessage.serializeBinaryToWriter = function(message, writer) {
+proto.AMessage.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getCode();
-  if (f !== 0.0) {
-    writer.writeEnum(
+  f = message.getTurn();
+  if (f != null) {
+    writer.writeMessage(
       1,
-      f
+      f,
+      proto.Turn.serializeBinaryToWriter
     );
   }
   f = message.getUpdates();
@@ -1232,31 +1234,32 @@ proto.CodeMessage.serializeBinaryToWriter = function(message, writer) {
 
 
 /**
- * @enum {number}
+ * optional Turn turn = 1;
+ * @return {?proto.Turn}
  */
-proto.CodeMessage.Code = {
-  UPDATE: 0,
-  TURN: 1,
-  REVEAL: 3,
-  ADD: 4,
-  DEL: 5,
-  TMAP: 21,
-  ZMAP: 22,
-  ICONS: 23
+proto.AMessage.prototype.getTurn = function() {
+  return /** @type{?proto.Turn} */ (
+    jspb.Message.getWrapperField(this, proto.Turn, 1));
 };
+
+
+/** @param {?proto.Turn|undefined} value */
+proto.AMessage.prototype.setTurn = function(value) {
+  jspb.Message.setWrapperField(this, 1, value);
+};
+
+
+proto.AMessage.prototype.clearTurn = function() {
+  this.setTurn(undefined);
+};
+
 
 /**
- * optional Code code = 1;
- * @return {!proto.CodeMessage.Code}
+ * Returns whether this field is set.
+ * @return {!boolean}
  */
-proto.CodeMessage.prototype.getCode = function() {
-  return /** @type {!proto.CodeMessage.Code} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
-};
-
-
-/** @param {!proto.CodeMessage.Code} value */
-proto.CodeMessage.prototype.setCode = function(value) {
-  jspb.Message.setField(this, 1, value);
+proto.AMessage.prototype.hasTurn = function() {
+  return jspb.Message.getField(this, 1) != null;
 };
 
 
@@ -1264,19 +1267,19 @@ proto.CodeMessage.prototype.setCode = function(value) {
  * optional UpdateSeq updates = 2;
  * @return {?proto.UpdateSeq}
  */
-proto.CodeMessage.prototype.getUpdates = function() {
+proto.AMessage.prototype.getUpdates = function() {
   return /** @type{?proto.UpdateSeq} */ (
     jspb.Message.getWrapperField(this, proto.UpdateSeq, 2));
 };
 
 
 /** @param {?proto.UpdateSeq|undefined} value */
-proto.CodeMessage.prototype.setUpdates = function(value) {
+proto.AMessage.prototype.setUpdates = function(value) {
   jspb.Message.setWrapperField(this, 2, value);
 };
 
 
-proto.CodeMessage.prototype.clearUpdates = function() {
+proto.AMessage.prototype.clearUpdates = function() {
   this.setUpdates(undefined);
 };
 
@@ -1285,7 +1288,7 @@ proto.CodeMessage.prototype.clearUpdates = function() {
  * Returns whether this field is set.
  * @return {!boolean}
  */
-proto.CodeMessage.prototype.hasUpdates = function() {
+proto.AMessage.prototype.hasUpdates = function() {
   return jspb.Message.getField(this, 2) != null;
 };
 
@@ -1294,19 +1297,19 @@ proto.CodeMessage.prototype.hasUpdates = function() {
  * optional RevealSeq reveals = 3;
  * @return {?proto.RevealSeq}
  */
-proto.CodeMessage.prototype.getReveals = function() {
+proto.AMessage.prototype.getReveals = function() {
   return /** @type{?proto.RevealSeq} */ (
     jspb.Message.getWrapperField(this, proto.RevealSeq, 3));
 };
 
 
 /** @param {?proto.RevealSeq|undefined} value */
-proto.CodeMessage.prototype.setReveals = function(value) {
+proto.AMessage.prototype.setReveals = function(value) {
   jspb.Message.setWrapperField(this, 3, value);
 };
 
 
-proto.CodeMessage.prototype.clearReveals = function() {
+proto.AMessage.prototype.clearReveals = function() {
   this.setReveals(undefined);
 };
 
@@ -1315,7 +1318,7 @@ proto.CodeMessage.prototype.clearReveals = function() {
  * Returns whether this field is set.
  * @return {!boolean}
  */
-proto.CodeMessage.prototype.hasReveals = function() {
+proto.AMessage.prototype.hasReveals = function() {
   return jspb.Message.getField(this, 3) != null;
 };
 
@@ -1324,19 +1327,19 @@ proto.CodeMessage.prototype.hasReveals = function() {
  * optional AddSeq adds = 4;
  * @return {?proto.AddSeq}
  */
-proto.CodeMessage.prototype.getAdds = function() {
+proto.AMessage.prototype.getAdds = function() {
   return /** @type{?proto.AddSeq} */ (
     jspb.Message.getWrapperField(this, proto.AddSeq, 4));
 };
 
 
 /** @param {?proto.AddSeq|undefined} value */
-proto.CodeMessage.prototype.setAdds = function(value) {
+proto.AMessage.prototype.setAdds = function(value) {
   jspb.Message.setWrapperField(this, 4, value);
 };
 
 
-proto.CodeMessage.prototype.clearAdds = function() {
+proto.AMessage.prototype.clearAdds = function() {
   this.setAdds(undefined);
 };
 
@@ -1345,7 +1348,7 @@ proto.CodeMessage.prototype.clearAdds = function() {
  * Returns whether this field is set.
  * @return {!boolean}
  */
-proto.CodeMessage.prototype.hasAdds = function() {
+proto.AMessage.prototype.hasAdds = function() {
   return jspb.Message.getField(this, 4) != null;
 };
 
@@ -1354,19 +1357,19 @@ proto.CodeMessage.prototype.hasAdds = function() {
  * optional DelSeq dels = 5;
  * @return {?proto.DelSeq}
  */
-proto.CodeMessage.prototype.getDels = function() {
+proto.AMessage.prototype.getDels = function() {
   return /** @type{?proto.DelSeq} */ (
     jspb.Message.getWrapperField(this, proto.DelSeq, 5));
 };
 
 
 /** @param {?proto.DelSeq|undefined} value */
-proto.CodeMessage.prototype.setDels = function(value) {
+proto.AMessage.prototype.setDels = function(value) {
   jspb.Message.setWrapperField(this, 5, value);
 };
 
 
-proto.CodeMessage.prototype.clearDels = function() {
+proto.AMessage.prototype.clearDels = function() {
   this.setDels(undefined);
 };
 
@@ -1375,7 +1378,7 @@ proto.CodeMessage.prototype.clearDels = function() {
  * Returns whether this field is set.
  * @return {!boolean}
  */
-proto.CodeMessage.prototype.hasDels = function() {
+proto.AMessage.prototype.hasDels = function() {
   return jspb.Message.getField(this, 5) != null;
 };
 
@@ -1384,19 +1387,19 @@ proto.CodeMessage.prototype.hasDels = function() {
  * optional TerImageSeq ter_images = 21;
  * @return {?proto.TerImageSeq}
  */
-proto.CodeMessage.prototype.getTerImages = function() {
+proto.AMessage.prototype.getTerImages = function() {
   return /** @type{?proto.TerImageSeq} */ (
     jspb.Message.getWrapperField(this, proto.TerImageSeq, 21));
 };
 
 
 /** @param {?proto.TerImageSeq|undefined} value */
-proto.CodeMessage.prototype.setTerImages = function(value) {
+proto.AMessage.prototype.setTerImages = function(value) {
   jspb.Message.setWrapperField(this, 21, value);
 };
 
 
-proto.CodeMessage.prototype.clearTerImages = function() {
+proto.AMessage.prototype.clearTerImages = function() {
   this.setTerImages(undefined);
 };
 
@@ -1405,7 +1408,7 @@ proto.CodeMessage.prototype.clearTerImages = function() {
  * Returns whether this field is set.
  * @return {!boolean}
  */
-proto.CodeMessage.prototype.hasTerImages = function() {
+proto.AMessage.prototype.hasTerImages = function() {
   return jspb.Message.getField(this, 21) != null;
 };
 
@@ -1414,19 +1417,19 @@ proto.CodeMessage.prototype.hasTerImages = function() {
  * optional ZHeightMap z_heigth_map = 22;
  * @return {?proto.ZHeightMap}
  */
-proto.CodeMessage.prototype.getZHeigthMap = function() {
+proto.AMessage.prototype.getZHeigthMap = function() {
   return /** @type{?proto.ZHeightMap} */ (
     jspb.Message.getWrapperField(this, proto.ZHeightMap, 22));
 };
 
 
 /** @param {?proto.ZHeightMap|undefined} value */
-proto.CodeMessage.prototype.setZHeigthMap = function(value) {
+proto.AMessage.prototype.setZHeigthMap = function(value) {
   jspb.Message.setWrapperField(this, 22, value);
 };
 
 
-proto.CodeMessage.prototype.clearZHeigthMap = function() {
+proto.AMessage.prototype.clearZHeigthMap = function() {
   this.setZHeigthMap(undefined);
 };
 
@@ -1435,7 +1438,7 @@ proto.CodeMessage.prototype.clearZHeigthMap = function() {
  * Returns whether this field is set.
  * @return {!boolean}
  */
-proto.CodeMessage.prototype.hasZHeigthMap = function() {
+proto.AMessage.prototype.hasZHeigthMap = function() {
   return jspb.Message.getField(this, 22) != null;
 };
 
@@ -1444,19 +1447,19 @@ proto.CodeMessage.prototype.hasZHeigthMap = function() {
  * optional ModelSeq images = 23;
  * @return {?proto.ModelSeq}
  */
-proto.CodeMessage.prototype.getImages = function() {
+proto.AMessage.prototype.getImages = function() {
   return /** @type{?proto.ModelSeq} */ (
     jspb.Message.getWrapperField(this, proto.ModelSeq, 23));
 };
 
 
 /** @param {?proto.ModelSeq|undefined} value */
-proto.CodeMessage.prototype.setImages = function(value) {
+proto.AMessage.prototype.setImages = function(value) {
   jspb.Message.setWrapperField(this, 23, value);
 };
 
 
-proto.CodeMessage.prototype.clearImages = function() {
+proto.AMessage.prototype.clearImages = function() {
   this.setImages(undefined);
 };
 
@@ -1465,7 +1468,7 @@ proto.CodeMessage.prototype.clearImages = function() {
  * Returns whether this field is set.
  * @return {!boolean}
  */
-proto.CodeMessage.prototype.hasImages = function() {
+proto.AMessage.prototype.hasImages = function() {
   return jspb.Message.getField(this, 23) != null;
 };
 
@@ -4963,5 +4966,20 @@ proto.ZHeightMap.prototype.clearZvalList = function() {
   this.setZvalList([]);
 };
 
+
+/**
+ * @enum {number}
+ */
+proto.Fields = {
+  NONE: 0,
+  TURN: 1,
+  UPDATE: 2,
+  REVEAL: 3,
+  ADD: 4,
+  DEL: 5,
+  TMAP: 21,
+  ZMAP: 22,
+  IMAG: 23
+};
 
 goog.object.extend(exports, proto);
