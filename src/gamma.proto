@@ -58,14 +58,14 @@ message Turn {
 
 // type of following message:
 message AMessage {
-    Turn      turn = 1;		// new turn number; no Seq for this...
-    UpdateSeq updates = 2;	// code 0
-    RevealSeq reveals = 3;	// RevealSeq
-    AddSeq adds = 4;		// AddSeq
-    DelSeq dels = 5;		// DelSeq
-    TerImageSeq ter_images = 21;
-    ZHeightMap z_heigth_map = 22;
-    ModelSeq images = 23;	// ModelSeq
+    Turn      turn = 1;		// Turn
+    UpdateSeq updates = 2;	// Update
+    RevealSeq reveals = 3;	// Reveal
+    AddSeq adds = 4;		// Add (Ident, Update)
+    DelSeq dels = 5;		// Del
+    TerImageSeq ter_images = 21;// TerImage, ImageAry
+    ModImageSeq mod_images = 22;// ModImage, ImageAry
+    ZHeightMap z_height_map = 25;
 }
 enum Fields {
     none = 0;
@@ -110,40 +110,14 @@ message UpdateSeq {
     repeated Update updates = 1;
 }
 
-message ImageAry {
-    uint32 npixels = 1;	// each sub-image is npixels X npixels, in  row major order
-    uint32 nrows = 2;	// each of the nrows
-    uint32 ncols = 3;	// has ncols
-    string url = 4;	// url[r,c] -> tid(r*ncols+c); tid->(tid/ncols,tid%ncols)
-}
-
-// set mapping from m_idx and icon_ndx to image (in ImageAry mblk)
-// for each player, create a master with the livery color replaced
-message ImageId {
-    uint32	id = 1;
-    uint32	x0 = 2;
-    uint32	y0 = 3;
-    uint32	x_px = 4;
-    uint32	y_px = 5;
-    uint32	x_off = 6;
-    uint32	y_off = 7;
-    uint32	p_color = 8;	// replace pixels of this RGB with player's color [livery]
-    // or maybe it is constant: #888888, #F10102 ?
-    string	name = 9;	// image name (dubious)
-}
-
-message ModelSeq {
-    ImageAry	mblk = 1;
-    repeated ImageId images = 2;
-}
-
 // unit identity and presentation
 message Ident {
-    string	type = 1;	// engineer, building, scout, etc (determines menu)
-    string	model = 2;	// scaled image or shape or 3d-model
-    string	icon = 3;	// constant size icon
-    string	display = 4;	// display name for new Unit (hovertext: eng#5)
-    uint32	player_id = 5;	// new Unit associated with Player (player id)
+    uint32	id = 1;		// unit_id, referenced in Update, Del (from Update, if missing)
+    string	type = 2;	// engineer, building, scout, etc (determines menu)
+    uint32	i_ndx = 3;	// ModImage of constant size icon
+    uint32	m_ndx = 4;	// 2D ModImage (scaled image or shape) or 3D-model identifier
+    string	display = 8;	// display name for new Unit (hovertext: eng#5)
+    uint32	player_id = 9;	// new Unit associated with Player (player id, livery)
 }
 
 // add Unit (or Player/Team/Civ)
@@ -178,15 +152,55 @@ message RevealSeq {
     repeated TerRasterY rastery = 1;
 }
 
-message Tmap {
+// ImageAry implicitly associate tids in range [0..nr*nc]
+// with the sub-images in ImageAry at: img[r=tid/ncols, c=tid%ncols] [npixels X npixels]
+// Tmap associates each tid with a display name
+message TerImage {
     uint32	tid = 1;
-    string	tname = 2;
-    string	url = 4;	// unless we have a Tblk
+    string	name = 2;	// advisory, for alt presentation, description
+    SubImage	sub_image = 3;
 }
-// 
+
+// usage: extract a single pixel at img[r,c] given a {x,y,tid}
+// tid maps to a npx X npx subimage
+// img[r,c] -> tid(r*ncols+c); tid->(tid/ncols,tid%ncols)
+message ImageAry {
+    uint32 npixels = 1;	// each sub-image is npixels X npixels, in  row major order
+    uint32 nrows = 2;	// each of the nrows
+    uint32 ncols = 3;	// has ncols
+    string url = 4;	// fetch master image
+}
+
+// override implict image location (from parsing ndx relative to ImageAry)
+message SubImage {
+    uint32	y0 = 2;		// npixels*(r=tid/ncols)
+    uint32	x0 = 3;		// npixels*(c=tid%ncols)
+    uint32	y_px = 4;	// npixels
+    uint32	x_px = 5;	// npixels
+    uint32	y_off = 6;	// 0 (offset to drag/rotate center)
+    uint32	x_off = 7;	// 0 (offset to drag/rotate center)
+    string	alt_url = 8;	// use alternative image (RARE)
+}
+
+// images for unit models, or other non-terrain things (on the unit-canvas)
+// set mapping from m_ndx and icon_ndx to image (in ImageAry mblk)
+// for each player, create a master with the livery color replaced
+message ModImage {
+    uint32	ndx = 1;
+    string	name = 2;	// model/image display name (dubious)
+    SubImage	sub_image = 3;
+    uint32	p_color = 5;	// replace pixels of this RGB with player's color [livery]
+    // or maybe it is constant: #888888, #F10102 ?
+}
+
 message TerImageSeq {
     ImageAry	tblk = 1;
-    repeated Tmap tmaps = 2;
+    repeated TerImage tmaps = 2;
+}
+
+message ModImageSeq {
+    ImageAry	mblk = 1;	// master image
+    repeated ModImage models = 2;// extract sub-image(a 2D model), call it models[ndx] 
 }
 
 // not sure we need this..

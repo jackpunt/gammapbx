@@ -22,13 +22,14 @@ goog.exportSymbol('proto.IDloc', null, global);
 goog.exportSymbol('proto.Ident', null, global);
 goog.exportSymbol('proto.Iloc', null, global);
 goog.exportSymbol('proto.ImageAry', null, global);
-goog.exportSymbol('proto.ImageId', null, global);
-goog.exportSymbol('proto.ModelSeq', null, global);
+goog.exportSymbol('proto.ModImage', null, global);
+goog.exportSymbol('proto.ModImageSeq', null, global);
 goog.exportSymbol('proto.RevealSeq', null, global);
+goog.exportSymbol('proto.SubImage', null, global);
+goog.exportSymbol('proto.TerImage', null, global);
 goog.exportSymbol('proto.TerImageSeq', null, global);
 goog.exportSymbol('proto.TerRasterY', null, global);
 goog.exportSymbol('proto.TerRunX', null, global);
-goog.exportSymbol('proto.Tmap', null, global);
 goog.exportSymbol('proto.Turn', null, global);
 goog.exportSymbol('proto.Update', null, global);
 goog.exportSymbol('proto.UpdateSeq', null, global);
@@ -1060,8 +1061,8 @@ proto.AMessage.toObject = function(includeInstance, msg) {
     adds: (f = msg.getAdds()) && proto.AddSeq.toObject(includeInstance, f),
     dels: (f = msg.getDels()) && proto.DelSeq.toObject(includeInstance, f),
     terImages: (f = msg.getTerImages()) && proto.TerImageSeq.toObject(includeInstance, f),
-    zHeigthMap: (f = msg.getZHeigthMap()) && proto.ZHeightMap.toObject(includeInstance, f),
-    images: (f = msg.getImages()) && proto.ModelSeq.toObject(includeInstance, f)
+    modImages: (f = msg.getModImages()) && proto.ModImageSeq.toObject(includeInstance, f),
+    zHeightMap: (f = msg.getZHeightMap()) && proto.ZHeightMap.toObject(includeInstance, f)
   };
 
   if (includeInstance) {
@@ -1129,14 +1130,14 @@ proto.AMessage.deserializeBinaryFromReader = function(msg, reader) {
       msg.setTerImages(value);
       break;
     case 22:
+      var value = new proto.ModImageSeq;
+      reader.readMessage(value,proto.ModImageSeq.deserializeBinaryFromReader);
+      msg.setModImages(value);
+      break;
+    case 25:
       var value = new proto.ZHeightMap;
       reader.readMessage(value,proto.ZHeightMap.deserializeBinaryFromReader);
-      msg.setZHeigthMap(value);
-      break;
-    case 23:
-      var value = new proto.ModelSeq;
-      reader.readMessage(value,proto.ModelSeq.deserializeBinaryFromReader);
-      msg.setImages(value);
+      msg.setZHeightMap(value);
       break;
     default:
       reader.skipField();
@@ -1214,20 +1215,20 @@ proto.AMessage.serializeBinaryToWriter = function(message, writer) {
       proto.TerImageSeq.serializeBinaryToWriter
     );
   }
-  f = message.getZHeigthMap();
+  f = message.getModImages();
   if (f != null) {
     writer.writeMessage(
       22,
       f,
-      proto.ZHeightMap.serializeBinaryToWriter
+      proto.ModImageSeq.serializeBinaryToWriter
     );
   }
-  f = message.getImages();
+  f = message.getZHeightMap();
   if (f != null) {
     writer.writeMessage(
-      23,
+      25,
       f,
-      proto.ModelSeq.serializeBinaryToWriter
+      proto.ZHeightMap.serializeBinaryToWriter
     );
   }
 };
@@ -1414,23 +1415,23 @@ proto.AMessage.prototype.hasTerImages = function() {
 
 
 /**
- * optional ZHeightMap z_heigth_map = 22;
- * @return {?proto.ZHeightMap}
+ * optional ModImageSeq mod_images = 22;
+ * @return {?proto.ModImageSeq}
  */
-proto.AMessage.prototype.getZHeigthMap = function() {
-  return /** @type{?proto.ZHeightMap} */ (
-    jspb.Message.getWrapperField(this, proto.ZHeightMap, 22));
+proto.AMessage.prototype.getModImages = function() {
+  return /** @type{?proto.ModImageSeq} */ (
+    jspb.Message.getWrapperField(this, proto.ModImageSeq, 22));
 };
 
 
-/** @param {?proto.ZHeightMap|undefined} value */
-proto.AMessage.prototype.setZHeigthMap = function(value) {
+/** @param {?proto.ModImageSeq|undefined} value */
+proto.AMessage.prototype.setModImages = function(value) {
   jspb.Message.setWrapperField(this, 22, value);
 };
 
 
-proto.AMessage.prototype.clearZHeigthMap = function() {
-  this.setZHeigthMap(undefined);
+proto.AMessage.prototype.clearModImages = function() {
+  this.setModImages(undefined);
 };
 
 
@@ -1438,29 +1439,29 @@ proto.AMessage.prototype.clearZHeigthMap = function() {
  * Returns whether this field is set.
  * @return {!boolean}
  */
-proto.AMessage.prototype.hasZHeigthMap = function() {
+proto.AMessage.prototype.hasModImages = function() {
   return jspb.Message.getField(this, 22) != null;
 };
 
 
 /**
- * optional ModelSeq images = 23;
- * @return {?proto.ModelSeq}
+ * optional ZHeightMap z_height_map = 25;
+ * @return {?proto.ZHeightMap}
  */
-proto.AMessage.prototype.getImages = function() {
-  return /** @type{?proto.ModelSeq} */ (
-    jspb.Message.getWrapperField(this, proto.ModelSeq, 23));
+proto.AMessage.prototype.getZHeightMap = function() {
+  return /** @type{?proto.ZHeightMap} */ (
+    jspb.Message.getWrapperField(this, proto.ZHeightMap, 25));
 };
 
 
-/** @param {?proto.ModelSeq|undefined} value */
-proto.AMessage.prototype.setImages = function(value) {
-  jspb.Message.setWrapperField(this, 23, value);
+/** @param {?proto.ZHeightMap|undefined} value */
+proto.AMessage.prototype.setZHeightMap = function(value) {
+  jspb.Message.setWrapperField(this, 25, value);
 };
 
 
-proto.AMessage.prototype.clearImages = function() {
-  this.setImages(undefined);
+proto.AMessage.prototype.clearZHeightMap = function() {
+  this.setZHeightMap(undefined);
 };
 
 
@@ -1468,8 +1469,8 @@ proto.AMessage.prototype.clearImages = function() {
  * Returns whether this field is set.
  * @return {!boolean}
  */
-proto.AMessage.prototype.hasImages = function() {
-  return jspb.Message.getField(this, 23) != null;
+proto.AMessage.prototype.hasZHeightMap = function() {
+  return jspb.Message.getField(this, 25) != null;
 };
 
 
@@ -2067,795 +2068,6 @@ proto.UpdateSeq.prototype.clearUpdatesList = function() {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.ImageAry = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
-};
-goog.inherits(proto.ImageAry, jspb.Message);
-if (goog.DEBUG && !COMPILED) {
-  proto.ImageAry.displayName = 'proto.ImageAry';
-}
-
-
-if (jspb.Message.GENERATE_TO_OBJECT) {
-/**
- * Creates an object representation of this proto suitable for use in Soy templates.
- * Field names that are reserved in JavaScript and will be renamed to pb_name.
- * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
- * For the list of reserved names please see:
- *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
- * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
- *     for transitional soy proto support: http://goto/soy-param-migration
- * @return {!Object}
- */
-proto.ImageAry.prototype.toObject = function(opt_includeInstance) {
-  return proto.ImageAry.toObject(opt_includeInstance, this);
-};
-
-
-/**
- * Static version of the {@see toObject} method.
- * @param {boolean|undefined} includeInstance Whether to include the JSPB
- *     instance for transitional soy proto support:
- *     http://goto/soy-param-migration
- * @param {!proto.ImageAry} msg The msg instance to transform.
- * @return {!Object}
- */
-proto.ImageAry.toObject = function(includeInstance, msg) {
-  var f, obj = {
-    npixels: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    nrows: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    ncols: jspb.Message.getFieldWithDefault(msg, 3, 0),
-    url: jspb.Message.getFieldWithDefault(msg, 4, "")
-  };
-
-  if (includeInstance) {
-    obj.$jspbMessageInstance = msg;
-  }
-  return obj;
-};
-}
-
-
-/**
- * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.ImageAry}
- */
-proto.ImageAry.deserializeBinary = function(bytes) {
-  var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.ImageAry;
-  return proto.ImageAry.deserializeBinaryFromReader(msg, reader);
-};
-
-
-/**
- * Deserializes binary data (in protobuf wire format) from the
- * given reader into the given message object.
- * @param {!proto.ImageAry} msg The message object to deserialize into.
- * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.ImageAry}
- */
-proto.ImageAry.deserializeBinaryFromReader = function(msg, reader) {
-  while (reader.nextField()) {
-    if (reader.isEndGroup()) {
-      break;
-    }
-    var field = reader.getFieldNumber();
-    switch (field) {
-    case 1:
-      var value = /** @type {number} */ (reader.readUint32());
-      msg.setNpixels(value);
-      break;
-    case 2:
-      var value = /** @type {number} */ (reader.readUint32());
-      msg.setNrows(value);
-      break;
-    case 3:
-      var value = /** @type {number} */ (reader.readUint32());
-      msg.setNcols(value);
-      break;
-    case 4:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setUrl(value);
-      break;
-    default:
-      reader.skipField();
-      break;
-    }
-  }
-  return msg;
-};
-
-
-/**
- * Serializes the message to binary data (in protobuf wire format).
- * @return {!Uint8Array}
- */
-proto.ImageAry.prototype.serializeBinary = function() {
-  var writer = new jspb.BinaryWriter();
-  proto.ImageAry.serializeBinaryToWriter(this, writer);
-  return writer.getResultBuffer();
-};
-
-
-/**
- * Serializes the given message to binary data (in protobuf wire
- * format), writing to the given BinaryWriter.
- * @param {!proto.ImageAry} message
- * @param {!jspb.BinaryWriter} writer
- */
-proto.ImageAry.serializeBinaryToWriter = function(message, writer) {
-  var f = undefined;
-  f = message.getNpixels();
-  if (f !== 0) {
-    writer.writeUint32(
-      1,
-      f
-    );
-  }
-  f = message.getNrows();
-  if (f !== 0) {
-    writer.writeUint32(
-      2,
-      f
-    );
-  }
-  f = message.getNcols();
-  if (f !== 0) {
-    writer.writeUint32(
-      3,
-      f
-    );
-  }
-  f = message.getUrl();
-  if (f.length > 0) {
-    writer.writeString(
-      4,
-      f
-    );
-  }
-};
-
-
-/**
- * optional uint32 npixels = 1;
- * @return {number}
- */
-proto.ImageAry.prototype.getNpixels = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
-};
-
-
-/** @param {number} value */
-proto.ImageAry.prototype.setNpixels = function(value) {
-  jspb.Message.setField(this, 1, value);
-};
-
-
-/**
- * optional uint32 nrows = 2;
- * @return {number}
- */
-proto.ImageAry.prototype.getNrows = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
-};
-
-
-/** @param {number} value */
-proto.ImageAry.prototype.setNrows = function(value) {
-  jspb.Message.setField(this, 2, value);
-};
-
-
-/**
- * optional uint32 ncols = 3;
- * @return {number}
- */
-proto.ImageAry.prototype.getNcols = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
-};
-
-
-/** @param {number} value */
-proto.ImageAry.prototype.setNcols = function(value) {
-  jspb.Message.setField(this, 3, value);
-};
-
-
-/**
- * optional string url = 4;
- * @return {string}
- */
-proto.ImageAry.prototype.getUrl = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
-};
-
-
-/** @param {string} value */
-proto.ImageAry.prototype.setUrl = function(value) {
-  jspb.Message.setField(this, 4, value);
-};
-
-
-
-/**
- * Generated by JsPbCodeGenerator.
- * @param {Array=} opt_data Optional initial data array, typically from a
- * server response, or constructed directly in Javascript. The array is used
- * in place and becomes part of the constructed object. It is not cloned.
- * If no data is provided, the constructed object will be empty, but still
- * valid.
- * @extends {jspb.Message}
- * @constructor
- */
-proto.ImageId = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
-};
-goog.inherits(proto.ImageId, jspb.Message);
-if (goog.DEBUG && !COMPILED) {
-  proto.ImageId.displayName = 'proto.ImageId';
-}
-
-
-if (jspb.Message.GENERATE_TO_OBJECT) {
-/**
- * Creates an object representation of this proto suitable for use in Soy templates.
- * Field names that are reserved in JavaScript and will be renamed to pb_name.
- * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
- * For the list of reserved names please see:
- *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
- * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
- *     for transitional soy proto support: http://goto/soy-param-migration
- * @return {!Object}
- */
-proto.ImageId.prototype.toObject = function(opt_includeInstance) {
-  return proto.ImageId.toObject(opt_includeInstance, this);
-};
-
-
-/**
- * Static version of the {@see toObject} method.
- * @param {boolean|undefined} includeInstance Whether to include the JSPB
- *     instance for transitional soy proto support:
- *     http://goto/soy-param-migration
- * @param {!proto.ImageId} msg The msg instance to transform.
- * @return {!Object}
- */
-proto.ImageId.toObject = function(includeInstance, msg) {
-  var f, obj = {
-    id: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    x0: jspb.Message.getFieldWithDefault(msg, 2, 0),
-    y0: jspb.Message.getFieldWithDefault(msg, 3, 0),
-    xPx: jspb.Message.getFieldWithDefault(msg, 4, 0),
-    yPx: jspb.Message.getFieldWithDefault(msg, 5, 0),
-    xOff: jspb.Message.getFieldWithDefault(msg, 6, 0),
-    yOff: jspb.Message.getFieldWithDefault(msg, 7, 0),
-    pColor: jspb.Message.getFieldWithDefault(msg, 8, 0),
-    name: jspb.Message.getFieldWithDefault(msg, 9, "")
-  };
-
-  if (includeInstance) {
-    obj.$jspbMessageInstance = msg;
-  }
-  return obj;
-};
-}
-
-
-/**
- * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.ImageId}
- */
-proto.ImageId.deserializeBinary = function(bytes) {
-  var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.ImageId;
-  return proto.ImageId.deserializeBinaryFromReader(msg, reader);
-};
-
-
-/**
- * Deserializes binary data (in protobuf wire format) from the
- * given reader into the given message object.
- * @param {!proto.ImageId} msg The message object to deserialize into.
- * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.ImageId}
- */
-proto.ImageId.deserializeBinaryFromReader = function(msg, reader) {
-  while (reader.nextField()) {
-    if (reader.isEndGroup()) {
-      break;
-    }
-    var field = reader.getFieldNumber();
-    switch (field) {
-    case 1:
-      var value = /** @type {number} */ (reader.readUint32());
-      msg.setId(value);
-      break;
-    case 2:
-      var value = /** @type {number} */ (reader.readUint32());
-      msg.setX0(value);
-      break;
-    case 3:
-      var value = /** @type {number} */ (reader.readUint32());
-      msg.setY0(value);
-      break;
-    case 4:
-      var value = /** @type {number} */ (reader.readUint32());
-      msg.setXPx(value);
-      break;
-    case 5:
-      var value = /** @type {number} */ (reader.readUint32());
-      msg.setYPx(value);
-      break;
-    case 6:
-      var value = /** @type {number} */ (reader.readUint32());
-      msg.setXOff(value);
-      break;
-    case 7:
-      var value = /** @type {number} */ (reader.readUint32());
-      msg.setYOff(value);
-      break;
-    case 8:
-      var value = /** @type {number} */ (reader.readUint32());
-      msg.setPColor(value);
-      break;
-    case 9:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setName(value);
-      break;
-    default:
-      reader.skipField();
-      break;
-    }
-  }
-  return msg;
-};
-
-
-/**
- * Serializes the message to binary data (in protobuf wire format).
- * @return {!Uint8Array}
- */
-proto.ImageId.prototype.serializeBinary = function() {
-  var writer = new jspb.BinaryWriter();
-  proto.ImageId.serializeBinaryToWriter(this, writer);
-  return writer.getResultBuffer();
-};
-
-
-/**
- * Serializes the given message to binary data (in protobuf wire
- * format), writing to the given BinaryWriter.
- * @param {!proto.ImageId} message
- * @param {!jspb.BinaryWriter} writer
- */
-proto.ImageId.serializeBinaryToWriter = function(message, writer) {
-  var f = undefined;
-  f = message.getId();
-  if (f !== 0) {
-    writer.writeUint32(
-      1,
-      f
-    );
-  }
-  f = message.getX0();
-  if (f !== 0) {
-    writer.writeUint32(
-      2,
-      f
-    );
-  }
-  f = message.getY0();
-  if (f !== 0) {
-    writer.writeUint32(
-      3,
-      f
-    );
-  }
-  f = message.getXPx();
-  if (f !== 0) {
-    writer.writeUint32(
-      4,
-      f
-    );
-  }
-  f = message.getYPx();
-  if (f !== 0) {
-    writer.writeUint32(
-      5,
-      f
-    );
-  }
-  f = message.getXOff();
-  if (f !== 0) {
-    writer.writeUint32(
-      6,
-      f
-    );
-  }
-  f = message.getYOff();
-  if (f !== 0) {
-    writer.writeUint32(
-      7,
-      f
-    );
-  }
-  f = message.getPColor();
-  if (f !== 0) {
-    writer.writeUint32(
-      8,
-      f
-    );
-  }
-  f = message.getName();
-  if (f.length > 0) {
-    writer.writeString(
-      9,
-      f
-    );
-  }
-};
-
-
-/**
- * optional uint32 id = 1;
- * @return {number}
- */
-proto.ImageId.prototype.getId = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
-};
-
-
-/** @param {number} value */
-proto.ImageId.prototype.setId = function(value) {
-  jspb.Message.setField(this, 1, value);
-};
-
-
-/**
- * optional uint32 x0 = 2;
- * @return {number}
- */
-proto.ImageId.prototype.getX0 = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
-};
-
-
-/** @param {number} value */
-proto.ImageId.prototype.setX0 = function(value) {
-  jspb.Message.setField(this, 2, value);
-};
-
-
-/**
- * optional uint32 y0 = 3;
- * @return {number}
- */
-proto.ImageId.prototype.getY0 = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
-};
-
-
-/** @param {number} value */
-proto.ImageId.prototype.setY0 = function(value) {
-  jspb.Message.setField(this, 3, value);
-};
-
-
-/**
- * optional uint32 x_px = 4;
- * @return {number}
- */
-proto.ImageId.prototype.getXPx = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
-};
-
-
-/** @param {number} value */
-proto.ImageId.prototype.setXPx = function(value) {
-  jspb.Message.setField(this, 4, value);
-};
-
-
-/**
- * optional uint32 y_px = 5;
- * @return {number}
- */
-proto.ImageId.prototype.getYPx = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
-};
-
-
-/** @param {number} value */
-proto.ImageId.prototype.setYPx = function(value) {
-  jspb.Message.setField(this, 5, value);
-};
-
-
-/**
- * optional uint32 x_off = 6;
- * @return {number}
- */
-proto.ImageId.prototype.getXOff = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 6, 0));
-};
-
-
-/** @param {number} value */
-proto.ImageId.prototype.setXOff = function(value) {
-  jspb.Message.setField(this, 6, value);
-};
-
-
-/**
- * optional uint32 y_off = 7;
- * @return {number}
- */
-proto.ImageId.prototype.getYOff = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 7, 0));
-};
-
-
-/** @param {number} value */
-proto.ImageId.prototype.setYOff = function(value) {
-  jspb.Message.setField(this, 7, value);
-};
-
-
-/**
- * optional uint32 p_color = 8;
- * @return {number}
- */
-proto.ImageId.prototype.getPColor = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 8, 0));
-};
-
-
-/** @param {number} value */
-proto.ImageId.prototype.setPColor = function(value) {
-  jspb.Message.setField(this, 8, value);
-};
-
-
-/**
- * optional string name = 9;
- * @return {string}
- */
-proto.ImageId.prototype.getName = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 9, ""));
-};
-
-
-/** @param {string} value */
-proto.ImageId.prototype.setName = function(value) {
-  jspb.Message.setField(this, 9, value);
-};
-
-
-
-/**
- * Generated by JsPbCodeGenerator.
- * @param {Array=} opt_data Optional initial data array, typically from a
- * server response, or constructed directly in Javascript. The array is used
- * in place and becomes part of the constructed object. It is not cloned.
- * If no data is provided, the constructed object will be empty, but still
- * valid.
- * @extends {jspb.Message}
- * @constructor
- */
-proto.ModelSeq = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, proto.ModelSeq.repeatedFields_, null);
-};
-goog.inherits(proto.ModelSeq, jspb.Message);
-if (goog.DEBUG && !COMPILED) {
-  proto.ModelSeq.displayName = 'proto.ModelSeq';
-}
-/**
- * List of repeated fields within this message type.
- * @private {!Array<number>}
- * @const
- */
-proto.ModelSeq.repeatedFields_ = [2];
-
-
-
-if (jspb.Message.GENERATE_TO_OBJECT) {
-/**
- * Creates an object representation of this proto suitable for use in Soy templates.
- * Field names that are reserved in JavaScript and will be renamed to pb_name.
- * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
- * For the list of reserved names please see:
- *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
- * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
- *     for transitional soy proto support: http://goto/soy-param-migration
- * @return {!Object}
- */
-proto.ModelSeq.prototype.toObject = function(opt_includeInstance) {
-  return proto.ModelSeq.toObject(opt_includeInstance, this);
-};
-
-
-/**
- * Static version of the {@see toObject} method.
- * @param {boolean|undefined} includeInstance Whether to include the JSPB
- *     instance for transitional soy proto support:
- *     http://goto/soy-param-migration
- * @param {!proto.ModelSeq} msg The msg instance to transform.
- * @return {!Object}
- */
-proto.ModelSeq.toObject = function(includeInstance, msg) {
-  var f, obj = {
-    mblk: (f = msg.getMblk()) && proto.ImageAry.toObject(includeInstance, f),
-    imagesList: jspb.Message.toObjectList(msg.getImagesList(),
-    proto.ImageId.toObject, includeInstance)
-  };
-
-  if (includeInstance) {
-    obj.$jspbMessageInstance = msg;
-  }
-  return obj;
-};
-}
-
-
-/**
- * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.ModelSeq}
- */
-proto.ModelSeq.deserializeBinary = function(bytes) {
-  var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.ModelSeq;
-  return proto.ModelSeq.deserializeBinaryFromReader(msg, reader);
-};
-
-
-/**
- * Deserializes binary data (in protobuf wire format) from the
- * given reader into the given message object.
- * @param {!proto.ModelSeq} msg The message object to deserialize into.
- * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.ModelSeq}
- */
-proto.ModelSeq.deserializeBinaryFromReader = function(msg, reader) {
-  while (reader.nextField()) {
-    if (reader.isEndGroup()) {
-      break;
-    }
-    var field = reader.getFieldNumber();
-    switch (field) {
-    case 1:
-      var value = new proto.ImageAry;
-      reader.readMessage(value,proto.ImageAry.deserializeBinaryFromReader);
-      msg.setMblk(value);
-      break;
-    case 2:
-      var value = new proto.ImageId;
-      reader.readMessage(value,proto.ImageId.deserializeBinaryFromReader);
-      msg.addImages(value);
-      break;
-    default:
-      reader.skipField();
-      break;
-    }
-  }
-  return msg;
-};
-
-
-/**
- * Serializes the message to binary data (in protobuf wire format).
- * @return {!Uint8Array}
- */
-proto.ModelSeq.prototype.serializeBinary = function() {
-  var writer = new jspb.BinaryWriter();
-  proto.ModelSeq.serializeBinaryToWriter(this, writer);
-  return writer.getResultBuffer();
-};
-
-
-/**
- * Serializes the given message to binary data (in protobuf wire
- * format), writing to the given BinaryWriter.
- * @param {!proto.ModelSeq} message
- * @param {!jspb.BinaryWriter} writer
- */
-proto.ModelSeq.serializeBinaryToWriter = function(message, writer) {
-  var f = undefined;
-  f = message.getMblk();
-  if (f != null) {
-    writer.writeMessage(
-      1,
-      f,
-      proto.ImageAry.serializeBinaryToWriter
-    );
-  }
-  f = message.getImagesList();
-  if (f.length > 0) {
-    writer.writeRepeatedMessage(
-      2,
-      f,
-      proto.ImageId.serializeBinaryToWriter
-    );
-  }
-};
-
-
-/**
- * optional ImageAry mblk = 1;
- * @return {?proto.ImageAry}
- */
-proto.ModelSeq.prototype.getMblk = function() {
-  return /** @type{?proto.ImageAry} */ (
-    jspb.Message.getWrapperField(this, proto.ImageAry, 1));
-};
-
-
-/** @param {?proto.ImageAry|undefined} value */
-proto.ModelSeq.prototype.setMblk = function(value) {
-  jspb.Message.setWrapperField(this, 1, value);
-};
-
-
-proto.ModelSeq.prototype.clearMblk = function() {
-  this.setMblk(undefined);
-};
-
-
-/**
- * Returns whether this field is set.
- * @return {!boolean}
- */
-proto.ModelSeq.prototype.hasMblk = function() {
-  return jspb.Message.getField(this, 1) != null;
-};
-
-
-/**
- * repeated ImageId images = 2;
- * If you change this array by adding, removing or replacing elements, or if you
- * replace the array itself, then you must call the setter to update it.
- * @return {!Array.<!proto.ImageId>}
- */
-proto.ModelSeq.prototype.getImagesList = function() {
-  return /** @type{!Array.<!proto.ImageId>} */ (
-    jspb.Message.getRepeatedWrapperField(this, proto.ImageId, 2));
-};
-
-
-/** @param {!Array.<!proto.ImageId>} value */
-proto.ModelSeq.prototype.setImagesList = function(value) {
-  jspb.Message.setRepeatedWrapperField(this, 2, value);
-};
-
-
-/**
- * @param {!proto.ImageId=} opt_value
- * @param {number=} opt_index
- * @return {!proto.ImageId}
- */
-proto.ModelSeq.prototype.addImages = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 2, opt_value, proto.ImageId, opt_index);
-};
-
-
-proto.ModelSeq.prototype.clearImagesList = function() {
-  this.setImagesList([]);
-};
-
-
-
-/**
- * Generated by JsPbCodeGenerator.
- * @param {Array=} opt_data Optional initial data array, typically from a
- * server response, or constructed directly in Javascript. The array is used
- * in place and becomes part of the constructed object. It is not cloned.
- * If no data is provided, the constructed object will be empty, but still
- * valid.
- * @extends {jspb.Message}
- * @constructor
- */
 proto.Ident = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
@@ -2891,11 +2103,12 @@ proto.Ident.prototype.toObject = function(opt_includeInstance) {
  */
 proto.Ident.toObject = function(includeInstance, msg) {
   var f, obj = {
-    type: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    model: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    icon: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    display: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    playerId: jspb.Message.getFieldWithDefault(msg, 5, 0)
+    id: jspb.Message.getFieldWithDefault(msg, 1, 0),
+    type: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    iNdx: jspb.Message.getFieldWithDefault(msg, 3, 0),
+    mNdx: jspb.Message.getFieldWithDefault(msg, 4, 0),
+    display: jspb.Message.getFieldWithDefault(msg, 8, ""),
+    playerId: jspb.Message.getFieldWithDefault(msg, 9, 0)
   };
 
   if (includeInstance) {
@@ -2933,22 +2146,26 @@ proto.Ident.deserializeBinaryFromReader = function(msg, reader) {
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setType(value);
+      var value = /** @type {number} */ (reader.readUint32());
+      msg.setId(value);
       break;
     case 2:
       var value = /** @type {string} */ (reader.readString());
-      msg.setModel(value);
+      msg.setType(value);
       break;
     case 3:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setIcon(value);
+      var value = /** @type {number} */ (reader.readUint32());
+      msg.setINdx(value);
       break;
     case 4:
+      var value = /** @type {number} */ (reader.readUint32());
+      msg.setMNdx(value);
+      break;
+    case 8:
       var value = /** @type {string} */ (reader.readString());
       msg.setDisplay(value);
       break;
-    case 5:
+    case 9:
       var value = /** @type {number} */ (reader.readUint32());
       msg.setPlayerId(value);
       break;
@@ -2980,38 +2197,45 @@ proto.Ident.prototype.serializeBinary = function() {
  */
 proto.Ident.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getType();
-  if (f.length > 0) {
-    writer.writeString(
+  f = message.getId();
+  if (f !== 0) {
+    writer.writeUint32(
       1,
       f
     );
   }
-  f = message.getModel();
+  f = message.getType();
   if (f.length > 0) {
     writer.writeString(
       2,
       f
     );
   }
-  f = message.getIcon();
-  if (f.length > 0) {
-    writer.writeString(
+  f = message.getINdx();
+  if (f !== 0) {
+    writer.writeUint32(
       3,
+      f
+    );
+  }
+  f = message.getMNdx();
+  if (f !== 0) {
+    writer.writeUint32(
+      4,
       f
     );
   }
   f = message.getDisplay();
   if (f.length > 0) {
     writer.writeString(
-      4,
+      8,
       f
     );
   }
   f = message.getPlayerId();
   if (f !== 0) {
     writer.writeUint32(
-      5,
+      9,
       f
     );
   }
@@ -3019,77 +2243,92 @@ proto.Ident.serializeBinaryToWriter = function(message, writer) {
 
 
 /**
- * optional string type = 1;
- * @return {string}
+ * optional uint32 id = 1;
+ * @return {number}
  */
-proto.Ident.prototype.getType = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
+proto.Ident.prototype.getId = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
 
-/** @param {string} value */
-proto.Ident.prototype.setType = function(value) {
+/** @param {number} value */
+proto.Ident.prototype.setId = function(value) {
   jspb.Message.setField(this, 1, value);
 };
 
 
 /**
- * optional string model = 2;
+ * optional string type = 2;
  * @return {string}
  */
-proto.Ident.prototype.getModel = function() {
+proto.Ident.prototype.getType = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
 
 /** @param {string} value */
-proto.Ident.prototype.setModel = function(value) {
+proto.Ident.prototype.setType = function(value) {
   jspb.Message.setField(this, 2, value);
 };
 
 
 /**
- * optional string icon = 3;
- * @return {string}
+ * optional uint32 i_ndx = 3;
+ * @return {number}
  */
-proto.Ident.prototype.getIcon = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+proto.Ident.prototype.getINdx = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
 };
 
 
-/** @param {string} value */
-proto.Ident.prototype.setIcon = function(value) {
+/** @param {number} value */
+proto.Ident.prototype.setINdx = function(value) {
   jspb.Message.setField(this, 3, value);
 };
 
 
 /**
- * optional string display = 4;
- * @return {string}
+ * optional uint32 m_ndx = 4;
+ * @return {number}
  */
-proto.Ident.prototype.getDisplay = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
+proto.Ident.prototype.getMNdx = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
 };
 
 
-/** @param {string} value */
-proto.Ident.prototype.setDisplay = function(value) {
+/** @param {number} value */
+proto.Ident.prototype.setMNdx = function(value) {
   jspb.Message.setField(this, 4, value);
 };
 
 
 /**
- * optional uint32 player_id = 5;
+ * optional string display = 8;
+ * @return {string}
+ */
+proto.Ident.prototype.getDisplay = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 8, ""));
+};
+
+
+/** @param {string} value */
+proto.Ident.prototype.setDisplay = function(value) {
+  jspb.Message.setField(this, 8, value);
+};
+
+
+/**
+ * optional uint32 player_id = 9;
  * @return {number}
  */
 proto.Ident.prototype.getPlayerId = function() {
-  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 9, 0));
 };
 
 
 /** @param {number} value */
 proto.Ident.prototype.setPlayerId = function(value) {
-  jspb.Message.setField(this, 5, value);
+  jspb.Message.setField(this, 9, value);
 };
 
 
@@ -4382,12 +3621,12 @@ proto.RevealSeq.prototype.clearRasteryList = function() {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.Tmap = function(opt_data) {
+proto.TerImage = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, null, null);
 };
-goog.inherits(proto.Tmap, jspb.Message);
+goog.inherits(proto.TerImage, jspb.Message);
 if (goog.DEBUG && !COMPILED) {
-  proto.Tmap.displayName = 'proto.Tmap';
+  proto.TerImage.displayName = 'proto.TerImage';
 }
 
 
@@ -4402,8 +3641,8 @@ if (jspb.Message.GENERATE_TO_OBJECT) {
  *     for transitional soy proto support: http://goto/soy-param-migration
  * @return {!Object}
  */
-proto.Tmap.prototype.toObject = function(opt_includeInstance) {
-  return proto.Tmap.toObject(opt_includeInstance, this);
+proto.TerImage.prototype.toObject = function(opt_includeInstance) {
+  return proto.TerImage.toObject(opt_includeInstance, this);
 };
 
 
@@ -4412,13 +3651,225 @@ proto.Tmap.prototype.toObject = function(opt_includeInstance) {
  * @param {boolean|undefined} includeInstance Whether to include the JSPB
  *     instance for transitional soy proto support:
  *     http://goto/soy-param-migration
- * @param {!proto.Tmap} msg The msg instance to transform.
+ * @param {!proto.TerImage} msg The msg instance to transform.
  * @return {!Object}
  */
-proto.Tmap.toObject = function(includeInstance, msg) {
+proto.TerImage.toObject = function(includeInstance, msg) {
   var f, obj = {
     tid: jspb.Message.getFieldWithDefault(msg, 1, 0),
-    tname: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    name: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    subImage: (f = msg.getSubImage()) && proto.SubImage.toObject(includeInstance, f)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.TerImage}
+ */
+proto.TerImage.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.TerImage;
+  return proto.TerImage.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.TerImage} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.TerImage}
+ */
+proto.TerImage.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {number} */ (reader.readUint32());
+      msg.setTid(value);
+      break;
+    case 2:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setName(value);
+      break;
+    case 3:
+      var value = new proto.SubImage;
+      reader.readMessage(value,proto.SubImage.deserializeBinaryFromReader);
+      msg.setSubImage(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.TerImage.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.TerImage.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.TerImage} message
+ * @param {!jspb.BinaryWriter} writer
+ */
+proto.TerImage.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getTid();
+  if (f !== 0) {
+    writer.writeUint32(
+      1,
+      f
+    );
+  }
+  f = message.getName();
+  if (f.length > 0) {
+    writer.writeString(
+      2,
+      f
+    );
+  }
+  f = message.getSubImage();
+  if (f != null) {
+    writer.writeMessage(
+      3,
+      f,
+      proto.SubImage.serializeBinaryToWriter
+    );
+  }
+};
+
+
+/**
+ * optional uint32 tid = 1;
+ * @return {number}
+ */
+proto.TerImage.prototype.getTid = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+};
+
+
+/** @param {number} value */
+proto.TerImage.prototype.setTid = function(value) {
+  jspb.Message.setField(this, 1, value);
+};
+
+
+/**
+ * optional string name = 2;
+ * @return {string}
+ */
+proto.TerImage.prototype.getName = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/** @param {string} value */
+proto.TerImage.prototype.setName = function(value) {
+  jspb.Message.setField(this, 2, value);
+};
+
+
+/**
+ * optional SubImage sub_image = 3;
+ * @return {?proto.SubImage}
+ */
+proto.TerImage.prototype.getSubImage = function() {
+  return /** @type{?proto.SubImage} */ (
+    jspb.Message.getWrapperField(this, proto.SubImage, 3));
+};
+
+
+/** @param {?proto.SubImage|undefined} value */
+proto.TerImage.prototype.setSubImage = function(value) {
+  jspb.Message.setWrapperField(this, 3, value);
+};
+
+
+proto.TerImage.prototype.clearSubImage = function() {
+  this.setSubImage(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {!boolean}
+ */
+proto.TerImage.prototype.hasSubImage = function() {
+  return jspb.Message.getField(this, 3) != null;
+};
+
+
+
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.ImageAry = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.ImageAry, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  proto.ImageAry.displayName = 'proto.ImageAry';
+}
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.ImageAry.prototype.toObject = function(opt_includeInstance) {
+  return proto.ImageAry.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.ImageAry} msg The msg instance to transform.
+ * @return {!Object}
+ */
+proto.ImageAry.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    npixels: jspb.Message.getFieldWithDefault(msg, 1, 0),
+    nrows: jspb.Message.getFieldWithDefault(msg, 2, 0),
+    ncols: jspb.Message.getFieldWithDefault(msg, 3, 0),
     url: jspb.Message.getFieldWithDefault(msg, 4, "")
   };
 
@@ -4433,23 +3884,23 @@ proto.Tmap.toObject = function(includeInstance, msg) {
 /**
  * Deserializes binary data (in protobuf wire format).
  * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.Tmap}
+ * @return {!proto.ImageAry}
  */
-proto.Tmap.deserializeBinary = function(bytes) {
+proto.ImageAry.deserializeBinary = function(bytes) {
   var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.Tmap;
-  return proto.Tmap.deserializeBinaryFromReader(msg, reader);
+  var msg = new proto.ImageAry;
+  return proto.ImageAry.deserializeBinaryFromReader(msg, reader);
 };
 
 
 /**
  * Deserializes binary data (in protobuf wire format) from the
  * given reader into the given message object.
- * @param {!proto.Tmap} msg The message object to deserialize into.
+ * @param {!proto.ImageAry} msg The message object to deserialize into.
  * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.Tmap}
+ * @return {!proto.ImageAry}
  */
-proto.Tmap.deserializeBinaryFromReader = function(msg, reader) {
+proto.ImageAry.deserializeBinaryFromReader = function(msg, reader) {
   while (reader.nextField()) {
     if (reader.isEndGroup()) {
       break;
@@ -4458,11 +3909,15 @@ proto.Tmap.deserializeBinaryFromReader = function(msg, reader) {
     switch (field) {
     case 1:
       var value = /** @type {number} */ (reader.readUint32());
-      msg.setTid(value);
+      msg.setNpixels(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
-      msg.setTname(value);
+      var value = /** @type {number} */ (reader.readUint32());
+      msg.setNrows(value);
+      break;
+    case 3:
+      var value = /** @type {number} */ (reader.readUint32());
+      msg.setNcols(value);
       break;
     case 4:
       var value = /** @type {string} */ (reader.readString());
@@ -4481,9 +3936,9 @@ proto.Tmap.deserializeBinaryFromReader = function(msg, reader) {
  * Serializes the message to binary data (in protobuf wire format).
  * @return {!Uint8Array}
  */
-proto.Tmap.prototype.serializeBinary = function() {
+proto.ImageAry.prototype.serializeBinary = function() {
   var writer = new jspb.BinaryWriter();
-  proto.Tmap.serializeBinaryToWriter(this, writer);
+  proto.ImageAry.serializeBinaryToWriter(this, writer);
   return writer.getResultBuffer();
 };
 
@@ -4491,22 +3946,29 @@ proto.Tmap.prototype.serializeBinary = function() {
 /**
  * Serializes the given message to binary data (in protobuf wire
  * format), writing to the given BinaryWriter.
- * @param {!proto.Tmap} message
+ * @param {!proto.ImageAry} message
  * @param {!jspb.BinaryWriter} writer
  */
-proto.Tmap.serializeBinaryToWriter = function(message, writer) {
+proto.ImageAry.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getTid();
+  f = message.getNpixels();
   if (f !== 0) {
     writer.writeUint32(
       1,
       f
     );
   }
-  f = message.getTname();
-  if (f.length > 0) {
-    writer.writeString(
+  f = message.getNrows();
+  if (f !== 0) {
+    writer.writeUint32(
       2,
+      f
+    );
+  }
+  f = message.getNcols();
+  if (f !== 0) {
+    writer.writeUint32(
+      3,
       f
     );
   }
@@ -4521,32 +3983,47 @@ proto.Tmap.serializeBinaryToWriter = function(message, writer) {
 
 
 /**
- * optional uint32 tid = 1;
+ * optional uint32 npixels = 1;
  * @return {number}
  */
-proto.Tmap.prototype.getTid = function() {
+proto.ImageAry.prototype.getNpixels = function() {
   return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
 };
 
 
 /** @param {number} value */
-proto.Tmap.prototype.setTid = function(value) {
+proto.ImageAry.prototype.setNpixels = function(value) {
   jspb.Message.setField(this, 1, value);
 };
 
 
 /**
- * optional string tname = 2;
- * @return {string}
+ * optional uint32 nrows = 2;
+ * @return {number}
  */
-proto.Tmap.prototype.getTname = function() {
-  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+proto.ImageAry.prototype.getNrows = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
 };
 
 
-/** @param {string} value */
-proto.Tmap.prototype.setTname = function(value) {
+/** @param {number} value */
+proto.ImageAry.prototype.setNrows = function(value) {
   jspb.Message.setField(this, 2, value);
+};
+
+
+/**
+ * optional uint32 ncols = 3;
+ * @return {number}
+ */
+proto.ImageAry.prototype.getNcols = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
+};
+
+
+/** @param {number} value */
+proto.ImageAry.prototype.setNcols = function(value) {
+  jspb.Message.setField(this, 3, value);
 };
 
 
@@ -4554,14 +4031,554 @@ proto.Tmap.prototype.setTname = function(value) {
  * optional string url = 4;
  * @return {string}
  */
-proto.Tmap.prototype.getUrl = function() {
+proto.ImageAry.prototype.getUrl = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
 };
 
 
 /** @param {string} value */
-proto.Tmap.prototype.setUrl = function(value) {
+proto.ImageAry.prototype.setUrl = function(value) {
   jspb.Message.setField(this, 4, value);
+};
+
+
+
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.SubImage = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.SubImage, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  proto.SubImage.displayName = 'proto.SubImage';
+}
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.SubImage.prototype.toObject = function(opt_includeInstance) {
+  return proto.SubImage.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.SubImage} msg The msg instance to transform.
+ * @return {!Object}
+ */
+proto.SubImage.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    y0: jspb.Message.getFieldWithDefault(msg, 2, 0),
+    x0: jspb.Message.getFieldWithDefault(msg, 3, 0),
+    yPx: jspb.Message.getFieldWithDefault(msg, 4, 0),
+    xPx: jspb.Message.getFieldWithDefault(msg, 5, 0),
+    yOff: jspb.Message.getFieldWithDefault(msg, 6, 0),
+    xOff: jspb.Message.getFieldWithDefault(msg, 7, 0),
+    altUrl: jspb.Message.getFieldWithDefault(msg, 8, "")
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.SubImage}
+ */
+proto.SubImage.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.SubImage;
+  return proto.SubImage.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.SubImage} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.SubImage}
+ */
+proto.SubImage.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 2:
+      var value = /** @type {number} */ (reader.readUint32());
+      msg.setY0(value);
+      break;
+    case 3:
+      var value = /** @type {number} */ (reader.readUint32());
+      msg.setX0(value);
+      break;
+    case 4:
+      var value = /** @type {number} */ (reader.readUint32());
+      msg.setYPx(value);
+      break;
+    case 5:
+      var value = /** @type {number} */ (reader.readUint32());
+      msg.setXPx(value);
+      break;
+    case 6:
+      var value = /** @type {number} */ (reader.readUint32());
+      msg.setYOff(value);
+      break;
+    case 7:
+      var value = /** @type {number} */ (reader.readUint32());
+      msg.setXOff(value);
+      break;
+    case 8:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setAltUrl(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.SubImage.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.SubImage.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.SubImage} message
+ * @param {!jspb.BinaryWriter} writer
+ */
+proto.SubImage.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getY0();
+  if (f !== 0) {
+    writer.writeUint32(
+      2,
+      f
+    );
+  }
+  f = message.getX0();
+  if (f !== 0) {
+    writer.writeUint32(
+      3,
+      f
+    );
+  }
+  f = message.getYPx();
+  if (f !== 0) {
+    writer.writeUint32(
+      4,
+      f
+    );
+  }
+  f = message.getXPx();
+  if (f !== 0) {
+    writer.writeUint32(
+      5,
+      f
+    );
+  }
+  f = message.getYOff();
+  if (f !== 0) {
+    writer.writeUint32(
+      6,
+      f
+    );
+  }
+  f = message.getXOff();
+  if (f !== 0) {
+    writer.writeUint32(
+      7,
+      f
+    );
+  }
+  f = message.getAltUrl();
+  if (f.length > 0) {
+    writer.writeString(
+      8,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional uint32 y0 = 2;
+ * @return {number}
+ */
+proto.SubImage.prototype.getY0 = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 2, 0));
+};
+
+
+/** @param {number} value */
+proto.SubImage.prototype.setY0 = function(value) {
+  jspb.Message.setField(this, 2, value);
+};
+
+
+/**
+ * optional uint32 x0 = 3;
+ * @return {number}
+ */
+proto.SubImage.prototype.getX0 = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 3, 0));
+};
+
+
+/** @param {number} value */
+proto.SubImage.prototype.setX0 = function(value) {
+  jspb.Message.setField(this, 3, value);
+};
+
+
+/**
+ * optional uint32 y_px = 4;
+ * @return {number}
+ */
+proto.SubImage.prototype.getYPx = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 4, 0));
+};
+
+
+/** @param {number} value */
+proto.SubImage.prototype.setYPx = function(value) {
+  jspb.Message.setField(this, 4, value);
+};
+
+
+/**
+ * optional uint32 x_px = 5;
+ * @return {number}
+ */
+proto.SubImage.prototype.getXPx = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
+};
+
+
+/** @param {number} value */
+proto.SubImage.prototype.setXPx = function(value) {
+  jspb.Message.setField(this, 5, value);
+};
+
+
+/**
+ * optional uint32 y_off = 6;
+ * @return {number}
+ */
+proto.SubImage.prototype.getYOff = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 6, 0));
+};
+
+
+/** @param {number} value */
+proto.SubImage.prototype.setYOff = function(value) {
+  jspb.Message.setField(this, 6, value);
+};
+
+
+/**
+ * optional uint32 x_off = 7;
+ * @return {number}
+ */
+proto.SubImage.prototype.getXOff = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 7, 0));
+};
+
+
+/** @param {number} value */
+proto.SubImage.prototype.setXOff = function(value) {
+  jspb.Message.setField(this, 7, value);
+};
+
+
+/**
+ * optional string alt_url = 8;
+ * @return {string}
+ */
+proto.SubImage.prototype.getAltUrl = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 8, ""));
+};
+
+
+/** @param {string} value */
+proto.SubImage.prototype.setAltUrl = function(value) {
+  jspb.Message.setField(this, 8, value);
+};
+
+
+
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.ModImage = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, null, null);
+};
+goog.inherits(proto.ModImage, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  proto.ModImage.displayName = 'proto.ModImage';
+}
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.ModImage.prototype.toObject = function(opt_includeInstance) {
+  return proto.ModImage.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.ModImage} msg The msg instance to transform.
+ * @return {!Object}
+ */
+proto.ModImage.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    ndx: jspb.Message.getFieldWithDefault(msg, 1, 0),
+    name: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    subImage: (f = msg.getSubImage()) && proto.SubImage.toObject(includeInstance, f),
+    pColor: jspb.Message.getFieldWithDefault(msg, 5, 0)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.ModImage}
+ */
+proto.ModImage.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.ModImage;
+  return proto.ModImage.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.ModImage} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.ModImage}
+ */
+proto.ModImage.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {number} */ (reader.readUint32());
+      msg.setNdx(value);
+      break;
+    case 2:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setName(value);
+      break;
+    case 3:
+      var value = new proto.SubImage;
+      reader.readMessage(value,proto.SubImage.deserializeBinaryFromReader);
+      msg.setSubImage(value);
+      break;
+    case 5:
+      var value = /** @type {number} */ (reader.readUint32());
+      msg.setPColor(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.ModImage.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.ModImage.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.ModImage} message
+ * @param {!jspb.BinaryWriter} writer
+ */
+proto.ModImage.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getNdx();
+  if (f !== 0) {
+    writer.writeUint32(
+      1,
+      f
+    );
+  }
+  f = message.getName();
+  if (f.length > 0) {
+    writer.writeString(
+      2,
+      f
+    );
+  }
+  f = message.getSubImage();
+  if (f != null) {
+    writer.writeMessage(
+      3,
+      f,
+      proto.SubImage.serializeBinaryToWriter
+    );
+  }
+  f = message.getPColor();
+  if (f !== 0) {
+    writer.writeUint32(
+      5,
+      f
+    );
+  }
+};
+
+
+/**
+ * optional uint32 ndx = 1;
+ * @return {number}
+ */
+proto.ModImage.prototype.getNdx = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 1, 0));
+};
+
+
+/** @param {number} value */
+proto.ModImage.prototype.setNdx = function(value) {
+  jspb.Message.setField(this, 1, value);
+};
+
+
+/**
+ * optional string name = 2;
+ * @return {string}
+ */
+proto.ModImage.prototype.getName = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
+};
+
+
+/** @param {string} value */
+proto.ModImage.prototype.setName = function(value) {
+  jspb.Message.setField(this, 2, value);
+};
+
+
+/**
+ * optional SubImage sub_image = 3;
+ * @return {?proto.SubImage}
+ */
+proto.ModImage.prototype.getSubImage = function() {
+  return /** @type{?proto.SubImage} */ (
+    jspb.Message.getWrapperField(this, proto.SubImage, 3));
+};
+
+
+/** @param {?proto.SubImage|undefined} value */
+proto.ModImage.prototype.setSubImage = function(value) {
+  jspb.Message.setWrapperField(this, 3, value);
+};
+
+
+proto.ModImage.prototype.clearSubImage = function() {
+  this.setSubImage(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {!boolean}
+ */
+proto.ModImage.prototype.hasSubImage = function() {
+  return jspb.Message.getField(this, 3) != null;
+};
+
+
+/**
+ * optional uint32 p_color = 5;
+ * @return {number}
+ */
+proto.ModImage.prototype.getPColor = function() {
+  return /** @type {number} */ (jspb.Message.getFieldWithDefault(this, 5, 0));
+};
+
+
+/** @param {number} value */
+proto.ModImage.prototype.setPColor = function(value) {
+  jspb.Message.setField(this, 5, value);
 };
 
 
@@ -4620,7 +4637,7 @@ proto.TerImageSeq.toObject = function(includeInstance, msg) {
   var f, obj = {
     tblk: (f = msg.getTblk()) && proto.ImageAry.toObject(includeInstance, f),
     tmapsList: jspb.Message.toObjectList(msg.getTmapsList(),
-    proto.Tmap.toObject, includeInstance)
+    proto.TerImage.toObject, includeInstance)
   };
 
   if (includeInstance) {
@@ -4663,8 +4680,8 @@ proto.TerImageSeq.deserializeBinaryFromReader = function(msg, reader) {
       msg.setTblk(value);
       break;
     case 2:
-      var value = new proto.Tmap;
-      reader.readMessage(value,proto.Tmap.deserializeBinaryFromReader);
+      var value = new proto.TerImage;
+      reader.readMessage(value,proto.TerImage.deserializeBinaryFromReader);
       msg.addTmaps(value);
       break;
     default:
@@ -4708,7 +4725,7 @@ proto.TerImageSeq.serializeBinaryToWriter = function(message, writer) {
     writer.writeRepeatedMessage(
       2,
       f,
-      proto.Tmap.serializeBinaryToWriter
+      proto.TerImage.serializeBinaryToWriter
     );
   }
 };
@@ -4745,35 +4762,247 @@ proto.TerImageSeq.prototype.hasTblk = function() {
 
 
 /**
- * repeated Tmap tmaps = 2;
+ * repeated TerImage tmaps = 2;
  * If you change this array by adding, removing or replacing elements, or if you
  * replace the array itself, then you must call the setter to update it.
- * @return {!Array.<!proto.Tmap>}
+ * @return {!Array.<!proto.TerImage>}
  */
 proto.TerImageSeq.prototype.getTmapsList = function() {
-  return /** @type{!Array.<!proto.Tmap>} */ (
-    jspb.Message.getRepeatedWrapperField(this, proto.Tmap, 2));
+  return /** @type{!Array.<!proto.TerImage>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.TerImage, 2));
 };
 
 
-/** @param {!Array.<!proto.Tmap>} value */
+/** @param {!Array.<!proto.TerImage>} value */
 proto.TerImageSeq.prototype.setTmapsList = function(value) {
   jspb.Message.setRepeatedWrapperField(this, 2, value);
 };
 
 
 /**
- * @param {!proto.Tmap=} opt_value
+ * @param {!proto.TerImage=} opt_value
  * @param {number=} opt_index
- * @return {!proto.Tmap}
+ * @return {!proto.TerImage}
  */
 proto.TerImageSeq.prototype.addTmaps = function(opt_value, opt_index) {
-  return jspb.Message.addToRepeatedWrapperField(this, 2, opt_value, proto.Tmap, opt_index);
+  return jspb.Message.addToRepeatedWrapperField(this, 2, opt_value, proto.TerImage, opt_index);
 };
 
 
 proto.TerImageSeq.prototype.clearTmapsList = function() {
   this.setTmapsList([]);
+};
+
+
+
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.ModImageSeq = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.ModImageSeq.repeatedFields_, null);
+};
+goog.inherits(proto.ModImageSeq, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  proto.ModImageSeq.displayName = 'proto.ModImageSeq';
+}
+/**
+ * List of repeated fields within this message type.
+ * @private {!Array<number>}
+ * @const
+ */
+proto.ModImageSeq.repeatedFields_ = [2];
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.ModImageSeq.prototype.toObject = function(opt_includeInstance) {
+  return proto.ModImageSeq.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.ModImageSeq} msg The msg instance to transform.
+ * @return {!Object}
+ */
+proto.ModImageSeq.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    mblk: (f = msg.getMblk()) && proto.ImageAry.toObject(includeInstance, f),
+    modelsList: jspb.Message.toObjectList(msg.getModelsList(),
+    proto.ModImage.toObject, includeInstance)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.ModImageSeq}
+ */
+proto.ModImageSeq.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.ModImageSeq;
+  return proto.ModImageSeq.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.ModImageSeq} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.ModImageSeq}
+ */
+proto.ModImageSeq.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = new proto.ImageAry;
+      reader.readMessage(value,proto.ImageAry.deserializeBinaryFromReader);
+      msg.setMblk(value);
+      break;
+    case 2:
+      var value = new proto.ModImage;
+      reader.readMessage(value,proto.ModImage.deserializeBinaryFromReader);
+      msg.addModels(value);
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.ModImageSeq.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  proto.ModImageSeq.serializeBinaryToWriter(this, writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the given message to binary data (in protobuf wire
+ * format), writing to the given BinaryWriter.
+ * @param {!proto.ModImageSeq} message
+ * @param {!jspb.BinaryWriter} writer
+ */
+proto.ModImageSeq.serializeBinaryToWriter = function(message, writer) {
+  var f = undefined;
+  f = message.getMblk();
+  if (f != null) {
+    writer.writeMessage(
+      1,
+      f,
+      proto.ImageAry.serializeBinaryToWriter
+    );
+  }
+  f = message.getModelsList();
+  if (f.length > 0) {
+    writer.writeRepeatedMessage(
+      2,
+      f,
+      proto.ModImage.serializeBinaryToWriter
+    );
+  }
+};
+
+
+/**
+ * optional ImageAry mblk = 1;
+ * @return {?proto.ImageAry}
+ */
+proto.ModImageSeq.prototype.getMblk = function() {
+  return /** @type{?proto.ImageAry} */ (
+    jspb.Message.getWrapperField(this, proto.ImageAry, 1));
+};
+
+
+/** @param {?proto.ImageAry|undefined} value */
+proto.ModImageSeq.prototype.setMblk = function(value) {
+  jspb.Message.setWrapperField(this, 1, value);
+};
+
+
+proto.ModImageSeq.prototype.clearMblk = function() {
+  this.setMblk(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {!boolean}
+ */
+proto.ModImageSeq.prototype.hasMblk = function() {
+  return jspb.Message.getField(this, 1) != null;
+};
+
+
+/**
+ * repeated ModImage models = 2;
+ * If you change this array by adding, removing or replacing elements, or if you
+ * replace the array itself, then you must call the setter to update it.
+ * @return {!Array.<!proto.ModImage>}
+ */
+proto.ModImageSeq.prototype.getModelsList = function() {
+  return /** @type{!Array.<!proto.ModImage>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.ModImage, 2));
+};
+
+
+/** @param {!Array.<!proto.ModImage>} value */
+proto.ModImageSeq.prototype.setModelsList = function(value) {
+  jspb.Message.setRepeatedWrapperField(this, 2, value);
+};
+
+
+/**
+ * @param {!proto.ModImage=} opt_value
+ * @param {number=} opt_index
+ * @return {!proto.ModImage}
+ */
+proto.ModImageSeq.prototype.addModels = function(opt_value, opt_index) {
+  return jspb.Message.addToRepeatedWrapperField(this, 2, opt_value, proto.ModImage, opt_index);
+};
+
+
+proto.ModImageSeq.prototype.clearModelsList = function() {
+  this.setModelsList([]);
 };
 
 
