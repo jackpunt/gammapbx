@@ -1,7 +1,7 @@
 {
   "name": "gammapbx",
-  "version": "0.1.0",
-  "description": "protobuf, javascript and java for gamma display client",
+  "version": "0.2.0",
+  "description": "protobuf for gamma display client; javascript and java",
   "main": "./gamma_pb.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

@@ -1,10 +1,10 @@
 syntax = "proto3";
 //package display.client;
 
-
 // add_unit(id,type,owner,loc[x,y],hp) : create unit of 'type' at 'loc' and register as 'id'
-// del_unid(id) : he's dead, jim
+// del_unit(id) : he's dead, jim
 // update(id, [owner], [loc], [hp], ...)
+
 message Iloc {
     int32	y = 1;
     int32	x = 2;
@@ -33,39 +33,20 @@ message Dloc {
     float	dx_dt = 2;
 }
 
-// create AMessage, obtain byte-count
-// for (phase in EventFields) {
-// m = new AMessage();
-// m.code = phase;
-// switch (phase) {
-// case reveal:
-// // r = new RevealSeq();
-// // for (y in info_to_reveal()) {
-// //   ty = y.makeTerRasterY(info_for_xrow());
-// //   r.rastery.add(ty);
-// // }
-// // m.reveals = r;
-// // break;
-// }
-// mbytes = m.serializeBinary();
-// nbytes = mbytes.length;
-// obytes = new ArrayBuffer(nbytes+4);
-// obytes[0..3] = nbytes;
-
 message Turn {
     uint32	id = 1;		// new turn number; no Seq for this...
 }
 
 // type of following message:
 message AMessage {
-    Turn      turn = 1;		// Turn
-    UpdateSeq updates = 2;	// Update
-    RevealSeq reveals = 3;	// Reveal
-    AddSeq adds = 4;		// Add (Ident, Update)
-    DelSeq dels = 5;		// Del
+    Turn        turn = 1;	// Turn
+    UpdateSeq   updates = 2;	// Update
+    RevealSeq   reveals = 3;	// Reveal
+    AddSeq      adds = 4;	// Add (Ident, Update)
+    DelSeq      dels = 5;	// Del
     TerImageSeq ter_images = 21;// TerImage, ImageAry
     ModImageSeq mod_images = 22;// ModImage, ImageAry
-    ZHeightMap z_height_map = 25;
+    ZHeightMap  z_height_map = 25;
 }
 enum Fields {
     none = 0;
@@ -104,6 +85,8 @@ message Update {
     // set expected speed: (close enough for many purposes; on keyframe set Floc/Idoc)
     Dloc	dloc = 8;
     bool	is_dloc = 9;
+    // change of owner: push it into Ident[id]
+    uint32	player_id = 10;
 }
 
 message UpdateSeq {
@@ -117,7 +100,7 @@ message Ident {
     uint32	i_ndx = 3;	// ModImage of constant size icon
     uint32	m_ndx = 4;	// 2D ModImage (scaled image or shape) or 3D-model identifier
     string	display = 8;	// display name for new Unit (hovertext: eng#5)
-    uint32	player_id = 9;	// new Unit associated with Player (player id, livery)
+    uint32	player_id = 10;	// new Unit associated with Player (player id, livery)
 }
 
 // add Unit (or Player/Team/Civ)
@@ -152,15 +135,6 @@ message RevealSeq {
     repeated TerRasterY rastery = 1;
 }
 
-// ImageAry implicitly associate tids in range [0..nr*nc]
-// with the sub-images in ImageAry at: img[r=tid/ncols, c=tid%ncols] [npixels X npixels]
-// Tmap associates each tid with a display name
-message TerImage {
-    uint32	tid = 1;
-    string	name = 2;	// advisory, for alt presentation, description
-    SubImage	sub_image = 3;
-}
-
 // usage: extract a single pixel at img[r,c] given a {x,y,tid}
 // tid maps to a npx X npx subimage
 // img[r,c] -> tid(r*ncols+c); tid->(tid/ncols,tid%ncols)
@@ -180,6 +154,15 @@ message SubImage {
     uint32	y_off = 6;	// 0 (offset to drag/rotate center)
     uint32	x_off = 7;	// 0 (offset to drag/rotate center)
     string	alt_url = 8;	// use alternative image (RARE)
+}
+
+// ImageAry implicitly associate tids in range [0..nr*nc]
+// with the sub-images in ImageAry at: img[r=tid/ncols, c=tid%ncols] [npixels X npixels]
+// Tmap associates each tid with a display name
+message TerImage {
+    uint32	tid = 1;
+    string	name = 2;	// advisory, for alt presentation, description
+    SubImage	sub_image = 3;
 }
 
 // images for unit models, or other non-terrain things (on the unit-canvas)
