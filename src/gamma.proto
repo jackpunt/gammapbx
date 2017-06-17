@@ -46,7 +46,6 @@ message AMessage {
     DelSeq      dels = 5;	// Del
     TerImageSeq ter_images = 21;// TerImage, ImageAry
     ModImageSeq mod_images = 22;// ModImage, ImageAry
-    ZHeightMap  z_height_map = 25;
 }
 enum Fields {
     none = 0;
@@ -55,9 +54,8 @@ enum Fields {
     reveal=3;
     add  = 4;
     del  = 5;
-    tmap = 21;
-    zmap = 22;
-    imag = 23;
+    timages = 21;
+    mimages = 22;
 }
 
 // add Player? add Unit?
@@ -73,7 +71,7 @@ enum Fields {
 
 // Unit position/health update:
 // Update-Floc, Update-Iloc, Update-Dloc, ...
-message Update {
+message Update {		// comp_of UpdateSeq
     uint32	id = 1;		// objectId (required)
     int32	hp = 2;		// hp for Unit update
     bool	isHp = 3;
@@ -89,12 +87,12 @@ message Update {
     uint32	player_id = 10;
 }
 
-message UpdateSeq {
+message UpdateSeq {		// comp_of AMessage
     repeated Update updates = 1;
 }
 
 // unit identity and presentation
-message Ident {
+message Ident {			// comp_of Add
     uint32	id = 1;		// unit_id, referenced in Update, Del (from Update, if missing)
     string	type = 2;	// engineer, building, scout, etc (determines menu)
     uint32	i_ndx = 3;	// ModImage of constant size icon
@@ -105,50 +103,39 @@ message Ident {
 
 // add Unit (or Player/Team/Civ)
 // Add { type, player, display, Update }
-message Add {
+message Add {			// comp_of AddSeq
     Ident	ident = 1;	// who/what
     Update	update = 2;	// where (initial value)
 }
-message AddSeq {
+message AddSeq {		// comp_of AMessage
     repeated Add adds = 1;
 }
 
-message Del {
+message Del {			// comp_of DelSeq
     uint32	id = 2;		// required
 }
-message DelSeq {
+message DelSeq {		// comp_of AMessage
     repeated Del dels = 1;
 }
 
-// from iloc(x,y) do set (x..+dx,y) to (tid,z)
-message TerRunX {
-    int32	dx = 2;		// small positive number, relative to loc [default=1]
-    uint32	tid = 3;	// index into terrain type map
-    uint32	zndx = 4;	// index into z-height map: z-height=zmap[zndx]
-    int32	zval = 5;	// actual z-height value
-}
-message TerRasterY { 		// extends Iloc?
-    Iloc	loc = 1;	// start at (y,x) [upper-left corner]
-    repeated TerRunX rowx = 2;	// for i=0...: (y+i: (x+dx0, tid0, z0), (x+dx1, tid1, z1))
-}
-message RevealSeq {
-    repeated TerRasterY rastery = 1;
-}
 
-// usage: extract a single pixel at img[r,c] given a {x,y,tid}
-// tid maps to a npx X npx subimage
-// img[r,c] -> tid(r*ncols+c); tid->(tid/ncols,tid%ncols)
-message ImageAry {
-    uint32 npixels = 1;	// each sub-image is npixels X npixels, in  row major order
-    uint32 nrows = 2;	// each of the nrows
-    uint32 ncols = 3;	// has ncols
-    string url = 4;	// fetch master image
+// from iloc(x,y) do set (x..+dx,y) to (ztv = zndx,tv)
+message TerRunX {		// comp_of TerRowY
+    int32	dx = 2;		// cells to reveal = dx+1 [dx default=0]
+    int32	ztv = 3;	// 10-bits(zndx) + 6bit(tv)
+}
+message TerRowY { 		// comp_of RevealSeq
+    Iloc	loc = 1;	// start at (y,x) [upper-left corner]
+    repeated TerRunX runx = 2;	// for each runx: for x+=0..dx: reveal(y,x, ztv) 
+}
+message RevealSeq {		// comp_of AMessage
+    repeated TerRowY rowy = 1;
 }
 
 // override implict image location (from parsing ndx relative to ImageAry)
-message SubImage {
-    uint32	y0 = 2;		// npixels*(r=tid/ncols)
-    uint32	x0 = 3;		// npixels*(c=tid%ncols)
+message SubImage {		// comp_of TerImage | ModImage
+    uint32	y0 = 2;		// npixels*(r=tvid/ncols)
+    uint32	x0 = 3;		// npixels*(c=tvid%ncols)
     uint32	y_px = 4;	// npixels
     uint32	x_px = 5;	// npixels
     uint32	y_off = 6;	// 0 (offset to drag/rotate center)
@@ -156,41 +143,55 @@ message SubImage {
     string	alt_url = 8;	// use alternative image (RARE)
 }
 
-// ImageAry implicitly associate tids in range [0..nr*nc]
-// with the sub-images in ImageAry at: img[r=tid/ncols, c=tid%ncols] [npixels X npixels]
-// Tmap associates each tid with a display name
-message TerImage {
-    uint32	tid = 1;
+// Q: can/how we support multiple image blocks?
+// A: there is one for terrain [TerImage] and one for Models [ModImage]
+
+
+
+// usage: extract a single pixel at img[r,c] given a {x,y,tvid}
+// tvid maps to a npx X npx subimage
+// img[r,c] -> tvid(r*ncols+c); tvid->(tvid/ncols,tvid%ncols)
+// TODO: rename to ImageBlock [because ImageAry is not an ARRAY in the ts sense]
+message ImageAry {		// comp_of TerImageSeq | ModImageSeq
+    uint32 npixels = 1;		// each sub-image is npixels X npixels, in  row major order
+    uint32 nrows = 2;		// each of the nrows
+    uint32 ncols = 3;		// has ncols
+    string url = 4;		// fetch master image
+}
+
+// if SubImage is not supplied, then y0=tvid/ncols, x0=tvid%ncols, y_px=x_px=npixels
+// tvid is used as index in to the y by x grid of npixels in ImageAry
+
+// ImageAry implicitly associates tvids in range [0..nr*nc]
+// with the sub-images in ImageAry at: img[r=tvid/ncols, c=tvid%ncols] [npixels X npixels]
+// TerImage associates each tvid with a display name
+message TerImage {		// comp_of TerImageSeq
+    uint32	tvid = 1;	// assign name & subimage to tvid
     string	name = 2;	// advisory, for alt presentation, description
-    SubImage	sub_image = 3;
+    SubImage	sub_image = 3;	// optional (use tvid/ncols,tvid%ncols,npix,npix)
+}
+
+message TerImageSeq {		// comp_of AMessage 
+    ImageAry	comp_image = 1;	// required: composite image
+    repeated TerImage tmag = 2;	// optional
+    repeated int32    zval = 3;	// length=1023 (2^10-1): elevation in meters, by zndx
+    repeated int32    indx = 4;	// length<64: map 6-bit tvid -> indx; ImgageAry[r*ncols+c]
+    				// one layer of indirection so can place images easily
+    // see TerrainMap.java for coding of ztv & zval (meters) -> zndx (10-bit)
 }
 
 // images for unit models, or other non-terrain things (on the unit-canvas)
 // set mapping from m_ndx and icon_ndx to image (in ImageAry mblk)
 // for each player, create a master with the livery color replaced
-message ModImage {
-    uint32	ndx = 1;
+message ModImage {		// comp_of ModImageSeq
+    uint32	mndx = 1;
     string	name = 2;	// model/image display name (dubious)
     SubImage	sub_image = 3;
     uint32	p_color = 5;	// replace pixels of this RGB with player's color [livery]
     // or maybe it is constant: #888888, #F10102 ?
 }
 
-message TerImageSeq {
-    ImageAry	tblk = 1;
-    repeated TerImage tmaps = 2;
-}
-
-message ModImageSeq {
+message ModImageSeq {		// comp_of AMessage 
     ImageAry	mblk = 1;	// master image
-    repeated ModImage models = 2;// extract sub-image(a 2D model), call it models[ndx] 
-}
-
-// not sure we need this..
-// compress 300m 500m ... 4000m ... 6000m to small ints
-// (but it quantizes the z-heights)
-// stuff these heights into a map for future reference: zheight[zndx+I(repeat)]=zval
-message ZHeightMap {
-    uint32 zndx = 2;
-    repeated int32 zval = 3;
+    repeated ModImage model = 2;// extract sub-image(a 2D model), call it models[mndx] 
 }
