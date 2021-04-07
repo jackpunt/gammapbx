@@ -1,14 +1,22 @@
 {
   "name": "gammapbx",
-  "version": "0.3.2",
-  "description": "protobuf for gamma display client; javascript and java",
-  "main": "./gamma_pb.js",
+  "version": "1.0.0",
+  "description": "protobuf for gamma display client; typescript, javascript and java",
+  "main": "./GammaProto.ts",
   "files": [
-    "gamma_pb.js",
-    "gamma_pb.d.ts"
+    "gamma/player/util/GammaProto.java",
+    "src/*.proto",
+    "*.js",
+    "*.ts"
   ],
-  "typings": "gamma_pb.d.ts",
+  "typings": "GammaProto.d.ts",
   "scripts": {
+    "java": "protoc -I src --java_out=. src/*.proto",
+    "dts": "tsc GammaProto.ts --target es2015 --declaration --emitDeclarationOnly --allowJs",
+    "protots": "protoc -I src --ts_out=. src/*.proto",
+    "protojs": "protoc -I src --js_out=library=GammaProto,binary:. src/*.proto",
+    "clean": "rm -f *.js *.ts src/*.js",
+    "build": "bash -c 'npm run clean; npm run protojs; npm run protots; npm run dts'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -17,6 +25,7 @@
   },
   "keywords": [
     "gamma",
+    "typescript",
     "client",
     "protobuf"
   ],
@@ -27,6 +36,11 @@
   },
   "homepage": "https://github.com/jackpunt/gammapbx#readme",
   "dependencies": {
-    "google-protobuf": "^3.2.0"
+    "@types/google-protobuf": "^3.7.4",
+    "google-protobuf": "^3.2.0",
+    "protoc-gen-ts": "^0.3.5"
+  },
+  "devDependencies": {
+    "typescript": "^4.2.3"
   }
 }
