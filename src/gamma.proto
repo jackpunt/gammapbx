@@ -1,5 +1,7 @@
 syntax = "proto3";
 //package display.client;
+option java_package = "gamma.player.util";
+option java_outer_classname = "GammaProto";
 
 // add_unit(id,type,owner,loc[x,y],hp) : create unit of 'type' at 'loc' and register as 'id'
 // del_unit(id) : he's dead, jim
@@ -85,6 +87,7 @@ message Update {		// comp_of UpdateSeq
     bool	is_dloc = 9;
     // change of owner: push it into Ident[id]
     uint32	player_id = 10;
+    float	quality = 11;	// of road...
 }
 
 message UpdateSeq {		// comp_of AMessage
@@ -169,6 +172,13 @@ message TerImage {		// comp_of TerImageSeq
     uint32	tvid = 1;	// assign name & subimage to tvid
     string	name = 2;	// advisory, for alt presentation, description
     SubImage	sub_image = 3;	// optional (use tvid/ncols,tvid%ncols,npix,npix)
+}
+message TerStats {		// indexed by tvid
+    float	visibilty = 1;	// expected sight range, cover or prob of seeing?
+    float	scoutablity= 2;	// difficulty of traverals/exporation by scout
+}
+message RoadStats {		// indexed by unit_id (objectId of path segment)
+    float	quality =1 ;	// level of difficulty/ease;
 }
 
 message TerImageSeq {		// comp_of AMessage 

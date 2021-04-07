@@ -10,3 +10,8 @@ git commit -m "..."
 git tag 0.2.0
 git push origin master --tags
 npm publish
+
+
+# generate gamma/player/util/GammaProto.java
+protoc -I ./src --java_out=. ./src/gamma.proto
+
