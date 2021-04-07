@@ -1,6 +1,6 @@
 {
   "name": "gammapbx",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "protobuf for gamma display client; typescript, javascript and java",
   "main": "./GammaProto.ts",
   "files": [
