@@ -1,3 +1,6 @@
+/* eslint-disable max-len */
+/* eslint-disable @typescript-eslint/no-unnecessary-type-assertion */
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import * as pb_1 from "google-protobuf";
 export enum Fields {
     none = 0,
@@ -47,6 +50,7 @@ export class Iloc extends pb_1.Message {
             writer.writeInt32(2, this.x);
         if (!w)
             return writer.getResultBuffer();
+        return undefined
     }
     serializeBinary(): Uint8Array { throw new Error("Method not implemented."); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Iloc {
@@ -105,6 +109,7 @@ export class Floc extends pb_1.Message {
             writer.writeFloat(2, this.x);
         if (!w)
             return writer.getResultBuffer();
+        return undefined
     }
     serializeBinary(): Uint8Array { throw new Error("Method not implemented."); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Floc {
@@ -163,6 +168,7 @@ export class IDloc extends pb_1.Message {
             writer.writeInt32(2, this.dx);
         if (!w)
             return writer.getResultBuffer();
+        return undefined
     }
     serializeBinary(): Uint8Array { throw new Error("Method not implemented."); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): IDloc {
@@ -221,6 +227,7 @@ export class FDloc extends pb_1.Message {
             writer.writeFloat(2, this.dx);
         if (!w)
             return writer.getResultBuffer();
+        return undefined
     }
     serializeBinary(): Uint8Array { throw new Error("Method not implemented."); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): FDloc {
@@ -326,6 +333,7 @@ export class Turn extends pb_1.Message {
             writer.writeUint32(1, this.id);
         if (!w)
             return writer.getResultBuffer();
+        return undefined
     }
     serializeBinary(): Uint8Array { throw new Error("Method not implemented."); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Turn {
@@ -436,6 +444,7 @@ export class AMessage extends pb_1.Message {
             writer.writeMessage(22, this.mod_images, () => this.mod_images.serialize(writer));
         if (!w)
             return writer.getResultBuffer();
+        return undefined
     }
     serializeBinary(): Uint8Array { throw new Error("Method not implemented."); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): AMessage {
@@ -608,6 +617,7 @@ export class Update extends pb_1.Message {
             writer.writeFloat(11, this.quality);
         if (!w)
             return writer.getResultBuffer();
+        return undefined
     }
     serializeBinary(): Uint8Array { throw new Error("Method not implemented."); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Update {
@@ -682,6 +692,7 @@ export class UpdateSeq extends pb_1.Message {
             writer.writeRepeatedMessage(1, this.updates, (item: Update) => item.serialize(writer));
         if (!w)
             return writer.getResultBuffer();
+        return undefined
     }
     serializeBinary(): Uint8Array { throw new Error("Method not implemented."); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): UpdateSeq {
@@ -781,6 +792,7 @@ export class Ident extends pb_1.Message {
             writer.writeUint32(10, this.player_id);
         if (!w)
             return writer.getResultBuffer();
+        return undefined
     }
     serializeBinary(): Uint8Array { throw new Error("Method not implemented."); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Ident {
@@ -851,6 +863,7 @@ export class Add extends pb_1.Message {
             writer.writeMessage(2, this.update, () => this.update.serialize(writer));
         if (!w)
             return writer.getResultBuffer();
+        return undefined
     }
     serializeBinary(): Uint8Array { throw new Error("Method not implemented."); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Add {
@@ -898,6 +911,7 @@ export class AddSeq extends pb_1.Message {
             writer.writeRepeatedMessage(1, this.adds, (item: Add) => item.serialize(writer));
         if (!w)
             return writer.getResultBuffer();
+        return undefined
     }
     serializeBinary(): Uint8Array { throw new Error("Method not implemented."); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): AddSeq {
@@ -942,6 +956,7 @@ export class Del extends pb_1.Message {
             writer.writeUint32(2, this.id);
         if (!w)
             return writer.getResultBuffer();
+        return undefined
     }
     serializeBinary(): Uint8Array { throw new Error("Method not implemented."); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Del {
@@ -986,6 +1001,7 @@ export class DelSeq extends pb_1.Message {
             writer.writeRepeatedMessage(1, this.dels, (item: Del) => item.serialize(writer));
         if (!w)
             return writer.getResultBuffer();
+        return undefined
     }
     serializeBinary(): Uint8Array { throw new Error("Method not implemented."); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): DelSeq {
@@ -1041,6 +1057,7 @@ export class TerRunX extends pb_1.Message {
             writer.writeInt32(3, this.ztv);
         if (!w)
             return writer.getResultBuffer();
+        return undefined
     }
     serializeBinary(): Uint8Array { throw new Error("Method not implemented."); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): TerRunX {
@@ -1099,6 +1116,7 @@ export class TerRowY extends pb_1.Message {
             writer.writeRepeatedMessage(2, this.runx, (item: TerRunX) => item.serialize(writer));
         if (!w)
             return writer.getResultBuffer();
+        return undefined
     }
     serializeBinary(): Uint8Array { throw new Error("Method not implemented."); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): TerRowY {
@@ -1146,6 +1164,7 @@ export class RevealSeq extends pb_1.Message {
             writer.writeRepeatedMessage(1, this.rowy, (item: TerRowY) => item.serialize(writer));
         if (!w)
             return writer.getResultBuffer();
+        return undefined
     }
     serializeBinary(): Uint8Array { throw new Error("Method not implemented."); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): RevealSeq {
@@ -1256,6 +1275,7 @@ export class SubImage extends pb_1.Message {
             writer.writeString(8, this.alt_url);
         if (!w)
             return writer.getResultBuffer();
+        return undefined
     }
     serializeBinary(): Uint8Array { throw new Error("Method not implemented."); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): SubImage {
@@ -1351,6 +1371,7 @@ export class ImageAry extends pb_1.Message {
             writer.writeString(4, this.url);
         if (!w)
             return writer.getResultBuffer();
+        return undefined
     }
     serializeBinary(): Uint8Array { throw new Error("Method not implemented."); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ImageAry {
@@ -1426,6 +1447,7 @@ export class TerImage extends pb_1.Message {
             writer.writeMessage(3, this.sub_image, () => this.sub_image.serialize(writer));
         if (!w)
             return writer.getResultBuffer();
+        return undefined
     }
     serializeBinary(): Uint8Array { throw new Error("Method not implemented."); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): TerImage {
@@ -1487,6 +1509,7 @@ export class TerStats extends pb_1.Message {
             writer.writeFloat(2, this.scoutablity);
         if (!w)
             return writer.getResultBuffer();
+        return undefined
     }
     serializeBinary(): Uint8Array { throw new Error("Method not implemented."); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): TerStats {
@@ -1534,6 +1557,7 @@ export class RoadStats extends pb_1.Message {
             writer.writeFloat(1, this.quality);
         if (!w)
             return writer.getResultBuffer();
+        return undefined
     }
     serializeBinary(): Uint8Array { throw new Error("Method not implemented."); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): RoadStats {
@@ -1611,6 +1635,7 @@ export class TerImageSeq extends pb_1.Message {
             writer.writePackedInt32(4, this.indx);
         if (!w)
             return writer.getResultBuffer();
+        return undefined
     }
     serializeBinary(): Uint8Array { throw new Error("Method not implemented."); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): TerImageSeq {
@@ -1697,6 +1722,7 @@ export class ModImage extends pb_1.Message {
             writer.writeUint32(5, this.p_color);
         if (!w)
             return writer.getResultBuffer();
+        return undefined
     }
     serializeBinary(): Uint8Array { throw new Error("Method not implemented."); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ModImage {
@@ -1761,6 +1787,7 @@ export class ModImageSeq extends pb_1.Message {
             writer.writeRepeatedMessage(2, this.model, (item: ModImage) => item.serialize(writer));
         if (!w)
             return writer.getResultBuffer();
+        return undefined
     }
     serializeBinary(): Uint8Array { throw new Error("Method not implemented."); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ModImageSeq {
