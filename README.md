@@ -1,4 +1,11 @@
 # gammapbx
+Protobuf definitions and support for 'gamma' clients & servers.
+
+Typescript and javascript client files.
+
+See "scripts" in package.json
+
+# old comments
 a few files to exercise a clonable git project.
 
     edit package.json "version"
