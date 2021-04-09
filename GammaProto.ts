@@ -286,6 +286,7 @@ export class Dloc extends pb_1.Message {
             writer.writeFloat(2, this.dx_dt);
         if (!w)
             return writer.getResultBuffer();
+        return undefined;
     }
     serializeBinary(): Uint8Array { throw new Error("Method not implemented."); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Dloc {
