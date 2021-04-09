@@ -2,21 +2,25 @@
   "name": "gammapbx",
   "version": "1.0.1",
   "description": "protobuf for gamma display client; typescript, javascript and java",
-  "main": "./GammaProto.ts",
+  "main": "./GammaProto.js",
   "files": [
     "gamma/player/util/GammaProto.java",
     "src/*.proto",
     "*.js",
-    "*.ts"
+    "*.d.ts"
   ],
   "typings": "GammaProto.d.ts",
   "scripts": {
+    "patch": "replace -s 'Uint8Array ? new pb_1.BinaryReader(bytes) : bytes' 'pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes)' --  GammaProto.ts",
     "java": "protoc -I src --java_out=. src/*.proto",
-    "dts": "tsc GammaProto.ts --target es2015 --declaration --emitDeclarationOnly --allowJs",
-    "protots": "protoc -I src --ts_out=. src/*.proto",
-    "protojs": "protoc -I src --js_out=library=GammaProto,binary:. src/*.proto",
+    "tsc": "tsc GammaProto.ts --target es2018",
+    "dts": "tsc GammaProto.ts --target es2018 --declaration --emitDeclarationOnly --allowJs",
+    "dts2": "tsc GammaProto_pb.js --target es2018 --declaration --emitDeclarationOnly --allowJs",
+    "protots": "protoc -I src --ts_out=binary:. src/*.proto",
+    "protojs2": "protoc -I src --js_out=library=GammaProto,binary:. src/*.proto",
+    "protojs": "protoc -I src --js_out=import_style=commonjs,binary:. src/*.proto",
     "clean": "rm -f *.js *.ts src/*.js",
-    "build": "bash -c 'npm run clean; npm run protojs; npm run protots; npm run dts'",
+    "build": "bash -c 'npm run clean; npm run protots; npm run patch; npm run tsc; npm run dts'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -36,11 +40,11 @@
   },
   "homepage": "https://github.com/jackpunt/gammapbx#readme",
   "dependencies": {
-    "@types/google-protobuf": "^3.7.4",
-    "google-protobuf": "^3.2.0",
-    "protoc-gen-ts": "^0.3.5"
+    "google-protobuf": "^3.2.0"
   },
   "devDependencies": {
+    "@types/google-protobuf": "^3.7.4",
+    "protoc-gen-ts": "^0.3.5",
     "typescript": "^4.2.3"
   }
 }
