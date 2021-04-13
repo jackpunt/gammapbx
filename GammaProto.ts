@@ -1,6 +1,3 @@
-/* eslint-disable max-len */
-/* eslint-disable @typescript-eslint/no-unnecessary-type-assertion */
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import * as pb_1 from "google-protobuf";
 export enum Fields {
     none = 0,
@@ -50,9 +47,9 @@ export class Iloc extends pb_1.Message {
             writer.writeInt32(2, this.x);
         if (!w)
             return writer.getResultBuffer();
-        return undefined
+        return undefined;
     }
-    serializeBinary(): Uint8Array { throw new Error("Method not implemented."); }
+    serializeBinary(): Uint8Array { return this.serialize(); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Iloc {
         const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Iloc();
         while (reader.nextField()) {
@@ -109,9 +106,9 @@ export class Floc extends pb_1.Message {
             writer.writeFloat(2, this.x);
         if (!w)
             return writer.getResultBuffer();
-        return undefined
+        return undefined;
     }
-    serializeBinary(): Uint8Array { throw new Error("Method not implemented."); }
+    serializeBinary(): Uint8Array { return this.serialize(); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Floc {
         const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Floc();
         while (reader.nextField()) {
@@ -168,9 +165,9 @@ export class IDloc extends pb_1.Message {
             writer.writeInt32(2, this.dx);
         if (!w)
             return writer.getResultBuffer();
-        return undefined
+        return undefined;
     }
-    serializeBinary(): Uint8Array { throw new Error("Method not implemented."); }
+    serializeBinary(): Uint8Array { return this.serialize(); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): IDloc {
         const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new IDloc();
         while (reader.nextField()) {
@@ -227,9 +224,9 @@ export class FDloc extends pb_1.Message {
             writer.writeFloat(2, this.dx);
         if (!w)
             return writer.getResultBuffer();
-        return undefined
+        return undefined;
     }
-    serializeBinary(): Uint8Array { throw new Error("Method not implemented."); }
+    serializeBinary(): Uint8Array { return this.serialize(); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): FDloc {
         const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new FDloc();
         while (reader.nextField()) {
@@ -288,7 +285,7 @@ export class Dloc extends pb_1.Message {
             return writer.getResultBuffer();
         return undefined;
     }
-    serializeBinary(): Uint8Array { throw new Error("Method not implemented."); }
+    serializeBinary(): Uint8Array { return this.serialize(); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Dloc {
         const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Dloc();
         while (reader.nextField()) {
@@ -334,9 +331,9 @@ export class Turn extends pb_1.Message {
             writer.writeUint32(1, this.id);
         if (!w)
             return writer.getResultBuffer();
-        return undefined
+        return undefined;
     }
-    serializeBinary(): Uint8Array { throw new Error("Method not implemented."); }
+    serializeBinary(): Uint8Array { return this.serialize(); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Turn {
         const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Turn();
         while (reader.nextField()) {
@@ -445,9 +442,9 @@ export class AMessage extends pb_1.Message {
             writer.writeMessage(22, this.mod_images, () => this.mod_images.serialize(writer));
         if (!w)
             return writer.getResultBuffer();
-        return undefined
+        return undefined;
     }
-    serializeBinary(): Uint8Array { throw new Error("Method not implemented."); }
+    serializeBinary(): Uint8Array { return this.serialize(); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): AMessage {
         const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new AMessage();
         while (reader.nextField()) {
@@ -618,9 +615,9 @@ export class Update extends pb_1.Message {
             writer.writeFloat(11, this.quality);
         if (!w)
             return writer.getResultBuffer();
-        return undefined
+        return undefined;
     }
-    serializeBinary(): Uint8Array { throw new Error("Method not implemented."); }
+    serializeBinary(): Uint8Array { return this.serialize(); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Update {
         const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Update();
         while (reader.nextField()) {
@@ -693,9 +690,9 @@ export class UpdateSeq extends pb_1.Message {
             writer.writeRepeatedMessage(1, this.updates, (item: Update) => item.serialize(writer));
         if (!w)
             return writer.getResultBuffer();
-        return undefined
+        return undefined;
     }
-    serializeBinary(): Uint8Array { throw new Error("Method not implemented."); }
+    serializeBinary(): Uint8Array { return this.serialize(); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): UpdateSeq {
         const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new UpdateSeq();
         while (reader.nextField()) {
@@ -793,9 +790,9 @@ export class Ident extends pb_1.Message {
             writer.writeUint32(10, this.player_id);
         if (!w)
             return writer.getResultBuffer();
-        return undefined
+        return undefined;
     }
-    serializeBinary(): Uint8Array { throw new Error("Method not implemented."); }
+    serializeBinary(): Uint8Array { return this.serialize(); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Ident {
         const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Ident();
         while (reader.nextField()) {
@@ -864,9 +861,9 @@ export class Add extends pb_1.Message {
             writer.writeMessage(2, this.update, () => this.update.serialize(writer));
         if (!w)
             return writer.getResultBuffer();
-        return undefined
+        return undefined;
     }
-    serializeBinary(): Uint8Array { throw new Error("Method not implemented."); }
+    serializeBinary(): Uint8Array { return this.serialize(); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Add {
         const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Add();
         while (reader.nextField()) {
@@ -912,9 +909,9 @@ export class AddSeq extends pb_1.Message {
             writer.writeRepeatedMessage(1, this.adds, (item: Add) => item.serialize(writer));
         if (!w)
             return writer.getResultBuffer();
-        return undefined
+        return undefined;
     }
-    serializeBinary(): Uint8Array { throw new Error("Method not implemented."); }
+    serializeBinary(): Uint8Array { return this.serialize(); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): AddSeq {
         const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new AddSeq();
         while (reader.nextField()) {
@@ -957,9 +954,9 @@ export class Del extends pb_1.Message {
             writer.writeUint32(2, this.id);
         if (!w)
             return writer.getResultBuffer();
-        return undefined
+        return undefined;
     }
-    serializeBinary(): Uint8Array { throw new Error("Method not implemented."); }
+    serializeBinary(): Uint8Array { return this.serialize(); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Del {
         const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Del();
         while (reader.nextField()) {
@@ -1002,9 +999,9 @@ export class DelSeq extends pb_1.Message {
             writer.writeRepeatedMessage(1, this.dels, (item: Del) => item.serialize(writer));
         if (!w)
             return writer.getResultBuffer();
-        return undefined
+        return undefined;
     }
-    serializeBinary(): Uint8Array { throw new Error("Method not implemented."); }
+    serializeBinary(): Uint8Array { return this.serialize(); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): DelSeq {
         const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new DelSeq();
         while (reader.nextField()) {
@@ -1058,9 +1055,9 @@ export class TerRunX extends pb_1.Message {
             writer.writeInt32(3, this.ztv);
         if (!w)
             return writer.getResultBuffer();
-        return undefined
+        return undefined;
     }
-    serializeBinary(): Uint8Array { throw new Error("Method not implemented."); }
+    serializeBinary(): Uint8Array { return this.serialize(); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): TerRunX {
         const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new TerRunX();
         while (reader.nextField()) {
@@ -1117,9 +1114,9 @@ export class TerRowY extends pb_1.Message {
             writer.writeRepeatedMessage(2, this.runx, (item: TerRunX) => item.serialize(writer));
         if (!w)
             return writer.getResultBuffer();
-        return undefined
+        return undefined;
     }
-    serializeBinary(): Uint8Array { throw new Error("Method not implemented."); }
+    serializeBinary(): Uint8Array { return this.serialize(); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): TerRowY {
         const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new TerRowY();
         while (reader.nextField()) {
@@ -1165,9 +1162,9 @@ export class RevealSeq extends pb_1.Message {
             writer.writeRepeatedMessage(1, this.rowy, (item: TerRowY) => item.serialize(writer));
         if (!w)
             return writer.getResultBuffer();
-        return undefined
+        return undefined;
     }
-    serializeBinary(): Uint8Array { throw new Error("Method not implemented."); }
+    serializeBinary(): Uint8Array { return this.serialize(); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): RevealSeq {
         const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new RevealSeq();
         while (reader.nextField()) {
@@ -1276,9 +1273,9 @@ export class SubImage extends pb_1.Message {
             writer.writeString(8, this.alt_url);
         if (!w)
             return writer.getResultBuffer();
-        return undefined
+        return undefined;
     }
-    serializeBinary(): Uint8Array { throw new Error("Method not implemented."); }
+    serializeBinary(): Uint8Array { return this.serialize(); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): SubImage {
         const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new SubImage();
         while (reader.nextField()) {
@@ -1372,9 +1369,9 @@ export class ImageAry extends pb_1.Message {
             writer.writeString(4, this.url);
         if (!w)
             return writer.getResultBuffer();
-        return undefined
+        return undefined;
     }
-    serializeBinary(): Uint8Array { throw new Error("Method not implemented."); }
+    serializeBinary(): Uint8Array { return this.serialize(); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ImageAry {
         const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new ImageAry();
         while (reader.nextField()) {
@@ -1448,9 +1445,9 @@ export class TerImage extends pb_1.Message {
             writer.writeMessage(3, this.sub_image, () => this.sub_image.serialize(writer));
         if (!w)
             return writer.getResultBuffer();
-        return undefined
+        return undefined;
     }
-    serializeBinary(): Uint8Array { throw new Error("Method not implemented."); }
+    serializeBinary(): Uint8Array { return this.serialize(); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): TerImage {
         const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new TerImage();
         while (reader.nextField()) {
@@ -1510,9 +1507,9 @@ export class TerStats extends pb_1.Message {
             writer.writeFloat(2, this.scoutablity);
         if (!w)
             return writer.getResultBuffer();
-        return undefined
+        return undefined;
     }
-    serializeBinary(): Uint8Array { throw new Error("Method not implemented."); }
+    serializeBinary(): Uint8Array { return this.serialize(); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): TerStats {
         const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new TerStats();
         while (reader.nextField()) {
@@ -1558,9 +1555,9 @@ export class RoadStats extends pb_1.Message {
             writer.writeFloat(1, this.quality);
         if (!w)
             return writer.getResultBuffer();
-        return undefined
+        return undefined;
     }
-    serializeBinary(): Uint8Array { throw new Error("Method not implemented."); }
+    serializeBinary(): Uint8Array { return this.serialize(); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): RoadStats {
         const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new RoadStats();
         while (reader.nextField()) {
@@ -1636,9 +1633,9 @@ export class TerImageSeq extends pb_1.Message {
             writer.writePackedInt32(4, this.indx);
         if (!w)
             return writer.getResultBuffer();
-        return undefined
+        return undefined;
     }
-    serializeBinary(): Uint8Array { throw new Error("Method not implemented."); }
+    serializeBinary(): Uint8Array { return this.serialize(); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): TerImageSeq {
         const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new TerImageSeq();
         while (reader.nextField()) {
@@ -1723,9 +1720,9 @@ export class ModImage extends pb_1.Message {
             writer.writeUint32(5, this.p_color);
         if (!w)
             return writer.getResultBuffer();
-        return undefined
+        return undefined;
     }
-    serializeBinary(): Uint8Array { throw new Error("Method not implemented."); }
+    serializeBinary(): Uint8Array { return this.serialize(); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ModImage {
         const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new ModImage();
         while (reader.nextField()) {
@@ -1788,9 +1785,9 @@ export class ModImageSeq extends pb_1.Message {
             writer.writeRepeatedMessage(2, this.model, (item: ModImage) => item.serialize(writer));
         if (!w)
             return writer.getResultBuffer();
-        return undefined
+        return undefined;
     }
-    serializeBinary(): Uint8Array { throw new Error("Method not implemented."); }
+    serializeBinary(): Uint8Array { return this.serialize(); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ModImageSeq {
         const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new ModImageSeq();
         while (reader.nextField()) {

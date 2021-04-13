@@ -1,6 +1,3 @@
-/* eslint-disable max-len */
-/* eslint-disable @typescript-eslint/no-unnecessary-type-assertion */
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import * as pb_1 from "google-protobuf";
 export var Fields;
 (function (Fields) {
