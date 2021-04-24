@@ -11,18 +11,15 @@
   ],
   "typings": "GammaProto.d.ts",
   "scripts": {
-    "patch-serial": "replace 'serializeBinary(): Uint8Array { throw new Error(\"Method not implemented.\"); }' 'serializeBinary(): Uint8Array { return this.serialize(); }' -- *Proto.ts",
-    "patch-return": "replace 'return writer.getResultBuffer();' 'return writer.getResultBuffer();\n        return undefined;' -- *Proto.ts",
-    "patch-reader": "replace -s 'Uint8Array ? new pb_1.BinaryReader(bytes) : bytes' 'pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes)' --  *Proto.ts",
     "java": "protoc -I src --java_out=. src/*.proto",
-    "tsc": "tsc GammaProto.ts --target es2018",
+    "tsc": "tsc GammaProto.ts --target es2018 --declaration ",
     "dts": "tsc GammaProto.ts --target es2018 --declaration --emitDeclarationOnly --allowJs",
     "dts2": "tsc GammaProto_pb.js --target es2018 --declaration --emitDeclarationOnly --allowJs",
     "protots": "protoc -I src --ts_out=binary:. src/*.proto",
     "protojs2": "protoc -I src --js_out=library=GammaProto,binary:. src/*.proto",
     "protojs": "protoc -I src --js_out=import_style=commonjs,binary:. src/*.proto",
     "clean": "rm -f *.js *.ts src/*.js",
-    "build": "bash -c 'npm run clean; npm run protots; npm run patch-reader; npm run patch-return; npm run patch-serial; npm run tsc; npm run dts'",
+    "build": "npm run clean; npm run protots; npm run tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -46,7 +43,6 @@
   },
   "devDependencies": {
     "@types/google-protobuf": "^3.7.4",
-    "protoc-gen-ts": "^0.3.5",
     "typescript": "^4.2.3"
   }
 }

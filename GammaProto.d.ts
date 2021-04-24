@@ -19,12 +19,13 @@ export declare class Iloc extends pb_1.Message {
     get x(): number;
     set x(value: number);
     toObject(): {
-        y: number;
-        x: number;
+        y?: number;
+        x?: number;
     };
     serialize(w?: pb_1.BinaryWriter): Uint8Array | undefined;
-    serializeBinary(): Uint8Array;
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Iloc;
+    serializeBinary(): Uint8Array;
+    static deserializeBinary(bytes: Uint8Array): Iloc;
 }
 export declare class Floc extends pb_1.Message {
     constructor(data?: any[] | {
@@ -36,12 +37,13 @@ export declare class Floc extends pb_1.Message {
     get x(): number;
     set x(value: number);
     toObject(): {
-        y: number;
-        x: number;
+        y?: number;
+        x?: number;
     };
     serialize(w?: pb_1.BinaryWriter): Uint8Array | undefined;
-    serializeBinary(): Uint8Array;
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Floc;
+    serializeBinary(): Uint8Array;
+    static deserializeBinary(bytes: Uint8Array): Floc;
 }
 export declare class IDloc extends pb_1.Message {
     constructor(data?: any[] | {
@@ -53,12 +55,13 @@ export declare class IDloc extends pb_1.Message {
     get dx(): number;
     set dx(value: number);
     toObject(): {
-        dy: number;
-        dx: number;
+        dy?: number;
+        dx?: number;
     };
     serialize(w?: pb_1.BinaryWriter): Uint8Array | undefined;
-    serializeBinary(): Uint8Array;
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): IDloc;
+    serializeBinary(): Uint8Array;
+    static deserializeBinary(bytes: Uint8Array): IDloc;
 }
 export declare class FDloc extends pb_1.Message {
     constructor(data?: any[] | {
@@ -70,12 +73,13 @@ export declare class FDloc extends pb_1.Message {
     get dx(): number;
     set dx(value: number);
     toObject(): {
-        dy: number;
-        dx: number;
+        dy?: number;
+        dx?: number;
     };
     serialize(w?: pb_1.BinaryWriter): Uint8Array | undefined;
-    serializeBinary(): Uint8Array;
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): FDloc;
+    serializeBinary(): Uint8Array;
+    static deserializeBinary(bytes: Uint8Array): FDloc;
 }
 export declare class Dloc extends pb_1.Message {
     constructor(data?: any[] | {
@@ -87,12 +91,13 @@ export declare class Dloc extends pb_1.Message {
     get dx_dt(): number;
     set dx_dt(value: number);
     toObject(): {
-        dy_dt: number;
-        dx_dt: number;
+        dy_dt?: number;
+        dx_dt?: number;
     };
     serialize(w?: pb_1.BinaryWriter): Uint8Array | undefined;
-    serializeBinary(): Uint8Array;
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Dloc;
+    serializeBinary(): Uint8Array;
+    static deserializeBinary(bytes: Uint8Array): Dloc;
 }
 export declare class Turn extends pb_1.Message {
     constructor(data?: any[] | {
@@ -101,11 +106,12 @@ export declare class Turn extends pb_1.Message {
     get id(): number;
     set id(value: number);
     toObject(): {
-        id: number;
+        id?: number;
     };
     serialize(w?: pb_1.BinaryWriter): Uint8Array | undefined;
-    serializeBinary(): Uint8Array;
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Turn;
+    serializeBinary(): Uint8Array;
+    static deserializeBinary(bytes: Uint8Array): Turn;
 }
 export declare class AMessage extends pb_1.Message {
     constructor(data?: any[] | {
@@ -132,133 +138,18 @@ export declare class AMessage extends pb_1.Message {
     get mod_images(): ModImageSeq;
     set mod_images(value: ModImageSeq);
     toObject(): {
-        turn: {
-            id: number;
-        };
-        updates: {
-            updates: {
-                id: number;
-                hp: number;
-                isHp: boolean;
-                floc: {
-                    y: number;
-                    x: number;
-                };
-                is_floc: boolean;
-                iloc: {
-                    y: number;
-                    x: number;
-                };
-                is_iloc: boolean;
-                dloc: {
-                    dy_dt: number;
-                    dx_dt: number;
-                };
-                is_dloc: boolean;
-                player_id: number;
-                quality: number;
-            }[];
-        };
-        reveals: {
-            rowy: {
-                loc: {
-                    y: number;
-                    x: number;
-                };
-                runx: {
-                    dx: number;
-                    ztv: number;
-                }[];
-            }[];
-        };
-        adds: {
-            adds: {
-                ident: {
-                    id: number;
-                    type: string;
-                    i_ndx: number;
-                    m_ndx: number;
-                    display: string;
-                    player_id: number;
-                };
-                update: {
-                    id: number;
-                    hp: number;
-                    isHp: boolean;
-                    floc: {
-                        y: number;
-                        x: number;
-                    };
-                    is_floc: boolean;
-                    iloc: {
-                        y: number;
-                        x: number;
-                    };
-                    is_iloc: boolean;
-                    dloc: {
-                        dy_dt: number;
-                        dx_dt: number;
-                    };
-                    is_dloc: boolean;
-                    player_id: number;
-                    quality: number;
-                };
-            }[];
-        };
-        dels: {
-            dels: {
-                id: number;
-            }[];
-        };
-        ter_images: {
-            comp_image: {
-                npixels: number;
-                nrows: number;
-                ncols: number;
-                url: string;
-            };
-            tmag: {
-                tvid: number;
-                name: string;
-                sub_image: {
-                    y0: number;
-                    x0: number;
-                    y_px: number;
-                    x_px: number;
-                    y_off: number;
-                    x_off: number;
-                    alt_url: string;
-                };
-            }[];
-            zval: number[];
-            indx: number[];
-        };
-        mod_images: {
-            mblk: {
-                npixels: number;
-                nrows: number;
-                ncols: number;
-                url: string;
-            };
-            model: {
-                mndx: number;
-                name: string;
-                sub_image: {
-                    y0: number;
-                    x0: number;
-                    y_px: number;
-                    x_px: number;
-                    y_off: number;
-                    x_off: number;
-                    alt_url: string;
-                };
-                p_color: number;
-            }[];
-        };
+        turn?: ReturnType<typeof Turn.prototype.toObject>;
+        updates?: ReturnType<typeof UpdateSeq.prototype.toObject>;
+        reveals?: ReturnType<typeof RevealSeq.prototype.toObject>;
+        adds?: ReturnType<typeof AddSeq.prototype.toObject>;
+        dels?: ReturnType<typeof DelSeq.prototype.toObject>;
+        ter_images?: ReturnType<typeof TerImageSeq.prototype.toObject>;
+        mod_images?: ReturnType<typeof ModImageSeq.prototype.toObject>;
     };
     serialize(w?: pb_1.BinaryWriter): Uint8Array | undefined;
-    serializeBinary(): Uint8Array;
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): AMessage;
+    serializeBinary(): Uint8Array;
+    static deserializeBinary(bytes: Uint8Array): AMessage;
 }
 export declare class Update extends pb_1.Message {
     constructor(data?: any[] | {
@@ -297,64 +188,36 @@ export declare class Update extends pb_1.Message {
     get quality(): number;
     set quality(value: number);
     toObject(): {
-        id: number;
-        hp: number;
-        isHp: boolean;
-        floc: {
-            y: number;
-            x: number;
-        };
-        is_floc: boolean;
-        iloc: {
-            y: number;
-            x: number;
-        };
-        is_iloc: boolean;
-        dloc: {
-            dy_dt: number;
-            dx_dt: number;
-        };
-        is_dloc: boolean;
-        player_id: number;
-        quality: number;
+        id?: number;
+        hp?: number;
+        isHp?: boolean;
+        floc?: ReturnType<typeof Floc.prototype.toObject>;
+        is_floc?: boolean;
+        iloc?: ReturnType<typeof Iloc.prototype.toObject>;
+        is_iloc?: boolean;
+        dloc?: ReturnType<typeof Dloc.prototype.toObject>;
+        is_dloc?: boolean;
+        player_id?: number;
+        quality?: number;
     };
     serialize(w?: pb_1.BinaryWriter): Uint8Array | undefined;
-    serializeBinary(): Uint8Array;
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Update;
+    serializeBinary(): Uint8Array;
+    static deserializeBinary(bytes: Uint8Array): Update;
 }
 export declare class UpdateSeq extends pb_1.Message {
     constructor(data?: any[] | {
-        updates?: Update[];
+        updates: Update[];
     });
     get updates(): Update[];
     set updates(value: Update[]);
     toObject(): {
-        updates: {
-            id: number;
-            hp: number;
-            isHp: boolean;
-            floc: {
-                y: number;
-                x: number;
-            };
-            is_floc: boolean;
-            iloc: {
-                y: number;
-                x: number;
-            };
-            is_iloc: boolean;
-            dloc: {
-                dy_dt: number;
-                dx_dt: number;
-            };
-            is_dloc: boolean;
-            player_id: number;
-            quality: number;
-        }[];
+        updates: ReturnType<typeof Update.prototype.toObject>[];
     };
     serialize(w?: pb_1.BinaryWriter): Uint8Array | undefined;
-    serializeBinary(): Uint8Array;
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): UpdateSeq;
+    serializeBinary(): Uint8Array;
+    static deserializeBinary(bytes: Uint8Array): UpdateSeq;
 }
 export declare class Ident extends pb_1.Message {
     constructor(data?: any[] | {
@@ -378,16 +241,17 @@ export declare class Ident extends pb_1.Message {
     get player_id(): number;
     set player_id(value: number);
     toObject(): {
-        id: number;
-        type: string;
-        i_ndx: number;
-        m_ndx: number;
-        display: string;
-        player_id: number;
+        id?: number;
+        type?: string;
+        i_ndx?: number;
+        m_ndx?: number;
+        display?: string;
+        player_id?: number;
     };
     serialize(w?: pb_1.BinaryWriter): Uint8Array | undefined;
-    serializeBinary(): Uint8Array;
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Ident;
+    serializeBinary(): Uint8Array;
+    static deserializeBinary(bytes: Uint8Array): Ident;
 }
 export declare class Add extends pb_1.Message {
     constructor(data?: any[] | {
@@ -399,84 +263,27 @@ export declare class Add extends pb_1.Message {
     get update(): Update;
     set update(value: Update);
     toObject(): {
-        ident: {
-            id: number;
-            type: string;
-            i_ndx: number;
-            m_ndx: number;
-            display: string;
-            player_id: number;
-        };
-        update: {
-            id: number;
-            hp: number;
-            isHp: boolean;
-            floc: {
-                y: number;
-                x: number;
-            };
-            is_floc: boolean;
-            iloc: {
-                y: number;
-                x: number;
-            };
-            is_iloc: boolean;
-            dloc: {
-                dy_dt: number;
-                dx_dt: number;
-            };
-            is_dloc: boolean;
-            player_id: number;
-            quality: number;
-        };
+        ident?: ReturnType<typeof Ident.prototype.toObject>;
+        update?: ReturnType<typeof Update.prototype.toObject>;
     };
     serialize(w?: pb_1.BinaryWriter): Uint8Array | undefined;
-    serializeBinary(): Uint8Array;
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Add;
+    serializeBinary(): Uint8Array;
+    static deserializeBinary(bytes: Uint8Array): Add;
 }
 export declare class AddSeq extends pb_1.Message {
     constructor(data?: any[] | {
-        adds?: Add[];
+        adds: Add[];
     });
     get adds(): Add[];
     set adds(value: Add[]);
     toObject(): {
-        adds: {
-            ident: {
-                id: number;
-                type: string;
-                i_ndx: number;
-                m_ndx: number;
-                display: string;
-                player_id: number;
-            };
-            update: {
-                id: number;
-                hp: number;
-                isHp: boolean;
-                floc: {
-                    y: number;
-                    x: number;
-                };
-                is_floc: boolean;
-                iloc: {
-                    y: number;
-                    x: number;
-                };
-                is_iloc: boolean;
-                dloc: {
-                    dy_dt: number;
-                    dx_dt: number;
-                };
-                is_dloc: boolean;
-                player_id: number;
-                quality: number;
-            };
-        }[];
+        adds: ReturnType<typeof Add.prototype.toObject>[];
     };
     serialize(w?: pb_1.BinaryWriter): Uint8Array | undefined;
-    serializeBinary(): Uint8Array;
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): AddSeq;
+    serializeBinary(): Uint8Array;
+    static deserializeBinary(bytes: Uint8Array): AddSeq;
 }
 export declare class Del extends pb_1.Message {
     constructor(data?: any[] | {
@@ -485,26 +292,26 @@ export declare class Del extends pb_1.Message {
     get id(): number;
     set id(value: number);
     toObject(): {
-        id: number;
+        id?: number;
     };
     serialize(w?: pb_1.BinaryWriter): Uint8Array | undefined;
-    serializeBinary(): Uint8Array;
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Del;
+    serializeBinary(): Uint8Array;
+    static deserializeBinary(bytes: Uint8Array): Del;
 }
 export declare class DelSeq extends pb_1.Message {
     constructor(data?: any[] | {
-        dels?: Del[];
+        dels: Del[];
     });
     get dels(): Del[];
     set dels(value: Del[]);
     toObject(): {
-        dels: {
-            id: number;
-        }[];
+        dels: ReturnType<typeof Del.prototype.toObject>[];
     };
     serialize(w?: pb_1.BinaryWriter): Uint8Array | undefined;
-    serializeBinary(): Uint8Array;
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): DelSeq;
+    serializeBinary(): Uint8Array;
+    static deserializeBinary(bytes: Uint8Array): DelSeq;
 }
 export declare class TerRunX extends pb_1.Message {
     constructor(data?: any[] | {
@@ -516,57 +323,45 @@ export declare class TerRunX extends pb_1.Message {
     get ztv(): number;
     set ztv(value: number);
     toObject(): {
-        dx: number;
-        ztv: number;
+        dx?: number;
+        ztv?: number;
     };
     serialize(w?: pb_1.BinaryWriter): Uint8Array | undefined;
-    serializeBinary(): Uint8Array;
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): TerRunX;
+    serializeBinary(): Uint8Array;
+    static deserializeBinary(bytes: Uint8Array): TerRunX;
 }
 export declare class TerRowY extends pb_1.Message {
     constructor(data?: any[] | {
         loc?: Iloc;
-        runx?: TerRunX[];
+        runx: TerRunX[];
     });
     get loc(): Iloc;
     set loc(value: Iloc);
     get runx(): TerRunX[];
     set runx(value: TerRunX[]);
     toObject(): {
-        loc: {
-            y: number;
-            x: number;
-        };
-        runx: {
-            dx: number;
-            ztv: number;
-        }[];
+        loc?: ReturnType<typeof Iloc.prototype.toObject>;
+        runx: ReturnType<typeof TerRunX.prototype.toObject>[];
     };
     serialize(w?: pb_1.BinaryWriter): Uint8Array | undefined;
-    serializeBinary(): Uint8Array;
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): TerRowY;
+    serializeBinary(): Uint8Array;
+    static deserializeBinary(bytes: Uint8Array): TerRowY;
 }
 export declare class RevealSeq extends pb_1.Message {
     constructor(data?: any[] | {
-        rowy?: TerRowY[];
+        rowy: TerRowY[];
     });
     get rowy(): TerRowY[];
     set rowy(value: TerRowY[]);
     toObject(): {
-        rowy: {
-            loc: {
-                y: number;
-                x: number;
-            };
-            runx: {
-                dx: number;
-                ztv: number;
-            }[];
-        }[];
+        rowy: ReturnType<typeof TerRowY.prototype.toObject>[];
     };
     serialize(w?: pb_1.BinaryWriter): Uint8Array | undefined;
-    serializeBinary(): Uint8Array;
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): RevealSeq;
+    serializeBinary(): Uint8Array;
+    static deserializeBinary(bytes: Uint8Array): RevealSeq;
 }
 export declare class SubImage extends pb_1.Message {
     constructor(data?: any[] | {
@@ -593,17 +388,18 @@ export declare class SubImage extends pb_1.Message {
     get alt_url(): string;
     set alt_url(value: string);
     toObject(): {
-        y0: number;
-        x0: number;
-        y_px: number;
-        x_px: number;
-        y_off: number;
-        x_off: number;
-        alt_url: string;
+        y0?: number;
+        x0?: number;
+        y_px?: number;
+        x_px?: number;
+        y_off?: number;
+        x_off?: number;
+        alt_url?: string;
     };
     serialize(w?: pb_1.BinaryWriter): Uint8Array | undefined;
-    serializeBinary(): Uint8Array;
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): SubImage;
+    serializeBinary(): Uint8Array;
+    static deserializeBinary(bytes: Uint8Array): SubImage;
 }
 export declare class ImageAry extends pb_1.Message {
     constructor(data?: any[] | {
@@ -621,14 +417,15 @@ export declare class ImageAry extends pb_1.Message {
     get url(): string;
     set url(value: string);
     toObject(): {
-        npixels: number;
-        nrows: number;
-        ncols: number;
-        url: string;
+        npixels?: number;
+        nrows?: number;
+        ncols?: number;
+        url?: string;
     };
     serialize(w?: pb_1.BinaryWriter): Uint8Array | undefined;
-    serializeBinary(): Uint8Array;
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ImageAry;
+    serializeBinary(): Uint8Array;
+    static deserializeBinary(bytes: Uint8Array): ImageAry;
 }
 export declare class TerImage extends pb_1.Message {
     constructor(data?: any[] | {
@@ -643,21 +440,14 @@ export declare class TerImage extends pb_1.Message {
     get sub_image(): SubImage;
     set sub_image(value: SubImage);
     toObject(): {
-        tvid: number;
-        name: string;
-        sub_image: {
-            y0: number;
-            x0: number;
-            y_px: number;
-            x_px: number;
-            y_off: number;
-            x_off: number;
-            alt_url: string;
-        };
+        tvid?: number;
+        name?: string;
+        sub_image?: ReturnType<typeof SubImage.prototype.toObject>;
     };
     serialize(w?: pb_1.BinaryWriter): Uint8Array | undefined;
-    serializeBinary(): Uint8Array;
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): TerImage;
+    serializeBinary(): Uint8Array;
+    static deserializeBinary(bytes: Uint8Array): TerImage;
 }
 export declare class TerStats extends pb_1.Message {
     constructor(data?: any[] | {
@@ -669,12 +459,13 @@ export declare class TerStats extends pb_1.Message {
     get scoutablity(): number;
     set scoutablity(value: number);
     toObject(): {
-        visibilty: number;
-        scoutablity: number;
+        visibilty?: number;
+        scoutablity?: number;
     };
     serialize(w?: pb_1.BinaryWriter): Uint8Array | undefined;
-    serializeBinary(): Uint8Array;
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): TerStats;
+    serializeBinary(): Uint8Array;
+    static deserializeBinary(bytes: Uint8Array): TerStats;
 }
 export declare class RoadStats extends pb_1.Message {
     constructor(data?: any[] | {
@@ -683,18 +474,19 @@ export declare class RoadStats extends pb_1.Message {
     get quality(): number;
     set quality(value: number);
     toObject(): {
-        quality: number;
+        quality?: number;
     };
     serialize(w?: pb_1.BinaryWriter): Uint8Array | undefined;
-    serializeBinary(): Uint8Array;
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): RoadStats;
+    serializeBinary(): Uint8Array;
+    static deserializeBinary(bytes: Uint8Array): RoadStats;
 }
 export declare class TerImageSeq extends pb_1.Message {
     constructor(data?: any[] | {
         comp_image?: ImageAry;
-        tmag?: TerImage[];
-        zval?: number[];
-        indx?: number[];
+        tmag: TerImage[];
+        zval: number[];
+        indx: number[];
     });
     get comp_image(): ImageAry;
     set comp_image(value: ImageAry);
@@ -705,31 +497,15 @@ export declare class TerImageSeq extends pb_1.Message {
     get indx(): number[];
     set indx(value: number[]);
     toObject(): {
-        comp_image: {
-            npixels: number;
-            nrows: number;
-            ncols: number;
-            url: string;
-        };
-        tmag: {
-            tvid: number;
-            name: string;
-            sub_image: {
-                y0: number;
-                x0: number;
-                y_px: number;
-                x_px: number;
-                y_off: number;
-                x_off: number;
-                alt_url: string;
-            };
-        }[];
+        comp_image?: ReturnType<typeof ImageAry.prototype.toObject>;
+        tmag: ReturnType<typeof TerImage.prototype.toObject>[];
         zval: number[];
         indx: number[];
     };
     serialize(w?: pb_1.BinaryWriter): Uint8Array | undefined;
-    serializeBinary(): Uint8Array;
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): TerImageSeq;
+    serializeBinary(): Uint8Array;
+    static deserializeBinary(bytes: Uint8Array): TerImageSeq;
 }
 export declare class ModImage extends pb_1.Message {
     constructor(data?: any[] | {
@@ -747,55 +523,31 @@ export declare class ModImage extends pb_1.Message {
     get p_color(): number;
     set p_color(value: number);
     toObject(): {
-        mndx: number;
-        name: string;
-        sub_image: {
-            y0: number;
-            x0: number;
-            y_px: number;
-            x_px: number;
-            y_off: number;
-            x_off: number;
-            alt_url: string;
-        };
-        p_color: number;
+        mndx?: number;
+        name?: string;
+        sub_image?: ReturnType<typeof SubImage.prototype.toObject>;
+        p_color?: number;
     };
     serialize(w?: pb_1.BinaryWriter): Uint8Array | undefined;
-    serializeBinary(): Uint8Array;
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ModImage;
+    serializeBinary(): Uint8Array;
+    static deserializeBinary(bytes: Uint8Array): ModImage;
 }
 export declare class ModImageSeq extends pb_1.Message {
     constructor(data?: any[] | {
         mblk?: ImageAry;
-        model?: ModImage[];
+        model: ModImage[];
     });
     get mblk(): ImageAry;
     set mblk(value: ImageAry);
     get model(): ModImage[];
     set model(value: ModImage[]);
     toObject(): {
-        mblk: {
-            npixels: number;
-            nrows: number;
-            ncols: number;
-            url: string;
-        };
-        model: {
-            mndx: number;
-            name: string;
-            sub_image: {
-                y0: number;
-                x0: number;
-                y_px: number;
-                x_px: number;
-                y_off: number;
-                x_off: number;
-                alt_url: string;
-            };
-            p_color: number;
-        }[];
+        mblk?: ReturnType<typeof ImageAry.prototype.toObject>;
+        model: ReturnType<typeof ModImage.prototype.toObject>[];
     };
     serialize(w?: pb_1.BinaryWriter): Uint8Array | undefined;
-    serializeBinary(): Uint8Array;
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ModImageSeq;
+    serializeBinary(): Uint8Array;
+    static deserializeBinary(bytes: Uint8Array): ModImageSeq;
 }

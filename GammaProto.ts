@@ -15,29 +15,40 @@ export class Iloc extends pb_1.Message {
         x?: number;
     }) {
         super();
-        pb_1.Message.initialize(this, Array.isArray(data) && data, 0, -1, [], null);
+        pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
         if (!Array.isArray(data) && typeof data == "object") {
-            this.y = data.y;
-            this.x = data.x;
+            if ("y" in data) {
+                this.y = data.y;
+            }
+            if ("x" in data) {
+                this.x = data.x;
+            }
         }
     }
-    get y(): number {
-        return pb_1.Message.getFieldWithDefault(this, 1, undefined) as number;
+    get y() {
+        return pb_1.Message.getField(this, 1) as number;
     }
     set y(value: number) {
         pb_1.Message.setField(this, 1, value);
     }
-    get x(): number {
-        return pb_1.Message.getFieldWithDefault(this, 2, undefined) as number;
+    get x() {
+        return pb_1.Message.getField(this, 2) as number;
     }
     set x(value: number) {
         pb_1.Message.setField(this, 2, value);
     }
     toObject() {
-        return {
-            y: this.y,
-            x: this.x
-        };
+        var data: {
+            y?: number;
+            x?: number;
+        } = {};
+        if (this.y != null) {
+            data.y = this.y;
+        }
+        if (this.x != null) {
+            data.x = this.x;
+        }
+        return data;
     }
     serialize(w?: pb_1.BinaryWriter): Uint8Array | undefined {
         const writer = w || new pb_1.BinaryWriter();
@@ -47,11 +58,9 @@ export class Iloc extends pb_1.Message {
             writer.writeInt32(2, this.x);
         if (!w)
             return writer.getResultBuffer();
-        return undefined;
     }
-    serializeBinary(): Uint8Array { return this.serialize(); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Iloc {
-        const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Iloc();
+        const reader = bytes instanceof Uint8Array ? new pb_1.BinaryReader(bytes) : bytes, message = new Iloc();
         while (reader.nextField()) {
             if (reader.isEndGroup())
                 break;
@@ -67,6 +76,12 @@ export class Iloc extends pb_1.Message {
         }
         return message;
     }
+    serializeBinary(): Uint8Array {
+        return this.serialize();
+    }
+    static deserializeBinary(bytes: Uint8Array): Iloc {
+        return Iloc.deserialize(bytes);
+    }
 }
 export class Floc extends pb_1.Message {
     constructor(data?: any[] | {
@@ -74,29 +89,40 @@ export class Floc extends pb_1.Message {
         x?: number;
     }) {
         super();
-        pb_1.Message.initialize(this, Array.isArray(data) && data, 0, -1, [], null);
+        pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
         if (!Array.isArray(data) && typeof data == "object") {
-            this.y = data.y;
-            this.x = data.x;
+            if ("y" in data) {
+                this.y = data.y;
+            }
+            if ("x" in data) {
+                this.x = data.x;
+            }
         }
     }
-    get y(): number {
-        return pb_1.Message.getFieldWithDefault(this, 1, undefined) as number;
+    get y() {
+        return pb_1.Message.getField(this, 1) as number;
     }
     set y(value: number) {
         pb_1.Message.setField(this, 1, value);
     }
-    get x(): number {
-        return pb_1.Message.getFieldWithDefault(this, 2, undefined) as number;
+    get x() {
+        return pb_1.Message.getField(this, 2) as number;
     }
     set x(value: number) {
         pb_1.Message.setField(this, 2, value);
     }
     toObject() {
-        return {
-            y: this.y,
-            x: this.x
-        };
+        var data: {
+            y?: number;
+            x?: number;
+        } = {};
+        if (this.y != null) {
+            data.y = this.y;
+        }
+        if (this.x != null) {
+            data.x = this.x;
+        }
+        return data;
     }
     serialize(w?: pb_1.BinaryWriter): Uint8Array | undefined {
         const writer = w || new pb_1.BinaryWriter();
@@ -106,11 +132,9 @@ export class Floc extends pb_1.Message {
             writer.writeFloat(2, this.x);
         if (!w)
             return writer.getResultBuffer();
-        return undefined;
     }
-    serializeBinary(): Uint8Array { return this.serialize(); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Floc {
-        const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Floc();
+        const reader = bytes instanceof Uint8Array ? new pb_1.BinaryReader(bytes) : bytes, message = new Floc();
         while (reader.nextField()) {
             if (reader.isEndGroup())
                 break;
@@ -126,6 +150,12 @@ export class Floc extends pb_1.Message {
         }
         return message;
     }
+    serializeBinary(): Uint8Array {
+        return this.serialize();
+    }
+    static deserializeBinary(bytes: Uint8Array): Floc {
+        return Floc.deserialize(bytes);
+    }
 }
 export class IDloc extends pb_1.Message {
     constructor(data?: any[] | {
@@ -133,29 +163,40 @@ export class IDloc extends pb_1.Message {
         dx?: number;
     }) {
         super();
-        pb_1.Message.initialize(this, Array.isArray(data) && data, 0, -1, [], null);
+        pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
         if (!Array.isArray(data) && typeof data == "object") {
-            this.dy = data.dy;
-            this.dx = data.dx;
+            if ("dy" in data) {
+                this.dy = data.dy;
+            }
+            if ("dx" in data) {
+                this.dx = data.dx;
+            }
         }
     }
-    get dy(): number {
-        return pb_1.Message.getFieldWithDefault(this, 1, undefined) as number;
+    get dy() {
+        return pb_1.Message.getField(this, 1) as number;
     }
     set dy(value: number) {
         pb_1.Message.setField(this, 1, value);
     }
-    get dx(): number {
-        return pb_1.Message.getFieldWithDefault(this, 2, undefined) as number;
+    get dx() {
+        return pb_1.Message.getField(this, 2) as number;
     }
     set dx(value: number) {
         pb_1.Message.setField(this, 2, value);
     }
     toObject() {
-        return {
-            dy: this.dy,
-            dx: this.dx
-        };
+        var data: {
+            dy?: number;
+            dx?: number;
+        } = {};
+        if (this.dy != null) {
+            data.dy = this.dy;
+        }
+        if (this.dx != null) {
+            data.dx = this.dx;
+        }
+        return data;
     }
     serialize(w?: pb_1.BinaryWriter): Uint8Array | undefined {
         const writer = w || new pb_1.BinaryWriter();
@@ -165,11 +206,9 @@ export class IDloc extends pb_1.Message {
             writer.writeInt32(2, this.dx);
         if (!w)
             return writer.getResultBuffer();
-        return undefined;
     }
-    serializeBinary(): Uint8Array { return this.serialize(); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): IDloc {
-        const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new IDloc();
+        const reader = bytes instanceof Uint8Array ? new pb_1.BinaryReader(bytes) : bytes, message = new IDloc();
         while (reader.nextField()) {
             if (reader.isEndGroup())
                 break;
@@ -185,6 +224,12 @@ export class IDloc extends pb_1.Message {
         }
         return message;
     }
+    serializeBinary(): Uint8Array {
+        return this.serialize();
+    }
+    static deserializeBinary(bytes: Uint8Array): IDloc {
+        return IDloc.deserialize(bytes);
+    }
 }
 export class FDloc extends pb_1.Message {
     constructor(data?: any[] | {
@@ -192,29 +237,40 @@ export class FDloc extends pb_1.Message {
         dx?: number;
     }) {
         super();
-        pb_1.Message.initialize(this, Array.isArray(data) && data, 0, -1, [], null);
+        pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
         if (!Array.isArray(data) && typeof data == "object") {
-            this.dy = data.dy;
-            this.dx = data.dx;
+            if ("dy" in data) {
+                this.dy = data.dy;
+            }
+            if ("dx" in data) {
+                this.dx = data.dx;
+            }
         }
     }
-    get dy(): number {
-        return pb_1.Message.getFieldWithDefault(this, 1, undefined) as number;
+    get dy() {
+        return pb_1.Message.getField(this, 1) as number;
     }
     set dy(value: number) {
         pb_1.Message.setField(this, 1, value);
     }
-    get dx(): number {
-        return pb_1.Message.getFieldWithDefault(this, 2, undefined) as number;
+    get dx() {
+        return pb_1.Message.getField(this, 2) as number;
     }
     set dx(value: number) {
         pb_1.Message.setField(this, 2, value);
     }
     toObject() {
-        return {
-            dy: this.dy,
-            dx: this.dx
-        };
+        var data: {
+            dy?: number;
+            dx?: number;
+        } = {};
+        if (this.dy != null) {
+            data.dy = this.dy;
+        }
+        if (this.dx != null) {
+            data.dx = this.dx;
+        }
+        return data;
     }
     serialize(w?: pb_1.BinaryWriter): Uint8Array | undefined {
         const writer = w || new pb_1.BinaryWriter();
@@ -224,11 +280,9 @@ export class FDloc extends pb_1.Message {
             writer.writeFloat(2, this.dx);
         if (!w)
             return writer.getResultBuffer();
-        return undefined;
     }
-    serializeBinary(): Uint8Array { return this.serialize(); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): FDloc {
-        const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new FDloc();
+        const reader = bytes instanceof Uint8Array ? new pb_1.BinaryReader(bytes) : bytes, message = new FDloc();
         while (reader.nextField()) {
             if (reader.isEndGroup())
                 break;
@@ -244,6 +298,12 @@ export class FDloc extends pb_1.Message {
         }
         return message;
     }
+    serializeBinary(): Uint8Array {
+        return this.serialize();
+    }
+    static deserializeBinary(bytes: Uint8Array): FDloc {
+        return FDloc.deserialize(bytes);
+    }
 }
 export class Dloc extends pb_1.Message {
     constructor(data?: any[] | {
@@ -251,29 +311,40 @@ export class Dloc extends pb_1.Message {
         dx_dt?: number;
     }) {
         super();
-        pb_1.Message.initialize(this, Array.isArray(data) && data, 0, -1, [], null);
+        pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
         if (!Array.isArray(data) && typeof data == "object") {
-            this.dy_dt = data.dy_dt;
-            this.dx_dt = data.dx_dt;
+            if ("dy_dt" in data) {
+                this.dy_dt = data.dy_dt;
+            }
+            if ("dx_dt" in data) {
+                this.dx_dt = data.dx_dt;
+            }
         }
     }
-    get dy_dt(): number {
-        return pb_1.Message.getFieldWithDefault(this, 1, undefined) as number;
+    get dy_dt() {
+        return pb_1.Message.getField(this, 1) as number;
     }
     set dy_dt(value: number) {
         pb_1.Message.setField(this, 1, value);
     }
-    get dx_dt(): number {
-        return pb_1.Message.getFieldWithDefault(this, 2, undefined) as number;
+    get dx_dt() {
+        return pb_1.Message.getField(this, 2) as number;
     }
     set dx_dt(value: number) {
         pb_1.Message.setField(this, 2, value);
     }
     toObject() {
-        return {
-            dy_dt: this.dy_dt,
-            dx_dt: this.dx_dt
-        };
+        var data: {
+            dy_dt?: number;
+            dx_dt?: number;
+        } = {};
+        if (this.dy_dt != null) {
+            data.dy_dt = this.dy_dt;
+        }
+        if (this.dx_dt != null) {
+            data.dx_dt = this.dx_dt;
+        }
+        return data;
     }
     serialize(w?: pb_1.BinaryWriter): Uint8Array | undefined {
         const writer = w || new pb_1.BinaryWriter();
@@ -283,11 +354,9 @@ export class Dloc extends pb_1.Message {
             writer.writeFloat(2, this.dx_dt);
         if (!w)
             return writer.getResultBuffer();
-        return undefined;
     }
-    serializeBinary(): Uint8Array { return this.serialize(); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Dloc {
-        const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Dloc();
+        const reader = bytes instanceof Uint8Array ? new pb_1.BinaryReader(bytes) : bytes, message = new Dloc();
         while (reader.nextField()) {
             if (reader.isEndGroup())
                 break;
@@ -303,27 +372,39 @@ export class Dloc extends pb_1.Message {
         }
         return message;
     }
+    serializeBinary(): Uint8Array {
+        return this.serialize();
+    }
+    static deserializeBinary(bytes: Uint8Array): Dloc {
+        return Dloc.deserialize(bytes);
+    }
 }
 export class Turn extends pb_1.Message {
     constructor(data?: any[] | {
         id?: number;
     }) {
         super();
-        pb_1.Message.initialize(this, Array.isArray(data) && data, 0, -1, [], null);
+        pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
         if (!Array.isArray(data) && typeof data == "object") {
-            this.id = data.id;
+            if ("id" in data) {
+                this.id = data.id;
+            }
         }
     }
-    get id(): number {
-        return pb_1.Message.getFieldWithDefault(this, 1, undefined) as number;
+    get id() {
+        return pb_1.Message.getField(this, 1) as number;
     }
     set id(value: number) {
         pb_1.Message.setField(this, 1, value);
     }
     toObject() {
-        return {
-            id: this.id
-        };
+        var data: {
+            id?: number;
+        } = {};
+        if (this.id != null) {
+            data.id = this.id;
+        }
+        return data;
     }
     serialize(w?: pb_1.BinaryWriter): Uint8Array | undefined {
         const writer = w || new pb_1.BinaryWriter();
@@ -331,11 +412,9 @@ export class Turn extends pb_1.Message {
             writer.writeUint32(1, this.id);
         if (!w)
             return writer.getResultBuffer();
-        return undefined;
     }
-    serializeBinary(): Uint8Array { return this.serialize(); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Turn {
-        const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Turn();
+        const reader = bytes instanceof Uint8Array ? new pb_1.BinaryReader(bytes) : bytes, message = new Turn();
         while (reader.nextField()) {
             if (reader.isEndGroup())
                 break;
@@ -347,6 +426,12 @@ export class Turn extends pb_1.Message {
             }
         }
         return message;
+    }
+    serializeBinary(): Uint8Array {
+        return this.serialize();
+    }
+    static deserializeBinary(bytes: Uint8Array): Turn {
+        return Turn.deserialize(bytes);
     }
 }
 export class AMessage extends pb_1.Message {
@@ -360,69 +445,105 @@ export class AMessage extends pb_1.Message {
         mod_images?: ModImageSeq;
     }) {
         super();
-        pb_1.Message.initialize(this, Array.isArray(data) && data, 0, -1, [], null);
+        pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
         if (!Array.isArray(data) && typeof data == "object") {
-            this.turn = data.turn;
-            this.updates = data.updates;
-            this.reveals = data.reveals;
-            this.adds = data.adds;
-            this.dels = data.dels;
-            this.ter_images = data.ter_images;
-            this.mod_images = data.mod_images;
+            if ("turn" in data) {
+                this.turn = data.turn;
+            }
+            if ("updates" in data) {
+                this.updates = data.updates;
+            }
+            if ("reveals" in data) {
+                this.reveals = data.reveals;
+            }
+            if ("adds" in data) {
+                this.adds = data.adds;
+            }
+            if ("dels" in data) {
+                this.dels = data.dels;
+            }
+            if ("ter_images" in data) {
+                this.ter_images = data.ter_images;
+            }
+            if ("mod_images" in data) {
+                this.mod_images = data.mod_images;
+            }
         }
     }
-    get turn(): Turn {
+    get turn() {
         return pb_1.Message.getWrapperField(this, Turn, 1) as Turn;
     }
     set turn(value: Turn) {
         pb_1.Message.setWrapperField(this, 1, value);
     }
-    get updates(): UpdateSeq {
+    get updates() {
         return pb_1.Message.getWrapperField(this, UpdateSeq, 2) as UpdateSeq;
     }
     set updates(value: UpdateSeq) {
         pb_1.Message.setWrapperField(this, 2, value);
     }
-    get reveals(): RevealSeq {
+    get reveals() {
         return pb_1.Message.getWrapperField(this, RevealSeq, 3) as RevealSeq;
     }
     set reveals(value: RevealSeq) {
         pb_1.Message.setWrapperField(this, 3, value);
     }
-    get adds(): AddSeq {
+    get adds() {
         return pb_1.Message.getWrapperField(this, AddSeq, 4) as AddSeq;
     }
     set adds(value: AddSeq) {
         pb_1.Message.setWrapperField(this, 4, value);
     }
-    get dels(): DelSeq {
+    get dels() {
         return pb_1.Message.getWrapperField(this, DelSeq, 5) as DelSeq;
     }
     set dels(value: DelSeq) {
         pb_1.Message.setWrapperField(this, 5, value);
     }
-    get ter_images(): TerImageSeq {
+    get ter_images() {
         return pb_1.Message.getWrapperField(this, TerImageSeq, 21) as TerImageSeq;
     }
     set ter_images(value: TerImageSeq) {
         pb_1.Message.setWrapperField(this, 21, value);
     }
-    get mod_images(): ModImageSeq {
+    get mod_images() {
         return pb_1.Message.getWrapperField(this, ModImageSeq, 22) as ModImageSeq;
     }
     set mod_images(value: ModImageSeq) {
         pb_1.Message.setWrapperField(this, 22, value);
     }
     toObject() {
-        return {
-            turn: this.turn && this.turn.toObject(),
-            updates: this.updates && this.updates.toObject(),
-            reveals: this.reveals && this.reveals.toObject(),
-            adds: this.adds && this.adds.toObject(),
-            dels: this.dels && this.dels.toObject(),
-            ter_images: this.ter_images && this.ter_images.toObject(),
-            mod_images: this.mod_images && this.mod_images.toObject()
-        };
+        var data: {
+            turn?: ReturnType<typeof Turn.prototype.toObject>;
+            updates?: ReturnType<typeof UpdateSeq.prototype.toObject>;
+            reveals?: ReturnType<typeof RevealSeq.prototype.toObject>;
+            adds?: ReturnType<typeof AddSeq.prototype.toObject>;
+            dels?: ReturnType<typeof DelSeq.prototype.toObject>;
+            ter_images?: ReturnType<typeof TerImageSeq.prototype.toObject>;
+            mod_images?: ReturnType<typeof ModImageSeq.prototype.toObject>;
+        } = {};
+        if (this.turn != null) {
+            data.turn = this.turn.toObject();
+        }
+        if (this.updates != null) {
+            data.updates = this.updates.toObject();
+        }
+        if (this.reveals != null) {
+            data.reveals = this.reveals.toObject();
+        }
+        if (this.adds != null) {
+            data.adds = this.adds.toObject();
+        }
+        if (this.dels != null) {
+            data.dels = this.dels.toObject();
+        }
+        if (this.ter_images != null) {
+            data.ter_images = this.ter_images.toObject();
+        }
+        if (this.mod_images != null) {
+            data.mod_images = this.mod_images.toObject();
+        }
+        return data;
     }
     serialize(w?: pb_1.BinaryWriter): Uint8Array | undefined {
         const writer = w || new pb_1.BinaryWriter();
@@ -442,11 +563,9 @@ export class AMessage extends pb_1.Message {
             writer.writeMessage(22, this.mod_images, () => this.mod_images.serialize(writer));
         if (!w)
             return writer.getResultBuffer();
-        return undefined;
     }
-    serializeBinary(): Uint8Array { return this.serialize(); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): AMessage {
-        const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new AMessage();
+        const reader = bytes instanceof Uint8Array ? new pb_1.BinaryReader(bytes) : bytes, message = new AMessage();
         while (reader.nextField()) {
             if (reader.isEndGroup())
                 break;
@@ -477,6 +596,12 @@ export class AMessage extends pb_1.Message {
         }
         return message;
     }
+    serializeBinary(): Uint8Array {
+        return this.serialize();
+    }
+    static deserializeBinary(bytes: Uint8Array): AMessage {
+        return AMessage.deserialize(bytes);
+    }
 }
 export class Update extends pb_1.Message {
     constructor(data?: any[] | {
@@ -493,101 +618,157 @@ export class Update extends pb_1.Message {
         quality?: number;
     }) {
         super();
-        pb_1.Message.initialize(this, Array.isArray(data) && data, 0, -1, [], null);
+        pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
         if (!Array.isArray(data) && typeof data == "object") {
-            this.id = data.id;
-            this.hp = data.hp;
-            this.isHp = data.isHp;
-            this.floc = data.floc;
-            this.is_floc = data.is_floc;
-            this.iloc = data.iloc;
-            this.is_iloc = data.is_iloc;
-            this.dloc = data.dloc;
-            this.is_dloc = data.is_dloc;
-            this.player_id = data.player_id;
-            this.quality = data.quality;
+            if ("id" in data) {
+                this.id = data.id;
+            }
+            if ("hp" in data) {
+                this.hp = data.hp;
+            }
+            if ("isHp" in data) {
+                this.isHp = data.isHp;
+            }
+            if ("floc" in data) {
+                this.floc = data.floc;
+            }
+            if ("is_floc" in data) {
+                this.is_floc = data.is_floc;
+            }
+            if ("iloc" in data) {
+                this.iloc = data.iloc;
+            }
+            if ("is_iloc" in data) {
+                this.is_iloc = data.is_iloc;
+            }
+            if ("dloc" in data) {
+                this.dloc = data.dloc;
+            }
+            if ("is_dloc" in data) {
+                this.is_dloc = data.is_dloc;
+            }
+            if ("player_id" in data) {
+                this.player_id = data.player_id;
+            }
+            if ("quality" in data) {
+                this.quality = data.quality;
+            }
         }
     }
-    get id(): number {
-        return pb_1.Message.getFieldWithDefault(this, 1, undefined) as number;
+    get id() {
+        return pb_1.Message.getField(this, 1) as number;
     }
     set id(value: number) {
         pb_1.Message.setField(this, 1, value);
     }
-    get hp(): number {
-        return pb_1.Message.getFieldWithDefault(this, 2, undefined) as number;
+    get hp() {
+        return pb_1.Message.getField(this, 2) as number;
     }
     set hp(value: number) {
         pb_1.Message.setField(this, 2, value);
     }
-    get isHp(): boolean {
-        return pb_1.Message.getFieldWithDefault(this, 3, undefined) as boolean;
+    get isHp() {
+        return pb_1.Message.getField(this, 3) as boolean;
     }
     set isHp(value: boolean) {
         pb_1.Message.setField(this, 3, value);
     }
-    get floc(): Floc {
+    get floc() {
         return pb_1.Message.getWrapperField(this, Floc, 4) as Floc;
     }
     set floc(value: Floc) {
         pb_1.Message.setWrapperField(this, 4, value);
     }
-    get is_floc(): boolean {
-        return pb_1.Message.getFieldWithDefault(this, 5, undefined) as boolean;
+    get is_floc() {
+        return pb_1.Message.getField(this, 5) as boolean;
     }
     set is_floc(value: boolean) {
         pb_1.Message.setField(this, 5, value);
     }
-    get iloc(): Iloc {
+    get iloc() {
         return pb_1.Message.getWrapperField(this, Iloc, 6) as Iloc;
     }
     set iloc(value: Iloc) {
         pb_1.Message.setWrapperField(this, 6, value);
     }
-    get is_iloc(): boolean {
-        return pb_1.Message.getFieldWithDefault(this, 7, undefined) as boolean;
+    get is_iloc() {
+        return pb_1.Message.getField(this, 7) as boolean;
     }
     set is_iloc(value: boolean) {
         pb_1.Message.setField(this, 7, value);
     }
-    get dloc(): Dloc {
+    get dloc() {
         return pb_1.Message.getWrapperField(this, Dloc, 8) as Dloc;
     }
     set dloc(value: Dloc) {
         pb_1.Message.setWrapperField(this, 8, value);
     }
-    get is_dloc(): boolean {
-        return pb_1.Message.getFieldWithDefault(this, 9, undefined) as boolean;
+    get is_dloc() {
+        return pb_1.Message.getField(this, 9) as boolean;
     }
     set is_dloc(value: boolean) {
         pb_1.Message.setField(this, 9, value);
     }
-    get player_id(): number {
-        return pb_1.Message.getFieldWithDefault(this, 10, undefined) as number;
+    get player_id() {
+        return pb_1.Message.getField(this, 10) as number;
     }
     set player_id(value: number) {
         pb_1.Message.setField(this, 10, value);
     }
-    get quality(): number {
-        return pb_1.Message.getFieldWithDefault(this, 11, undefined) as number;
+    get quality() {
+        return pb_1.Message.getField(this, 11) as number;
     }
     set quality(value: number) {
         pb_1.Message.setField(this, 11, value);
     }
     toObject() {
-        return {
-            id: this.id,
-            hp: this.hp,
-            isHp: this.isHp,
-            floc: this.floc && this.floc.toObject(),
-            is_floc: this.is_floc,
-            iloc: this.iloc && this.iloc.toObject(),
-            is_iloc: this.is_iloc,
-            dloc: this.dloc && this.dloc.toObject(),
-            is_dloc: this.is_dloc,
-            player_id: this.player_id,
-            quality: this.quality
-        };
+        var data: {
+            id?: number;
+            hp?: number;
+            isHp?: boolean;
+            floc?: ReturnType<typeof Floc.prototype.toObject>;
+            is_floc?: boolean;
+            iloc?: ReturnType<typeof Iloc.prototype.toObject>;
+            is_iloc?: boolean;
+            dloc?: ReturnType<typeof Dloc.prototype.toObject>;
+            is_dloc?: boolean;
+            player_id?: number;
+            quality?: number;
+        } = {};
+        if (this.id != null) {
+            data.id = this.id;
+        }
+        if (this.hp != null) {
+            data.hp = this.hp;
+        }
+        if (this.isHp != null) {
+            data.isHp = this.isHp;
+        }
+        if (this.floc != null) {
+            data.floc = this.floc.toObject();
+        }
+        if (this.is_floc != null) {
+            data.is_floc = this.is_floc;
+        }
+        if (this.iloc != null) {
+            data.iloc = this.iloc.toObject();
+        }
+        if (this.is_iloc != null) {
+            data.is_iloc = this.is_iloc;
+        }
+        if (this.dloc != null) {
+            data.dloc = this.dloc.toObject();
+        }
+        if (this.is_dloc != null) {
+            data.is_dloc = this.is_dloc;
+        }
+        if (this.player_id != null) {
+            data.player_id = this.player_id;
+        }
+        if (this.quality != null) {
+            data.quality = this.quality;
+        }
+        return data;
     }
     serialize(w?: pb_1.BinaryWriter): Uint8Array | undefined {
         const writer = w || new pb_1.BinaryWriter();
@@ -615,11 +796,9 @@ export class Update extends pb_1.Message {
             writer.writeFloat(11, this.quality);
         if (!w)
             return writer.getResultBuffer();
-        return undefined;
     }
-    serializeBinary(): Uint8Array { return this.serialize(); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Update {
-        const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Update();
+        const reader = bytes instanceof Uint8Array ? new pb_1.BinaryReader(bytes) : bytes, message = new Update();
         while (reader.nextField()) {
             if (reader.isEndGroup())
                 break;
@@ -662,27 +841,36 @@ export class Update extends pb_1.Message {
         }
         return message;
     }
+    serializeBinary(): Uint8Array {
+        return this.serialize();
+    }
+    static deserializeBinary(bytes: Uint8Array): Update {
+        return Update.deserialize(bytes);
+    }
 }
 export class UpdateSeq extends pb_1.Message {
     constructor(data?: any[] | {
-        updates?: Update[];
+        updates: Update[];
     }) {
         super();
-        pb_1.Message.initialize(this, Array.isArray(data) && data, 0, -1, [1], null);
+        pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [1], []);
         if (!Array.isArray(data) && typeof data == "object") {
             this.updates = data.updates;
         }
     }
-    get updates(): Update[] {
+    get updates() {
         return pb_1.Message.getRepeatedWrapperField(this, Update, 1) as Update[];
     }
     set updates(value: Update[]) {
         pb_1.Message.setRepeatedWrapperField(this, 1, value);
     }
     toObject() {
-        return {
+        var data: {
+            updates: ReturnType<typeof Update.prototype.toObject>[];
+        } = {
             updates: this.updates.map((item: Update) => item.toObject())
         };
+        return data;
     }
     serialize(w?: pb_1.BinaryWriter): Uint8Array | undefined {
         const writer = w || new pb_1.BinaryWriter();
@@ -690,11 +878,9 @@ export class UpdateSeq extends pb_1.Message {
             writer.writeRepeatedMessage(1, this.updates, (item: Update) => item.serialize(writer));
         if (!w)
             return writer.getResultBuffer();
-        return undefined;
     }
-    serializeBinary(): Uint8Array { return this.serialize(); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): UpdateSeq {
-        const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new UpdateSeq();
+        const reader = bytes instanceof Uint8Array ? new pb_1.BinaryReader(bytes) : bytes, message = new UpdateSeq();
         while (reader.nextField()) {
             if (reader.isEndGroup())
                 break;
@@ -707,6 +893,12 @@ export class UpdateSeq extends pb_1.Message {
         }
         return message;
     }
+    serializeBinary(): Uint8Array {
+        return this.serialize();
+    }
+    static deserializeBinary(bytes: Uint8Array): UpdateSeq {
+        return UpdateSeq.deserialize(bytes);
+    }
 }
 export class Ident extends pb_1.Message {
     constructor(data?: any[] | {
@@ -718,61 +910,92 @@ export class Ident extends pb_1.Message {
         player_id?: number;
     }) {
         super();
-        pb_1.Message.initialize(this, Array.isArray(data) && data, 0, -1, [], null);
+        pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
         if (!Array.isArray(data) && typeof data == "object") {
-            this.id = data.id;
-            this.type = data.type;
-            this.i_ndx = data.i_ndx;
-            this.m_ndx = data.m_ndx;
-            this.display = data.display;
-            this.player_id = data.player_id;
+            if ("id" in data) {
+                this.id = data.id;
+            }
+            if ("type" in data) {
+                this.type = data.type;
+            }
+            if ("i_ndx" in data) {
+                this.i_ndx = data.i_ndx;
+            }
+            if ("m_ndx" in data) {
+                this.m_ndx = data.m_ndx;
+            }
+            if ("display" in data) {
+                this.display = data.display;
+            }
+            if ("player_id" in data) {
+                this.player_id = data.player_id;
+            }
         }
     }
-    get id(): number {
-        return pb_1.Message.getFieldWithDefault(this, 1, undefined) as number;
+    get id() {
+        return pb_1.Message.getField(this, 1) as number;
     }
     set id(value: number) {
         pb_1.Message.setField(this, 1, value);
     }
-    get type(): string {
-        return pb_1.Message.getFieldWithDefault(this, 2, undefined) as string;
+    get type() {
+        return pb_1.Message.getField(this, 2) as string;
     }
     set type(value: string) {
         pb_1.Message.setField(this, 2, value);
     }
-    get i_ndx(): number {
-        return pb_1.Message.getFieldWithDefault(this, 3, undefined) as number;
+    get i_ndx() {
+        return pb_1.Message.getField(this, 3) as number;
     }
     set i_ndx(value: number) {
         pb_1.Message.setField(this, 3, value);
     }
-    get m_ndx(): number {
-        return pb_1.Message.getFieldWithDefault(this, 4, undefined) as number;
+    get m_ndx() {
+        return pb_1.Message.getField(this, 4) as number;
     }
     set m_ndx(value: number) {
         pb_1.Message.setField(this, 4, value);
     }
-    get display(): string {
-        return pb_1.Message.getFieldWithDefault(this, 8, undefined) as string;
+    get display() {
+        return pb_1.Message.getField(this, 8) as string;
     }
     set display(value: string) {
         pb_1.Message.setField(this, 8, value);
     }
-    get player_id(): number {
-        return pb_1.Message.getFieldWithDefault(this, 10, undefined) as number;
+    get player_id() {
+        return pb_1.Message.getField(this, 10) as number;
     }
     set player_id(value: number) {
         pb_1.Message.setField(this, 10, value);
     }
     toObject() {
-        return {
-            id: this.id,
-            type: this.type,
-            i_ndx: this.i_ndx,
-            m_ndx: this.m_ndx,
-            display: this.display,
-            player_id: this.player_id
-        };
+        var data: {
+            id?: number;
+            type?: string;
+            i_ndx?: number;
+            m_ndx?: number;
+            display?: string;
+            player_id?: number;
+        } = {};
+        if (this.id != null) {
+            data.id = this.id;
+        }
+        if (this.type != null) {
+            data.type = this.type;
+        }
+        if (this.i_ndx != null) {
+            data.i_ndx = this.i_ndx;
+        }
+        if (this.m_ndx != null) {
+            data.m_ndx = this.m_ndx;
+        }
+        if (this.display != null) {
+            data.display = this.display;
+        }
+        if (this.player_id != null) {
+            data.player_id = this.player_id;
+        }
+        return data;
     }
     serialize(w?: pb_1.BinaryWriter): Uint8Array | undefined {
         const writer = w || new pb_1.BinaryWriter();
@@ -790,11 +1013,9 @@ export class Ident extends pb_1.Message {
             writer.writeUint32(10, this.player_id);
         if (!w)
             return writer.getResultBuffer();
-        return undefined;
     }
-    serializeBinary(): Uint8Array { return this.serialize(); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Ident {
-        const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Ident();
+        const reader = bytes instanceof Uint8Array ? new pb_1.BinaryReader(bytes) : bytes, message = new Ident();
         while (reader.nextField()) {
             if (reader.isEndGroup())
                 break;
@@ -822,6 +1043,12 @@ export class Ident extends pb_1.Message {
         }
         return message;
     }
+    serializeBinary(): Uint8Array {
+        return this.serialize();
+    }
+    static deserializeBinary(bytes: Uint8Array): Ident {
+        return Ident.deserialize(bytes);
+    }
 }
 export class Add extends pb_1.Message {
     constructor(data?: any[] | {
@@ -829,29 +1056,40 @@ export class Add extends pb_1.Message {
         update?: Update;
     }) {
         super();
-        pb_1.Message.initialize(this, Array.isArray(data) && data, 0, -1, [], null);
+        pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
         if (!Array.isArray(data) && typeof data == "object") {
-            this.ident = data.ident;
-            this.update = data.update;
+            if ("ident" in data) {
+                this.ident = data.ident;
+            }
+            if ("update" in data) {
+                this.update = data.update;
+            }
         }
     }
-    get ident(): Ident {
+    get ident() {
         return pb_1.Message.getWrapperField(this, Ident, 1) as Ident;
     }
     set ident(value: Ident) {
         pb_1.Message.setWrapperField(this, 1, value);
     }
-    get update(): Update {
+    get update() {
         return pb_1.Message.getWrapperField(this, Update, 2) as Update;
     }
     set update(value: Update) {
         pb_1.Message.setWrapperField(this, 2, value);
     }
     toObject() {
-        return {
-            ident: this.ident && this.ident.toObject(),
-            update: this.update && this.update.toObject()
-        };
+        var data: {
+            ident?: ReturnType<typeof Ident.prototype.toObject>;
+            update?: ReturnType<typeof Update.prototype.toObject>;
+        } = {};
+        if (this.ident != null) {
+            data.ident = this.ident.toObject();
+        }
+        if (this.update != null) {
+            data.update = this.update.toObject();
+        }
+        return data;
     }
     serialize(w?: pb_1.BinaryWriter): Uint8Array | undefined {
         const writer = w || new pb_1.BinaryWriter();
@@ -861,11 +1099,9 @@ export class Add extends pb_1.Message {
             writer.writeMessage(2, this.update, () => this.update.serialize(writer));
         if (!w)
             return writer.getResultBuffer();
-        return undefined;
     }
-    serializeBinary(): Uint8Array { return this.serialize(); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Add {
-        const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Add();
+        const reader = bytes instanceof Uint8Array ? new pb_1.BinaryReader(bytes) : bytes, message = new Add();
         while (reader.nextField()) {
             if (reader.isEndGroup())
                 break;
@@ -881,27 +1117,36 @@ export class Add extends pb_1.Message {
         }
         return message;
     }
+    serializeBinary(): Uint8Array {
+        return this.serialize();
+    }
+    static deserializeBinary(bytes: Uint8Array): Add {
+        return Add.deserialize(bytes);
+    }
 }
 export class AddSeq extends pb_1.Message {
     constructor(data?: any[] | {
-        adds?: Add[];
+        adds: Add[];
     }) {
         super();
-        pb_1.Message.initialize(this, Array.isArray(data) && data, 0, -1, [1], null);
+        pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [1], []);
         if (!Array.isArray(data) && typeof data == "object") {
             this.adds = data.adds;
         }
     }
-    get adds(): Add[] {
+    get adds() {
         return pb_1.Message.getRepeatedWrapperField(this, Add, 1) as Add[];
     }
     set adds(value: Add[]) {
         pb_1.Message.setRepeatedWrapperField(this, 1, value);
     }
     toObject() {
-        return {
+        var data: {
+            adds: ReturnType<typeof Add.prototype.toObject>[];
+        } = {
             adds: this.adds.map((item: Add) => item.toObject())
         };
+        return data;
     }
     serialize(w?: pb_1.BinaryWriter): Uint8Array | undefined {
         const writer = w || new pb_1.BinaryWriter();
@@ -909,11 +1154,9 @@ export class AddSeq extends pb_1.Message {
             writer.writeRepeatedMessage(1, this.adds, (item: Add) => item.serialize(writer));
         if (!w)
             return writer.getResultBuffer();
-        return undefined;
     }
-    serializeBinary(): Uint8Array { return this.serialize(); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): AddSeq {
-        const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new AddSeq();
+        const reader = bytes instanceof Uint8Array ? new pb_1.BinaryReader(bytes) : bytes, message = new AddSeq();
         while (reader.nextField()) {
             if (reader.isEndGroup())
                 break;
@@ -926,27 +1169,39 @@ export class AddSeq extends pb_1.Message {
         }
         return message;
     }
+    serializeBinary(): Uint8Array {
+        return this.serialize();
+    }
+    static deserializeBinary(bytes: Uint8Array): AddSeq {
+        return AddSeq.deserialize(bytes);
+    }
 }
 export class Del extends pb_1.Message {
     constructor(data?: any[] | {
         id?: number;
     }) {
         super();
-        pb_1.Message.initialize(this, Array.isArray(data) && data, 0, -1, [], null);
+        pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
         if (!Array.isArray(data) && typeof data == "object") {
-            this.id = data.id;
+            if ("id" in data) {
+                this.id = data.id;
+            }
         }
     }
-    get id(): number {
-        return pb_1.Message.getFieldWithDefault(this, 2, undefined) as number;
+    get id() {
+        return pb_1.Message.getField(this, 2) as number;
     }
     set id(value: number) {
         pb_1.Message.setField(this, 2, value);
     }
     toObject() {
-        return {
-            id: this.id
-        };
+        var data: {
+            id?: number;
+        } = {};
+        if (this.id != null) {
+            data.id = this.id;
+        }
+        return data;
     }
     serialize(w?: pb_1.BinaryWriter): Uint8Array | undefined {
         const writer = w || new pb_1.BinaryWriter();
@@ -954,11 +1209,9 @@ export class Del extends pb_1.Message {
             writer.writeUint32(2, this.id);
         if (!w)
             return writer.getResultBuffer();
-        return undefined;
     }
-    serializeBinary(): Uint8Array { return this.serialize(); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Del {
-        const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Del();
+        const reader = bytes instanceof Uint8Array ? new pb_1.BinaryReader(bytes) : bytes, message = new Del();
         while (reader.nextField()) {
             if (reader.isEndGroup())
                 break;
@@ -971,27 +1224,36 @@ export class Del extends pb_1.Message {
         }
         return message;
     }
+    serializeBinary(): Uint8Array {
+        return this.serialize();
+    }
+    static deserializeBinary(bytes: Uint8Array): Del {
+        return Del.deserialize(bytes);
+    }
 }
 export class DelSeq extends pb_1.Message {
     constructor(data?: any[] | {
-        dels?: Del[];
+        dels: Del[];
     }) {
         super();
-        pb_1.Message.initialize(this, Array.isArray(data) && data, 0, -1, [1], null);
+        pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [1], []);
         if (!Array.isArray(data) && typeof data == "object") {
             this.dels = data.dels;
         }
     }
-    get dels(): Del[] {
+    get dels() {
         return pb_1.Message.getRepeatedWrapperField(this, Del, 1) as Del[];
     }
     set dels(value: Del[]) {
         pb_1.Message.setRepeatedWrapperField(this, 1, value);
     }
     toObject() {
-        return {
+        var data: {
+            dels: ReturnType<typeof Del.prototype.toObject>[];
+        } = {
             dels: this.dels.map((item: Del) => item.toObject())
         };
+        return data;
     }
     serialize(w?: pb_1.BinaryWriter): Uint8Array | undefined {
         const writer = w || new pb_1.BinaryWriter();
@@ -999,11 +1261,9 @@ export class DelSeq extends pb_1.Message {
             writer.writeRepeatedMessage(1, this.dels, (item: Del) => item.serialize(writer));
         if (!w)
             return writer.getResultBuffer();
-        return undefined;
     }
-    serializeBinary(): Uint8Array { return this.serialize(); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): DelSeq {
-        const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new DelSeq();
+        const reader = bytes instanceof Uint8Array ? new pb_1.BinaryReader(bytes) : bytes, message = new DelSeq();
         while (reader.nextField()) {
             if (reader.isEndGroup())
                 break;
@@ -1016,6 +1276,12 @@ export class DelSeq extends pb_1.Message {
         }
         return message;
     }
+    serializeBinary(): Uint8Array {
+        return this.serialize();
+    }
+    static deserializeBinary(bytes: Uint8Array): DelSeq {
+        return DelSeq.deserialize(bytes);
+    }
 }
 export class TerRunX extends pb_1.Message {
     constructor(data?: any[] | {
@@ -1023,29 +1289,40 @@ export class TerRunX extends pb_1.Message {
         ztv?: number;
     }) {
         super();
-        pb_1.Message.initialize(this, Array.isArray(data) && data, 0, -1, [], null);
+        pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
         if (!Array.isArray(data) && typeof data == "object") {
-            this.dx = data.dx;
-            this.ztv = data.ztv;
+            if ("dx" in data) {
+                this.dx = data.dx;
+            }
+            if ("ztv" in data) {
+                this.ztv = data.ztv;
+            }
         }
     }
-    get dx(): number {
-        return pb_1.Message.getFieldWithDefault(this, 2, undefined) as number;
+    get dx() {
+        return pb_1.Message.getField(this, 2) as number;
     }
     set dx(value: number) {
         pb_1.Message.setField(this, 2, value);
     }
-    get ztv(): number {
-        return pb_1.Message.getFieldWithDefault(this, 3, undefined) as number;
+    get ztv() {
+        return pb_1.Message.getField(this, 3) as number;
     }
     set ztv(value: number) {
         pb_1.Message.setField(this, 3, value);
     }
     toObject() {
-        return {
-            dx: this.dx,
-            ztv: this.ztv
-        };
+        var data: {
+            dx?: number;
+            ztv?: number;
+        } = {};
+        if (this.dx != null) {
+            data.dx = this.dx;
+        }
+        if (this.ztv != null) {
+            data.ztv = this.ztv;
+        }
+        return data;
     }
     serialize(w?: pb_1.BinaryWriter): Uint8Array | undefined {
         const writer = w || new pb_1.BinaryWriter();
@@ -1055,11 +1332,9 @@ export class TerRunX extends pb_1.Message {
             writer.writeInt32(3, this.ztv);
         if (!w)
             return writer.getResultBuffer();
-        return undefined;
     }
-    serializeBinary(): Uint8Array { return this.serialize(); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): TerRunX {
-        const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new TerRunX();
+        const reader = bytes instanceof Uint8Array ? new pb_1.BinaryReader(bytes) : bytes, message = new TerRunX();
         while (reader.nextField()) {
             if (reader.isEndGroup())
                 break;
@@ -1075,36 +1350,50 @@ export class TerRunX extends pb_1.Message {
         }
         return message;
     }
+    serializeBinary(): Uint8Array {
+        return this.serialize();
+    }
+    static deserializeBinary(bytes: Uint8Array): TerRunX {
+        return TerRunX.deserialize(bytes);
+    }
 }
 export class TerRowY extends pb_1.Message {
     constructor(data?: any[] | {
         loc?: Iloc;
-        runx?: TerRunX[];
+        runx: TerRunX[];
     }) {
         super();
-        pb_1.Message.initialize(this, Array.isArray(data) && data, 0, -1, [2], null);
+        pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [2], []);
         if (!Array.isArray(data) && typeof data == "object") {
-            this.loc = data.loc;
+            if ("loc" in data) {
+                this.loc = data.loc;
+            }
             this.runx = data.runx;
         }
     }
-    get loc(): Iloc {
+    get loc() {
         return pb_1.Message.getWrapperField(this, Iloc, 1) as Iloc;
     }
     set loc(value: Iloc) {
         pb_1.Message.setWrapperField(this, 1, value);
     }
-    get runx(): TerRunX[] {
+    get runx() {
         return pb_1.Message.getRepeatedWrapperField(this, TerRunX, 2) as TerRunX[];
     }
     set runx(value: TerRunX[]) {
         pb_1.Message.setRepeatedWrapperField(this, 2, value);
     }
     toObject() {
-        return {
-            loc: this.loc && this.loc.toObject(),
+        var data: {
+            loc?: ReturnType<typeof Iloc.prototype.toObject>;
+            runx: ReturnType<typeof TerRunX.prototype.toObject>[];
+        } = {
             runx: this.runx.map((item: TerRunX) => item.toObject())
         };
+        if (this.loc != null) {
+            data.loc = this.loc.toObject();
+        }
+        return data;
     }
     serialize(w?: pb_1.BinaryWriter): Uint8Array | undefined {
         const writer = w || new pb_1.BinaryWriter();
@@ -1114,11 +1403,9 @@ export class TerRowY extends pb_1.Message {
             writer.writeRepeatedMessage(2, this.runx, (item: TerRunX) => item.serialize(writer));
         if (!w)
             return writer.getResultBuffer();
-        return undefined;
     }
-    serializeBinary(): Uint8Array { return this.serialize(); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): TerRowY {
-        const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new TerRowY();
+        const reader = bytes instanceof Uint8Array ? new pb_1.BinaryReader(bytes) : bytes, message = new TerRowY();
         while (reader.nextField()) {
             if (reader.isEndGroup())
                 break;
@@ -1134,27 +1421,36 @@ export class TerRowY extends pb_1.Message {
         }
         return message;
     }
+    serializeBinary(): Uint8Array {
+        return this.serialize();
+    }
+    static deserializeBinary(bytes: Uint8Array): TerRowY {
+        return TerRowY.deserialize(bytes);
+    }
 }
 export class RevealSeq extends pb_1.Message {
     constructor(data?: any[] | {
-        rowy?: TerRowY[];
+        rowy: TerRowY[];
     }) {
         super();
-        pb_1.Message.initialize(this, Array.isArray(data) && data, 0, -1, [1], null);
+        pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [1], []);
         if (!Array.isArray(data) && typeof data == "object") {
             this.rowy = data.rowy;
         }
     }
-    get rowy(): TerRowY[] {
+    get rowy() {
         return pb_1.Message.getRepeatedWrapperField(this, TerRowY, 1) as TerRowY[];
     }
     set rowy(value: TerRowY[]) {
         pb_1.Message.setRepeatedWrapperField(this, 1, value);
     }
     toObject() {
-        return {
+        var data: {
+            rowy: ReturnType<typeof TerRowY.prototype.toObject>[];
+        } = {
             rowy: this.rowy.map((item: TerRowY) => item.toObject())
         };
+        return data;
     }
     serialize(w?: pb_1.BinaryWriter): Uint8Array | undefined {
         const writer = w || new pb_1.BinaryWriter();
@@ -1162,11 +1458,9 @@ export class RevealSeq extends pb_1.Message {
             writer.writeRepeatedMessage(1, this.rowy, (item: TerRowY) => item.serialize(writer));
         if (!w)
             return writer.getResultBuffer();
-        return undefined;
     }
-    serializeBinary(): Uint8Array { return this.serialize(); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): RevealSeq {
-        const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new RevealSeq();
+        const reader = bytes instanceof Uint8Array ? new pb_1.BinaryReader(bytes) : bytes, message = new RevealSeq();
         while (reader.nextField()) {
             if (reader.isEndGroup())
                 break;
@@ -1178,6 +1472,12 @@ export class RevealSeq extends pb_1.Message {
             }
         }
         return message;
+    }
+    serializeBinary(): Uint8Array {
+        return this.serialize();
+    }
+    static deserializeBinary(bytes: Uint8Array): RevealSeq {
+        return RevealSeq.deserialize(bytes);
     }
 }
 export class SubImage extends pb_1.Message {
@@ -1191,69 +1491,105 @@ export class SubImage extends pb_1.Message {
         alt_url?: string;
     }) {
         super();
-        pb_1.Message.initialize(this, Array.isArray(data) && data, 0, -1, [], null);
+        pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
         if (!Array.isArray(data) && typeof data == "object") {
-            this.y0 = data.y0;
-            this.x0 = data.x0;
-            this.y_px = data.y_px;
-            this.x_px = data.x_px;
-            this.y_off = data.y_off;
-            this.x_off = data.x_off;
-            this.alt_url = data.alt_url;
+            if ("y0" in data) {
+                this.y0 = data.y0;
+            }
+            if ("x0" in data) {
+                this.x0 = data.x0;
+            }
+            if ("y_px" in data) {
+                this.y_px = data.y_px;
+            }
+            if ("x_px" in data) {
+                this.x_px = data.x_px;
+            }
+            if ("y_off" in data) {
+                this.y_off = data.y_off;
+            }
+            if ("x_off" in data) {
+                this.x_off = data.x_off;
+            }
+            if ("alt_url" in data) {
+                this.alt_url = data.alt_url;
+            }
         }
     }
-    get y0(): number {
-        return pb_1.Message.getFieldWithDefault(this, 2, undefined) as number;
+    get y0() {
+        return pb_1.Message.getField(this, 2) as number;
     }
     set y0(value: number) {
         pb_1.Message.setField(this, 2, value);
     }
-    get x0(): number {
-        return pb_1.Message.getFieldWithDefault(this, 3, undefined) as number;
+    get x0() {
+        return pb_1.Message.getField(this, 3) as number;
     }
     set x0(value: number) {
         pb_1.Message.setField(this, 3, value);
     }
-    get y_px(): number {
-        return pb_1.Message.getFieldWithDefault(this, 4, undefined) as number;
+    get y_px() {
+        return pb_1.Message.getField(this, 4) as number;
     }
     set y_px(value: number) {
         pb_1.Message.setField(this, 4, value);
     }
-    get x_px(): number {
-        return pb_1.Message.getFieldWithDefault(this, 5, undefined) as number;
+    get x_px() {
+        return pb_1.Message.getField(this, 5) as number;
     }
     set x_px(value: number) {
         pb_1.Message.setField(this, 5, value);
     }
-    get y_off(): number {
-        return pb_1.Message.getFieldWithDefault(this, 6, undefined) as number;
+    get y_off() {
+        return pb_1.Message.getField(this, 6) as number;
     }
     set y_off(value: number) {
         pb_1.Message.setField(this, 6, value);
     }
-    get x_off(): number {
-        return pb_1.Message.getFieldWithDefault(this, 7, undefined) as number;
+    get x_off() {
+        return pb_1.Message.getField(this, 7) as number;
     }
     set x_off(value: number) {
         pb_1.Message.setField(this, 7, value);
     }
-    get alt_url(): string {
-        return pb_1.Message.getFieldWithDefault(this, 8, undefined) as string;
+    get alt_url() {
+        return pb_1.Message.getField(this, 8) as string;
     }
     set alt_url(value: string) {
         pb_1.Message.setField(this, 8, value);
     }
     toObject() {
-        return {
-            y0: this.y0,
-            x0: this.x0,
-            y_px: this.y_px,
-            x_px: this.x_px,
-            y_off: this.y_off,
-            x_off: this.x_off,
-            alt_url: this.alt_url
-        };
+        var data: {
+            y0?: number;
+            x0?: number;
+            y_px?: number;
+            x_px?: number;
+            y_off?: number;
+            x_off?: number;
+            alt_url?: string;
+        } = {};
+        if (this.y0 != null) {
+            data.y0 = this.y0;
+        }
+        if (this.x0 != null) {
+            data.x0 = this.x0;
+        }
+        if (this.y_px != null) {
+            data.y_px = this.y_px;
+        }
+        if (this.x_px != null) {
+            data.x_px = this.x_px;
+        }
+        if (this.y_off != null) {
+            data.y_off = this.y_off;
+        }
+        if (this.x_off != null) {
+            data.x_off = this.x_off;
+        }
+        if (this.alt_url != null) {
+            data.alt_url = this.alt_url;
+        }
+        return data;
     }
     serialize(w?: pb_1.BinaryWriter): Uint8Array | undefined {
         const writer = w || new pb_1.BinaryWriter();
@@ -1273,11 +1609,9 @@ export class SubImage extends pb_1.Message {
             writer.writeString(8, this.alt_url);
         if (!w)
             return writer.getResultBuffer();
-        return undefined;
     }
-    serializeBinary(): Uint8Array { return this.serialize(); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): SubImage {
-        const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new SubImage();
+        const reader = bytes instanceof Uint8Array ? new pb_1.BinaryReader(bytes) : bytes, message = new SubImage();
         while (reader.nextField()) {
             if (reader.isEndGroup())
                 break;
@@ -1308,6 +1642,12 @@ export class SubImage extends pb_1.Message {
         }
         return message;
     }
+    serializeBinary(): Uint8Array {
+        return this.serialize();
+    }
+    static deserializeBinary(bytes: Uint8Array): SubImage {
+        return SubImage.deserialize(bytes);
+    }
 }
 export class ImageAry extends pb_1.Message {
     constructor(data?: any[] | {
@@ -1317,45 +1657,66 @@ export class ImageAry extends pb_1.Message {
         url?: string;
     }) {
         super();
-        pb_1.Message.initialize(this, Array.isArray(data) && data, 0, -1, [], null);
+        pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
         if (!Array.isArray(data) && typeof data == "object") {
-            this.npixels = data.npixels;
-            this.nrows = data.nrows;
-            this.ncols = data.ncols;
-            this.url = data.url;
+            if ("npixels" in data) {
+                this.npixels = data.npixels;
+            }
+            if ("nrows" in data) {
+                this.nrows = data.nrows;
+            }
+            if ("ncols" in data) {
+                this.ncols = data.ncols;
+            }
+            if ("url" in data) {
+                this.url = data.url;
+            }
         }
     }
-    get npixels(): number {
-        return pb_1.Message.getFieldWithDefault(this, 1, undefined) as number;
+    get npixels() {
+        return pb_1.Message.getField(this, 1) as number;
     }
     set npixels(value: number) {
         pb_1.Message.setField(this, 1, value);
     }
-    get nrows(): number {
-        return pb_1.Message.getFieldWithDefault(this, 2, undefined) as number;
+    get nrows() {
+        return pb_1.Message.getField(this, 2) as number;
     }
     set nrows(value: number) {
         pb_1.Message.setField(this, 2, value);
     }
-    get ncols(): number {
-        return pb_1.Message.getFieldWithDefault(this, 3, undefined) as number;
+    get ncols() {
+        return pb_1.Message.getField(this, 3) as number;
     }
     set ncols(value: number) {
         pb_1.Message.setField(this, 3, value);
     }
-    get url(): string {
-        return pb_1.Message.getFieldWithDefault(this, 4, undefined) as string;
+    get url() {
+        return pb_1.Message.getField(this, 4) as string;
     }
     set url(value: string) {
         pb_1.Message.setField(this, 4, value);
     }
     toObject() {
-        return {
-            npixels: this.npixels,
-            nrows: this.nrows,
-            ncols: this.ncols,
-            url: this.url
-        };
+        var data: {
+            npixels?: number;
+            nrows?: number;
+            ncols?: number;
+            url?: string;
+        } = {};
+        if (this.npixels != null) {
+            data.npixels = this.npixels;
+        }
+        if (this.nrows != null) {
+            data.nrows = this.nrows;
+        }
+        if (this.ncols != null) {
+            data.ncols = this.ncols;
+        }
+        if (this.url != null) {
+            data.url = this.url;
+        }
+        return data;
     }
     serialize(w?: pb_1.BinaryWriter): Uint8Array | undefined {
         const writer = w || new pb_1.BinaryWriter();
@@ -1369,11 +1730,9 @@ export class ImageAry extends pb_1.Message {
             writer.writeString(4, this.url);
         if (!w)
             return writer.getResultBuffer();
-        return undefined;
     }
-    serializeBinary(): Uint8Array { return this.serialize(); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ImageAry {
-        const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new ImageAry();
+        const reader = bytes instanceof Uint8Array ? new pb_1.BinaryReader(bytes) : bytes, message = new ImageAry();
         while (reader.nextField()) {
             if (reader.isEndGroup())
                 break;
@@ -1395,6 +1754,12 @@ export class ImageAry extends pb_1.Message {
         }
         return message;
     }
+    serializeBinary(): Uint8Array {
+        return this.serialize();
+    }
+    static deserializeBinary(bytes: Uint8Array): ImageAry {
+        return ImageAry.deserialize(bytes);
+    }
 }
 export class TerImage extends pb_1.Message {
     constructor(data?: any[] | {
@@ -1403,37 +1768,53 @@ export class TerImage extends pb_1.Message {
         sub_image?: SubImage;
     }) {
         super();
-        pb_1.Message.initialize(this, Array.isArray(data) && data, 0, -1, [], null);
+        pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
         if (!Array.isArray(data) && typeof data == "object") {
-            this.tvid = data.tvid;
-            this.name = data.name;
-            this.sub_image = data.sub_image;
+            if ("tvid" in data) {
+                this.tvid = data.tvid;
+            }
+            if ("name" in data) {
+                this.name = data.name;
+            }
+            if ("sub_image" in data) {
+                this.sub_image = data.sub_image;
+            }
         }
     }
-    get tvid(): number {
-        return pb_1.Message.getFieldWithDefault(this, 1, undefined) as number;
+    get tvid() {
+        return pb_1.Message.getField(this, 1) as number;
     }
     set tvid(value: number) {
         pb_1.Message.setField(this, 1, value);
     }
-    get name(): string {
-        return pb_1.Message.getFieldWithDefault(this, 2, undefined) as string;
+    get name() {
+        return pb_1.Message.getField(this, 2) as string;
     }
     set name(value: string) {
         pb_1.Message.setField(this, 2, value);
     }
-    get sub_image(): SubImage {
+    get sub_image() {
         return pb_1.Message.getWrapperField(this, SubImage, 3) as SubImage;
     }
     set sub_image(value: SubImage) {
         pb_1.Message.setWrapperField(this, 3, value);
     }
     toObject() {
-        return {
-            tvid: this.tvid,
-            name: this.name,
-            sub_image: this.sub_image && this.sub_image.toObject()
-        };
+        var data: {
+            tvid?: number;
+            name?: string;
+            sub_image?: ReturnType<typeof SubImage.prototype.toObject>;
+        } = {};
+        if (this.tvid != null) {
+            data.tvid = this.tvid;
+        }
+        if (this.name != null) {
+            data.name = this.name;
+        }
+        if (this.sub_image != null) {
+            data.sub_image = this.sub_image.toObject();
+        }
+        return data;
     }
     serialize(w?: pb_1.BinaryWriter): Uint8Array | undefined {
         const writer = w || new pb_1.BinaryWriter();
@@ -1445,11 +1826,9 @@ export class TerImage extends pb_1.Message {
             writer.writeMessage(3, this.sub_image, () => this.sub_image.serialize(writer));
         if (!w)
             return writer.getResultBuffer();
-        return undefined;
     }
-    serializeBinary(): Uint8Array { return this.serialize(); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): TerImage {
-        const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new TerImage();
+        const reader = bytes instanceof Uint8Array ? new pb_1.BinaryReader(bytes) : bytes, message = new TerImage();
         while (reader.nextField()) {
             if (reader.isEndGroup())
                 break;
@@ -1468,6 +1847,12 @@ export class TerImage extends pb_1.Message {
         }
         return message;
     }
+    serializeBinary(): Uint8Array {
+        return this.serialize();
+    }
+    static deserializeBinary(bytes: Uint8Array): TerImage {
+        return TerImage.deserialize(bytes);
+    }
 }
 export class TerStats extends pb_1.Message {
     constructor(data?: any[] | {
@@ -1475,29 +1860,40 @@ export class TerStats extends pb_1.Message {
         scoutablity?: number;
     }) {
         super();
-        pb_1.Message.initialize(this, Array.isArray(data) && data, 0, -1, [], null);
+        pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
         if (!Array.isArray(data) && typeof data == "object") {
-            this.visibilty = data.visibilty;
-            this.scoutablity = data.scoutablity;
+            if ("visibilty" in data) {
+                this.visibilty = data.visibilty;
+            }
+            if ("scoutablity" in data) {
+                this.scoutablity = data.scoutablity;
+            }
         }
     }
-    get visibilty(): number {
-        return pb_1.Message.getFieldWithDefault(this, 1, undefined) as number;
+    get visibilty() {
+        return pb_1.Message.getField(this, 1) as number;
     }
     set visibilty(value: number) {
         pb_1.Message.setField(this, 1, value);
     }
-    get scoutablity(): number {
-        return pb_1.Message.getFieldWithDefault(this, 2, undefined) as number;
+    get scoutablity() {
+        return pb_1.Message.getField(this, 2) as number;
     }
     set scoutablity(value: number) {
         pb_1.Message.setField(this, 2, value);
     }
     toObject() {
-        return {
-            visibilty: this.visibilty,
-            scoutablity: this.scoutablity
-        };
+        var data: {
+            visibilty?: number;
+            scoutablity?: number;
+        } = {};
+        if (this.visibilty != null) {
+            data.visibilty = this.visibilty;
+        }
+        if (this.scoutablity != null) {
+            data.scoutablity = this.scoutablity;
+        }
+        return data;
     }
     serialize(w?: pb_1.BinaryWriter): Uint8Array | undefined {
         const writer = w || new pb_1.BinaryWriter();
@@ -1507,11 +1903,9 @@ export class TerStats extends pb_1.Message {
             writer.writeFloat(2, this.scoutablity);
         if (!w)
             return writer.getResultBuffer();
-        return undefined;
     }
-    serializeBinary(): Uint8Array { return this.serialize(); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): TerStats {
-        const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new TerStats();
+        const reader = bytes instanceof Uint8Array ? new pb_1.BinaryReader(bytes) : bytes, message = new TerStats();
         while (reader.nextField()) {
             if (reader.isEndGroup())
                 break;
@@ -1527,27 +1921,39 @@ export class TerStats extends pb_1.Message {
         }
         return message;
     }
+    serializeBinary(): Uint8Array {
+        return this.serialize();
+    }
+    static deserializeBinary(bytes: Uint8Array): TerStats {
+        return TerStats.deserialize(bytes);
+    }
 }
 export class RoadStats extends pb_1.Message {
     constructor(data?: any[] | {
         quality?: number;
     }) {
         super();
-        pb_1.Message.initialize(this, Array.isArray(data) && data, 0, -1, [], null);
+        pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
         if (!Array.isArray(data) && typeof data == "object") {
-            this.quality = data.quality;
+            if ("quality" in data) {
+                this.quality = data.quality;
+            }
         }
     }
-    get quality(): number {
-        return pb_1.Message.getFieldWithDefault(this, 1, undefined) as number;
+    get quality() {
+        return pb_1.Message.getField(this, 1) as number;
     }
     set quality(value: number) {
         pb_1.Message.setField(this, 1, value);
     }
     toObject() {
-        return {
-            quality: this.quality
-        };
+        var data: {
+            quality?: number;
+        } = {};
+        if (this.quality != null) {
+            data.quality = this.quality;
+        }
+        return data;
     }
     serialize(w?: pb_1.BinaryWriter): Uint8Array | undefined {
         const writer = w || new pb_1.BinaryWriter();
@@ -1555,11 +1961,9 @@ export class RoadStats extends pb_1.Message {
             writer.writeFloat(1, this.quality);
         if (!w)
             return writer.getResultBuffer();
-        return undefined;
     }
-    serializeBinary(): Uint8Array { return this.serialize(); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): RoadStats {
-        const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new RoadStats();
+        const reader = bytes instanceof Uint8Array ? new pb_1.BinaryReader(bytes) : bytes, message = new RoadStats();
         while (reader.nextField()) {
             if (reader.isEndGroup())
                 break;
@@ -1572,54 +1976,70 @@ export class RoadStats extends pb_1.Message {
         }
         return message;
     }
+    serializeBinary(): Uint8Array {
+        return this.serialize();
+    }
+    static deserializeBinary(bytes: Uint8Array): RoadStats {
+        return RoadStats.deserialize(bytes);
+    }
 }
 export class TerImageSeq extends pb_1.Message {
     constructor(data?: any[] | {
         comp_image?: ImageAry;
-        tmag?: TerImage[];
-        zval?: number[];
-        indx?: number[];
+        tmag: TerImage[];
+        zval: number[];
+        indx: number[];
     }) {
         super();
-        pb_1.Message.initialize(this, Array.isArray(data) && data, 0, -1, [2, 3, 4], null);
+        pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [2, 3, 4], []);
         if (!Array.isArray(data) && typeof data == "object") {
-            this.comp_image = data.comp_image;
+            if ("comp_image" in data) {
+                this.comp_image = data.comp_image;
+            }
             this.tmag = data.tmag;
             this.zval = data.zval;
             this.indx = data.indx;
         }
     }
-    get comp_image(): ImageAry {
+    get comp_image() {
         return pb_1.Message.getWrapperField(this, ImageAry, 1) as ImageAry;
     }
     set comp_image(value: ImageAry) {
         pb_1.Message.setWrapperField(this, 1, value);
     }
-    get tmag(): TerImage[] {
+    get tmag() {
         return pb_1.Message.getRepeatedWrapperField(this, TerImage, 2) as TerImage[];
     }
     set tmag(value: TerImage[]) {
         pb_1.Message.setRepeatedWrapperField(this, 2, value);
     }
-    get zval(): number[] {
+    get zval() {
         return pb_1.Message.getField(this, 3) as number[];
     }
     set zval(value: number[]) {
         pb_1.Message.setField(this, 3, value);
     }
-    get indx(): number[] {
+    get indx() {
         return pb_1.Message.getField(this, 4) as number[];
     }
     set indx(value: number[]) {
         pb_1.Message.setField(this, 4, value);
     }
     toObject() {
-        return {
-            comp_image: this.comp_image && this.comp_image.toObject(),
+        var data: {
+            comp_image?: ReturnType<typeof ImageAry.prototype.toObject>;
+            tmag: ReturnType<typeof TerImage.prototype.toObject>[];
+            zval: number[];
+            indx: number[];
+        } = {
             tmag: this.tmag.map((item: TerImage) => item.toObject()),
             zval: this.zval,
             indx: this.indx
         };
+        if (this.comp_image != null) {
+            data.comp_image = this.comp_image.toObject();
+        }
+        return data;
     }
     serialize(w?: pb_1.BinaryWriter): Uint8Array | undefined {
         const writer = w || new pb_1.BinaryWriter();
@@ -1633,11 +2053,9 @@ export class TerImageSeq extends pb_1.Message {
             writer.writePackedInt32(4, this.indx);
         if (!w)
             return writer.getResultBuffer();
-        return undefined;
     }
-    serializeBinary(): Uint8Array { return this.serialize(); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): TerImageSeq {
-        const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new TerImageSeq();
+        const reader = bytes instanceof Uint8Array ? new pb_1.BinaryReader(bytes) : bytes, message = new TerImageSeq();
         while (reader.nextField()) {
             if (reader.isEndGroup())
                 break;
@@ -1659,6 +2077,12 @@ export class TerImageSeq extends pb_1.Message {
         }
         return message;
     }
+    serializeBinary(): Uint8Array {
+        return this.serialize();
+    }
+    static deserializeBinary(bytes: Uint8Array): TerImageSeq {
+        return TerImageSeq.deserialize(bytes);
+    }
 }
 export class ModImage extends pb_1.Message {
     constructor(data?: any[] | {
@@ -1668,45 +2092,66 @@ export class ModImage extends pb_1.Message {
         p_color?: number;
     }) {
         super();
-        pb_1.Message.initialize(this, Array.isArray(data) && data, 0, -1, [], null);
+        pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], []);
         if (!Array.isArray(data) && typeof data == "object") {
-            this.mndx = data.mndx;
-            this.name = data.name;
-            this.sub_image = data.sub_image;
-            this.p_color = data.p_color;
+            if ("mndx" in data) {
+                this.mndx = data.mndx;
+            }
+            if ("name" in data) {
+                this.name = data.name;
+            }
+            if ("sub_image" in data) {
+                this.sub_image = data.sub_image;
+            }
+            if ("p_color" in data) {
+                this.p_color = data.p_color;
+            }
         }
     }
-    get mndx(): number {
-        return pb_1.Message.getFieldWithDefault(this, 1, undefined) as number;
+    get mndx() {
+        return pb_1.Message.getField(this, 1) as number;
     }
     set mndx(value: number) {
         pb_1.Message.setField(this, 1, value);
     }
-    get name(): string {
-        return pb_1.Message.getFieldWithDefault(this, 2, undefined) as string;
+    get name() {
+        return pb_1.Message.getField(this, 2) as string;
     }
     set name(value: string) {
         pb_1.Message.setField(this, 2, value);
     }
-    get sub_image(): SubImage {
+    get sub_image() {
         return pb_1.Message.getWrapperField(this, SubImage, 3) as SubImage;
     }
     set sub_image(value: SubImage) {
         pb_1.Message.setWrapperField(this, 3, value);
     }
-    get p_color(): number {
-        return pb_1.Message.getFieldWithDefault(this, 5, undefined) as number;
+    get p_color() {
+        return pb_1.Message.getField(this, 5) as number;
     }
     set p_color(value: number) {
         pb_1.Message.setField(this, 5, value);
     }
     toObject() {
-        return {
-            mndx: this.mndx,
-            name: this.name,
-            sub_image: this.sub_image && this.sub_image.toObject(),
-            p_color: this.p_color
-        };
+        var data: {
+            mndx?: number;
+            name?: string;
+            sub_image?: ReturnType<typeof SubImage.prototype.toObject>;
+            p_color?: number;
+        } = {};
+        if (this.mndx != null) {
+            data.mndx = this.mndx;
+        }
+        if (this.name != null) {
+            data.name = this.name;
+        }
+        if (this.sub_image != null) {
+            data.sub_image = this.sub_image.toObject();
+        }
+        if (this.p_color != null) {
+            data.p_color = this.p_color;
+        }
+        return data;
     }
     serialize(w?: pb_1.BinaryWriter): Uint8Array | undefined {
         const writer = w || new pb_1.BinaryWriter();
@@ -1720,11 +2165,9 @@ export class ModImage extends pb_1.Message {
             writer.writeUint32(5, this.p_color);
         if (!w)
             return writer.getResultBuffer();
-        return undefined;
     }
-    serializeBinary(): Uint8Array { return this.serialize(); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ModImage {
-        const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new ModImage();
+        const reader = bytes instanceof Uint8Array ? new pb_1.BinaryReader(bytes) : bytes, message = new ModImage();
         while (reader.nextField()) {
             if (reader.isEndGroup())
                 break;
@@ -1746,36 +2189,50 @@ export class ModImage extends pb_1.Message {
         }
         return message;
     }
+    serializeBinary(): Uint8Array {
+        return this.serialize();
+    }
+    static deserializeBinary(bytes: Uint8Array): ModImage {
+        return ModImage.deserialize(bytes);
+    }
 }
 export class ModImageSeq extends pb_1.Message {
     constructor(data?: any[] | {
         mblk?: ImageAry;
-        model?: ModImage[];
+        model: ModImage[];
     }) {
         super();
-        pb_1.Message.initialize(this, Array.isArray(data) && data, 0, -1, [2], null);
+        pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [2], []);
         if (!Array.isArray(data) && typeof data == "object") {
-            this.mblk = data.mblk;
+            if ("mblk" in data) {
+                this.mblk = data.mblk;
+            }
             this.model = data.model;
         }
     }
-    get mblk(): ImageAry {
+    get mblk() {
         return pb_1.Message.getWrapperField(this, ImageAry, 1) as ImageAry;
     }
     set mblk(value: ImageAry) {
         pb_1.Message.setWrapperField(this, 1, value);
     }
-    get model(): ModImage[] {
+    get model() {
         return pb_1.Message.getRepeatedWrapperField(this, ModImage, 2) as ModImage[];
     }
     set model(value: ModImage[]) {
         pb_1.Message.setRepeatedWrapperField(this, 2, value);
     }
     toObject() {
-        return {
-            mblk: this.mblk && this.mblk.toObject(),
+        var data: {
+            mblk?: ReturnType<typeof ImageAry.prototype.toObject>;
+            model: ReturnType<typeof ModImage.prototype.toObject>[];
+        } = {
             model: this.model.map((item: ModImage) => item.toObject())
         };
+        if (this.mblk != null) {
+            data.mblk = this.mblk.toObject();
+        }
+        return data;
     }
     serialize(w?: pb_1.BinaryWriter): Uint8Array | undefined {
         const writer = w || new pb_1.BinaryWriter();
@@ -1785,11 +2242,9 @@ export class ModImageSeq extends pb_1.Message {
             writer.writeRepeatedMessage(2, this.model, (item: ModImage) => item.serialize(writer));
         if (!w)
             return writer.getResultBuffer();
-        return undefined;
     }
-    serializeBinary(): Uint8Array { return this.serialize(); }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ModImageSeq {
-        const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new ModImageSeq();
+        const reader = bytes instanceof Uint8Array ? new pb_1.BinaryReader(bytes) : bytes, message = new ModImageSeq();
         while (reader.nextField()) {
             if (reader.isEndGroup())
                 break;
@@ -1804,5 +2259,11 @@ export class ModImageSeq extends pb_1.Message {
             }
         }
         return message;
+    }
+    serializeBinary(): Uint8Array {
+        return this.serialize();
+    }
+    static deserializeBinary(bytes: Uint8Array): ModImageSeq {
+        return ModImageSeq.deserialize(bytes);
     }
 }
