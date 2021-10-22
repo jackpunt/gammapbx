@@ -60,7 +60,7 @@ export class Iloc extends pb_1.Message {
             return writer.getResultBuffer();
     }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Iloc {
-        const reader = bytes instanceof Uint8Array ? new pb_1.BinaryReader(bytes) : bytes, message = new Iloc();
+        const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Iloc();
         while (reader.nextField()) {
             if (reader.isEndGroup())
                 break;
@@ -134,7 +134,7 @@ export class Floc extends pb_1.Message {
             return writer.getResultBuffer();
     }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Floc {
-        const reader = bytes instanceof Uint8Array ? new pb_1.BinaryReader(bytes) : bytes, message = new Floc();
+        const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Floc();
         while (reader.nextField()) {
             if (reader.isEndGroup())
                 break;
@@ -208,7 +208,7 @@ export class IDloc extends pb_1.Message {
             return writer.getResultBuffer();
     }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): IDloc {
-        const reader = bytes instanceof Uint8Array ? new pb_1.BinaryReader(bytes) : bytes, message = new IDloc();
+        const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new IDloc();
         while (reader.nextField()) {
             if (reader.isEndGroup())
                 break;
@@ -282,7 +282,7 @@ export class FDloc extends pb_1.Message {
             return writer.getResultBuffer();
     }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): FDloc {
-        const reader = bytes instanceof Uint8Array ? new pb_1.BinaryReader(bytes) : bytes, message = new FDloc();
+        const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new FDloc();
         while (reader.nextField()) {
             if (reader.isEndGroup())
                 break;
@@ -356,7 +356,7 @@ export class Dloc extends pb_1.Message {
             return writer.getResultBuffer();
     }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Dloc {
-        const reader = bytes instanceof Uint8Array ? new pb_1.BinaryReader(bytes) : bytes, message = new Dloc();
+        const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Dloc();
         while (reader.nextField()) {
             if (reader.isEndGroup())
                 break;
@@ -414,7 +414,7 @@ export class Turn extends pb_1.Message {
             return writer.getResultBuffer();
     }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Turn {
-        const reader = bytes instanceof Uint8Array ? new pb_1.BinaryReader(bytes) : bytes, message = new Turn();
+        const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Turn();
         while (reader.nextField()) {
             if (reader.isEndGroup())
                 break;
@@ -565,7 +565,7 @@ export class AMessage extends pb_1.Message {
             return writer.getResultBuffer();
     }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): AMessage {
-        const reader = bytes instanceof Uint8Array ? new pb_1.BinaryReader(bytes) : bytes, message = new AMessage();
+        const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new AMessage();
         while (reader.nextField()) {
             if (reader.isEndGroup())
                 break;
@@ -798,7 +798,7 @@ export class Update extends pb_1.Message {
             return writer.getResultBuffer();
     }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Update {
-        const reader = bytes instanceof Uint8Array ? new pb_1.BinaryReader(bytes) : bytes, message = new Update();
+        const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Update();
         while (reader.nextField()) {
             if (reader.isEndGroup())
                 break;
@@ -880,7 +880,7 @@ export class UpdateSeq extends pb_1.Message {
             return writer.getResultBuffer();
     }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): UpdateSeq {
-        const reader = bytes instanceof Uint8Array ? new pb_1.BinaryReader(bytes) : bytes, message = new UpdateSeq();
+        const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new UpdateSeq();
         while (reader.nextField()) {
             if (reader.isEndGroup())
                 break;
@@ -1015,7 +1015,7 @@ export class Ident extends pb_1.Message {
             return writer.getResultBuffer();
     }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Ident {
-        const reader = bytes instanceof Uint8Array ? new pb_1.BinaryReader(bytes) : bytes, message = new Ident();
+        const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Ident();
         while (reader.nextField()) {
             if (reader.isEndGroup())
                 break;
@@ -1101,7 +1101,7 @@ export class Add extends pb_1.Message {
             return writer.getResultBuffer();
     }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Add {
-        const reader = bytes instanceof Uint8Array ? new pb_1.BinaryReader(bytes) : bytes, message = new Add();
+        const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Add();
         while (reader.nextField()) {
             if (reader.isEndGroup())
                 break;
@@ -1156,7 +1156,7 @@ export class AddSeq extends pb_1.Message {
             return writer.getResultBuffer();
     }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): AddSeq {
-        const reader = bytes instanceof Uint8Array ? new pb_1.BinaryReader(bytes) : bytes, message = new AddSeq();
+        const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new AddSeq();
         while (reader.nextField()) {
             if (reader.isEndGroup())
                 break;
@@ -1211,7 +1211,7 @@ export class Del extends pb_1.Message {
             return writer.getResultBuffer();
     }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Del {
-        const reader = bytes instanceof Uint8Array ? new pb_1.BinaryReader(bytes) : bytes, message = new Del();
+        const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Del();
         while (reader.nextField()) {
             if (reader.isEndGroup())
                 break;
@@ -1263,7 +1263,7 @@ export class DelSeq extends pb_1.Message {
             return writer.getResultBuffer();
     }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): DelSeq {
-        const reader = bytes instanceof Uint8Array ? new pb_1.BinaryReader(bytes) : bytes, message = new DelSeq();
+        const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new DelSeq();
         while (reader.nextField()) {
             if (reader.isEndGroup())
                 break;
@@ -1334,7 +1334,7 @@ export class TerRunX extends pb_1.Message {
             return writer.getResultBuffer();
     }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): TerRunX {
-        const reader = bytes instanceof Uint8Array ? new pb_1.BinaryReader(bytes) : bytes, message = new TerRunX();
+        const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new TerRunX();
         while (reader.nextField()) {
             if (reader.isEndGroup())
                 break;
@@ -1405,7 +1405,7 @@ export class TerRowY extends pb_1.Message {
             return writer.getResultBuffer();
     }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): TerRowY {
-        const reader = bytes instanceof Uint8Array ? new pb_1.BinaryReader(bytes) : bytes, message = new TerRowY();
+        const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new TerRowY();
         while (reader.nextField()) {
             if (reader.isEndGroup())
                 break;
@@ -1460,7 +1460,7 @@ export class RevealSeq extends pb_1.Message {
             return writer.getResultBuffer();
     }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): RevealSeq {
-        const reader = bytes instanceof Uint8Array ? new pb_1.BinaryReader(bytes) : bytes, message = new RevealSeq();
+        const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new RevealSeq();
         while (reader.nextField()) {
             if (reader.isEndGroup())
                 break;
@@ -1611,7 +1611,7 @@ export class SubImage extends pb_1.Message {
             return writer.getResultBuffer();
     }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): SubImage {
-        const reader = bytes instanceof Uint8Array ? new pb_1.BinaryReader(bytes) : bytes, message = new SubImage();
+        const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new SubImage();
         while (reader.nextField()) {
             if (reader.isEndGroup())
                 break;
@@ -1732,7 +1732,7 @@ export class ImageAry extends pb_1.Message {
             return writer.getResultBuffer();
     }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ImageAry {
-        const reader = bytes instanceof Uint8Array ? new pb_1.BinaryReader(bytes) : bytes, message = new ImageAry();
+        const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new ImageAry();
         while (reader.nextField()) {
             if (reader.isEndGroup())
                 break;
@@ -1828,7 +1828,7 @@ export class TerImage extends pb_1.Message {
             return writer.getResultBuffer();
     }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): TerImage {
-        const reader = bytes instanceof Uint8Array ? new pb_1.BinaryReader(bytes) : bytes, message = new TerImage();
+        const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new TerImage();
         while (reader.nextField()) {
             if (reader.isEndGroup())
                 break;
@@ -1905,7 +1905,7 @@ export class TerStats extends pb_1.Message {
             return writer.getResultBuffer();
     }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): TerStats {
-        const reader = bytes instanceof Uint8Array ? new pb_1.BinaryReader(bytes) : bytes, message = new TerStats();
+        const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new TerStats();
         while (reader.nextField()) {
             if (reader.isEndGroup())
                 break;
@@ -1963,7 +1963,7 @@ export class RoadStats extends pb_1.Message {
             return writer.getResultBuffer();
     }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): RoadStats {
-        const reader = bytes instanceof Uint8Array ? new pb_1.BinaryReader(bytes) : bytes, message = new RoadStats();
+        const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new RoadStats();
         while (reader.nextField()) {
             if (reader.isEndGroup())
                 break;
@@ -2055,7 +2055,7 @@ export class TerImageSeq extends pb_1.Message {
             return writer.getResultBuffer();
     }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): TerImageSeq {
-        const reader = bytes instanceof Uint8Array ? new pb_1.BinaryReader(bytes) : bytes, message = new TerImageSeq();
+        const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new TerImageSeq();
         while (reader.nextField()) {
             if (reader.isEndGroup())
                 break;
@@ -2167,7 +2167,7 @@ export class ModImage extends pb_1.Message {
             return writer.getResultBuffer();
     }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ModImage {
-        const reader = bytes instanceof Uint8Array ? new pb_1.BinaryReader(bytes) : bytes, message = new ModImage();
+        const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new ModImage();
         while (reader.nextField()) {
             if (reader.isEndGroup())
                 break;
@@ -2244,7 +2244,7 @@ export class ModImageSeq extends pb_1.Message {
             return writer.getResultBuffer();
     }
     static deserialize(bytes: Uint8Array | pb_1.BinaryReader): ModImageSeq {
-        const reader = bytes instanceof Uint8Array ? new pb_1.BinaryReader(bytes) : bytes, message = new ModImageSeq();
+        const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new ModImageSeq();
         while (reader.nextField()) {
             if (reader.isEndGroup())
                 break;
