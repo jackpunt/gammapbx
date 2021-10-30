@@ -21,7 +21,7 @@
     "protojs2": "protoc -I src --js_out=library=GammaProto,binary:. src/*.proto",
     "protojs": "protoc -I src --js_out=import_style=commonjs,binary:. src/*.proto",
     "clean": "rm -f *.js *.ts src/*.js",
-    "build": "npm run clean; npm run protots; npm run tsc",
+    "build": "npm run clean; npm run protots; npm run patch-proto; npm run tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
