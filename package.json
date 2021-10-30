@@ -11,6 +11,8 @@
   ],
   "typings": "GammaProto.d.ts",
   "scripts": {
+    "patch-proto": "patch GammaProto.ts < GammaProto.patch",
+    "make-patch": "cp GammaProto.ts GammaProto-patched.ts; npm run protots; (diff -patch GammaProto.ts GammaProto-patched.ts > GammaProto.patch); npm run patch-proto",
     "java": "protoc -I src --java_out=. src/*.proto",
     "tsc": "tsc GammaProto.ts --target es2018 --declaration ",
     "dts": "tsc GammaProto.ts --target es2018 --declaration --emitDeclarationOnly --allowJs",
