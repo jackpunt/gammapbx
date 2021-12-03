@@ -1,5 +1,7 @@
 # gammapbx
-Protobuf definitions and support for 'gamma' clients & servers.
+Protobuf definitions and support between 'gamma' clients & and the gamma game server.
+
+Available on npmjs.com as @thegraid/gammapbx
 
 Typescript and javascript client files.
 
